@@ -1,0 +1,9 @@
+
+* Quy dinh dat ten: mantech_mod_<phan viec>_<java module>
+
+Vd: mantech_mod_complaint_ejb
+      mantech_mod_article_ejb
+
+* Quy dinh dat JNDI: ejb/mantech/saigon/<interface>
+
+Vd: ejb/mantech/saigon/AccountBussines

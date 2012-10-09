@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : decorators.xml
+    Created on : September 29, 2012, 7:24 PM
+    Author     : NGUYEN
+    Description:
+        Purpose of the document follows.
+-->
+
+<decorators defaultdir="/decorators">
+    <decorator name="admin-theme" page="admin-theme.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>
