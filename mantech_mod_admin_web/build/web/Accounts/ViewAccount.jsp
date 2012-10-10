@@ -17,20 +17,14 @@
 
 
 
-    <article class="module width_3_quarter">
+    <article class="module width_3_quarter"  style="width: 90%">
         <div class="tab_container">
             <jsp:include page="../includes/modules/viewusers.jsp"/>
         </div><!-- end of .tab_container -->
 
     </article><!-- end of content manager article -->
 
-    <article class="module width_quarter">
-        <jsp:include page="../includes/modules/updateacccount.jsp"/>
-    </article><!-- end of messages article -->
 
-    <div class="clear"></div>
-
-
-    <div class="spacer"></div>
+   
 </body>
 </html>
