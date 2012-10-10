@@ -4,10 +4,6 @@
     Author     : NGUYEN
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
 <header><h3 class="tabs_involved">All Complaints</h3>
     <ul class="tabs">
         <li><a href="#tab1">Complaints</a></li>

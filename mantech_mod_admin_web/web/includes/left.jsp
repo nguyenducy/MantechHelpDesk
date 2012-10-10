@@ -11,7 +11,7 @@
 <h3>Complaint</h3>
 <ul class="toggle">
     <li class="icn_categories"><a href="${pageContext.request.contextPath}/Complaints/ViewComplaints.jsp">View complaints</a></li>
-    <li class="icn_edit_article"><a href="#">Pending</a></li>   
+    <li class="icn_edit_article"><a href="${pageContext.request.contextPath}/Complaints/ViewPending.jsp">Pending</a></li>
     <li class="icn_tags"><a href="${pageContext.request.contextPath}/Complaints/ViewCategory.jsp">Categories</a></li>
     <li class="icn_view_users"><a href="${pageContext.request.contextPath}/Complaints/ViewTechnicians.jsp">Technicians</a></li>
 </ul>
