@@ -20,5 +20,6 @@
     </div>
     <footer>
         <input type="submit"  value="Change" />
+        <input type="reset" value="Reset"/>
     </footer>
 </form>
