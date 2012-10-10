@@ -25,7 +25,29 @@
             <option>Admin</option>
         </select>
     </fieldset>
-
+     <fieldset style="width: 30%">
+        <label>Full Name</label>
+        <input type="text" name="fulname" style="width: 70%" >
+    </fieldset>
+     <fieldset style="width: 30%">
+        <label>Address</label>
+        <input type="text" name="address" style="width: 70%" >
+    </fieldset>
+     <fieldset style="width: 30%">
+        <label>Telephone</label>
+        <input type="text" name="telephone" style="width: 70%" >
+    </fieldset>
+    <fieldset style="width: 30%">
+        <label>Role</label>
+        <select style="width: 50%">
+            <option>Education Services</option>
+            <option>Learning Service</option>
+        </select>
+    </fieldset>
+     <fieldset style="width: 30%">
+        <label>Image</label>
+        <input type="file" name="image" style="width: 70%" >
+    </fieldset>
 </div>
 <footer>
     <div class="submit_link">
