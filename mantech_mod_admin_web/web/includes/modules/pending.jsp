@@ -1,10 +1,11 @@
 <%-- 
-    Document   : complaints
-    Created on : Oct 9, 2012, 10:59:59 AM
+    Document   : pending
+    Created on : Oct 10, 2012, 6:28:22 PM
     Author     : NGUYEN
 --%>
 
-<header><h3 class="tabs_involved">All Complaints</h3>
+<form action="" >
+<header><h3 class="tabs_involved">All Pending Complaints</h3>
     <ul class="tabs">
         <li><a href="#tab1">Complaints</a></li>
     </ul>
@@ -19,60 +20,82 @@
                 <th>Category</th>
                 <th>Employee</th>
                 <th>Created On</th>
-                <th>Issued</th>
-                <th>Pending</th>
-                <th>Completed</th>
-                <th>Completed On</th>
-                <th>Technician</th>
                 <th>Note</th>
+                <th>Technician</th>
+                
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
                 <td></td>
                 <td>Articles</td>
                 <td>5th April 2011</td>
-                <td></td>
+                <td>
+                    <select>
+                        <option>Kevin</option>
+                        <option>John</option>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Ipsum Lorem Dolor Sit Amet</td>
                 <td></td>
                 <td>Freebies</td>
                 <td>6th April 2011</td>
-                <td></td>
+                <td>
+                     <select>
+                        <option>Kevin</option>
+                        <option>John</option>
+                    </select>
+                </td>
 
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Sit Amet Dolor Ipsum</td>
                 <td></td>
                 <td>Tutorials</td>
                 <td>10th April 2011</td>
-                <td></td>
+                <td>
+                     <select>
+                        <option>Kevin</option>
+                        <option>John</option>
+                    </select>
+                </td>
 
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Dolor Lorem Amet</td>
                 <td></td>
                 <td>Articles</td>
                 <td>16th April 2011</td>
-                <td></td>
+                <td>
+                     <select>
+                        <option>Kevin</option>
+                        <option>John</option>
+                    </select>
+                </td>
 
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Dolor Lorem Amet</td>
                 <td></td>
                 <td>Articles</td>
                 <td>16th April 2011</td>
-                <td></td>
+                <td>
+                     <select>
+                        <option>Kevin</option>
+                        <option>John</option>
+                    </select>
+                </td>
 
             </tr>
         </tbody>
     </table>
 </div><!-- end of #tab1 -->
-
-
+<input type="submit" value="Update"/>
+</form>
