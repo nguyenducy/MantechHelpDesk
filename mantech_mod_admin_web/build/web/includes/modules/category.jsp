@@ -26,7 +26,7 @@
                 <td><input type="checkbox"></td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
                 <td></td>
-                >
+                
             </tr>
             <tr>
                 <td><input type="checkbox"></td>
