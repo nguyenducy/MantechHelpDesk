@@ -19,6 +19,7 @@
 <ul class="toggle">
     <li class="icn_add_user"><a href="${pageContext.request.contextPath}/Accounts/Grant.jsp">Add New User</a></li>
     <li class="icn_view_users"><a href="${pageContext.request.contextPath}/Accounts/ViewAccount.jsp">View Accounts</a></li>
+    <li class="icn_security"><a href="${pageContext.request.contextPath}/Accounts/ChangePassword.jsp">Change Password</a></li>
     <li class="icn_view_users"><a href="${pageContext.request.contextPath}/Accounts/ViewUsers.jsp">View Users</a></li>
 </ul>
 <h3>Task</h3>
