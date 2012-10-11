@@ -14,7 +14,7 @@
                 address : {required: true},
                 telephone: {required: true},
                 image : {required: true, extension: "png|jpeg"}
-            }
+            }      
         });
         jQuery.validator.addMethod("extension", function(value, element, param) {
             param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpeg|gif";
@@ -28,15 +28,15 @@
     <div class="module_content">
         <fieldset style="width: 30%">
             <label>User name</label>
-            <input type="text" name="username" style="width: 70%" >
+            <input type="text" name="username" id="username" style="width: 70%" >
         </fieldset>
         <fieldset style="width: 30%">
             <label>Password</label>
-            <input type="text" name="password" style="width: 70%" >
+            <input type="password" name="password"  style="width: 70%" >
         </fieldset>
         <fieldset style="width: 30%">
             <label>Confirm Password</label>
-            <input type="text" name="confirmPassword" style="width: 70%" >
+            <input type="password" name="confirmPassword" style="width: 70%" >
         </fieldset>
         <fieldset style="width: 30%">
             <label>Role</label>
@@ -71,7 +71,6 @@
     </div>
     <footer>
         <div class="submit_link">
-
             <input type="submit" value="Grant" class="alt_btn">
             <input type="submit" value="Reset">
         </div>

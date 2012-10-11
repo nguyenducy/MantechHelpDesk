@@ -12,9 +12,25 @@
         <servlet-name>Authentication</servlet-name>
         <servlet-class>mantech.mod.admin.web.servlet.Authentication</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckUserAvailable</servlet-name>
+        <servlet-class>mantech.mod.admin.web.servlet.CheckUserAvailable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckRoleAvailable</servlet-name>
+        <servlet-class>mantech.mod.admin.web.servlet.CheckRoleAvailable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/Authentication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckUserAvailable</servlet-name>
+        <url-pattern>/CheckUserAvailable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckRoleAvailable</servlet-name>
+        <url-pattern>/CheckRoleAvailable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
