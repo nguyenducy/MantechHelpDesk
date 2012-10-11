@@ -9,6 +9,9 @@
 -->
 
 <decorators defaultdir="/decorators">
+    <excludes>
+        <pattern>/login.html</pattern>
+    </excludes>
     <decorator name="admin-theme" page="admin-theme.jsp">
         <pattern>/*</pattern>
     </decorator>
