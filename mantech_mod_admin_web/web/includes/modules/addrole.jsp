@@ -4,8 +4,18 @@
     Author     : NGUYEN
 --%>
 
+<script>
+    $(document).ready(function(){
+        $("#newRoleForm").validate({
+            rules:{
+                username: {required: true}
+            }
+        });
+    });
+</script>
+
 <header><h3>Add New Role</h3></header>
-<form class="post_message">
+<form class="post_message" id="newRoleForm" action="" method="get">
     <div class="message_list">
         <div class="module_content">
             <div class="message">Role: <input name="username"/></div>       

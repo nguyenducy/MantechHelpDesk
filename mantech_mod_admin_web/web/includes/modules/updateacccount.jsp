@@ -5,15 +5,33 @@
 --%>
 
 
+<script>
+    $(document).ready(function(){
+        $("#updateAccountForm").validate({
+            rules:{
+                username: {required: true},
+                password: {required: true},
+                newPassword: {required: true}           
+            }
+        });
+    });
+</script>
 
 <header><h3>Change Username OR Password</h3></header>
-<form class="post_message">
+<form class="post_message" action="" id="updateAccountForm" >
     <div class="message_list">
         <div class="module_content">
-            <div class="message">Username: <input name="username"/></div>
-            <div class="message">Old-Password: <input type="password" name="password"/></div>
-            <div class="message">New-Password: <input type="password" name="newPassword"/></div>
-            
+            <table>
+                <tr>
+                    <td><div class="message">Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="username"/></div></td>
+                </tr>
+                <tr>
+                    <td><div class="message">Old-Password: &nbsp;&nbsp;<input type="password" name="password"/></div></td>
+                </tr>
+                <tr>
+                    <td><div class="message">New-Password: <input type="password" name="newPassword"/></div></td>
+                </tr>
+            </table>        
         </div>
     </div>
     <footer>
