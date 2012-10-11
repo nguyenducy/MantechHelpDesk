@@ -19,7 +19,7 @@
         jQuery.validator.addMethod("extension", function(value, element, param) {
             param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpeg|gif";
             return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
-        }, jQuery.format("Not valid extension."));
+        }, jQuery.format("Only PNG or JPEG extenstion."));
     });
 </script>
 
