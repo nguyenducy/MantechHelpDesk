@@ -36,7 +36,7 @@
     <li class="icn_settings"><a href="#">Options</a></li>
     <li class="icn_security"><a href="${pageContext.request.contextPath}/Accounts/NewRole.jsp">Add Role</a></li>
     <li class="icn_profile"><a href="${pageContext.request.contextPath}/Profiles/ViewProfile.jsp">My Profile</a></li>
-    <li class="icn_jump_back"><a href="#">Logout</a></li>
+    <li class="icn_jump_back"><a href="${pageContext.request.contextPath}/login.html">Logout</a></li>
 </ul>
 
 <footer>
