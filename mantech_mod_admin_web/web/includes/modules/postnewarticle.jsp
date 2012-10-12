@@ -7,9 +7,21 @@
     $(document).ready(function(){
         $("#newArticleForm").validate({
             rules:{
-                article: {required: true},
+                article: {required: true, maxlength: 50},
                 content: {required: true},
                 thumbnail: {required: true, extension: "png|jpeg"}
+            },
+            messages:{
+                article:{
+                    required: "Required",
+                    maxlength: "Less than 51 characters"
+                },
+                content:{
+                    required: "Required"
+                },
+                thumbnail:{
+                    required: "Required"
+                }
             }
         });
 
@@ -41,7 +53,7 @@
         <div class="submit_link">
 
             <input type="submit" value="Publish" class="alt_btn">
-            <input type="submit" value="Reset">
+            <input type="reset" value="Reset">
         </div>
     </footer>
 </form>

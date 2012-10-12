@@ -33,7 +33,7 @@
         <div class="submit_link">
 
             <input type="submit" value="Publish" class="alt_btn">
-            <input type="submit" value="Reset">
+            <input type="reset" value="Reset">
         </div>
     </footer>
 </form>

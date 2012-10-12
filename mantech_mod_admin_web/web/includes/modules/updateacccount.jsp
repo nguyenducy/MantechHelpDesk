@@ -9,9 +9,23 @@
     $(document).ready(function(){
         $("#updateAccountForm").validate({
             rules:{
-                username: {required: true},
-                password: {required: true},
-                newPassword: {required: true}           
+                username: {required: true, maxlength: 10},
+                password: {required: true, maxlength: 15},
+                newPassword: {required: true, maxlength: 15}
+            },
+            messages:{
+                username:{
+                    required: "Required",
+                    maxlength: "Less than 11 characters"
+                },
+                password: {
+                    required: "Required",
+                    maxlength: "Less than 16 characters"
+                },
+                newPassword:{
+                    required: "Required",
+                    maxlength: "Less than 16 characters"
+                }
             }
         });
     });
@@ -35,7 +49,7 @@
         </div>
     </div>
     <footer>
-        <input type="submit"  value="Change" />
+        <input type="submit"  value="Change" class="alt_btn" />
         <input type="reset" value="Reset"/>
     </footer>
 </form>

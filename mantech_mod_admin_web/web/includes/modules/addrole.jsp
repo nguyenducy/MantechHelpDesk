@@ -8,7 +8,12 @@
     $(document).ready(function(){
         $("#newRoleForm").validate({
             rules:{
-                username: {required: true}
+                role: {required: true}
+            },
+            messages:{
+                role:{
+                    required: "Required"
+                }
             }
         });
     });
@@ -18,11 +23,11 @@
 <form class="post_message" id="newRoleForm" action="" method="get">
     <div class="message_list">
         <div class="module_content">
-            <div class="message">Role: <input name="username"/></div>       
+            <div class="message">Role: <input name="role"/></div>
         </div>
     </div>
     <footer>
-        <input type="submit"  value="Add" />
+        <input type="submit"  value="Add" class="alt_btn" />
         <input type="reset" value="Reset"/>
     </footer>
 </form>
