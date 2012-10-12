@@ -26,7 +26,9 @@
 <h3>Task</h3>
 <ul class="toggle">
     <li class="icn_new_article"><a href="${pageContext.request.contextPath}/Articles/NewArticle.jsp">New Article</a></li>
+     <li class="icn_logout"><a href="${pageContext.request.contextPath}/Articles/DeleteArticle.jsp">Delete Article</a></li>
     <li class="icn_photo"><a href="${pageContext.request.contextPath}/Articles/FAQ.jsp">FAQ</a></li>
+     <li class="icn_logout"><a href="${pageContext.request.contextPath}/Articles/DeleteFAQ.jsp">Delete FAQ</a></li>
     <li class="icn_folder"><a href="#">Report</a></li>
     
     <!--<li class="icn_audio"><a href="#">Audio</a></li>
