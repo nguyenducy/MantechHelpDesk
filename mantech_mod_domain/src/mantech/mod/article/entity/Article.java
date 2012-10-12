@@ -10,6 +10,8 @@ import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -23,16 +25,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Article", catalog = "Mantech", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
+    @NamedQuery(name = "Article.collectNewsArticle", query = "SELECT a FROM Article a Order By a.createdDate DESC"),
     @NamedQuery(name = "Article.findById", query = "SELECT a FROM Article a WHERE a.id = :id"),
+
     @NamedQuery(name = "Article.findByArticle", query = "SELECT a FROM Article a WHERE a.article = :article"),
+    @NamedQuery(name = "Article.findByLikeArticle", query = "SELECT a FROM Article a WHERE a.article like :article Order By a.createdDate DESC"),
+    @NamedQuery(name = "Article.findByLikeArticleContant", query = "SELECT a FROM Article a WHERE a.article like :contentString or a.content like :contentString Order By a.createdDate DESC"),
+
     @NamedQuery(name = "Article.findByCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate = :createdDate"),
-    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate"),
+    @NamedQuery(name = "Article.findBetweenCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate BETWEEN :date1 AND :date2 Order By a.createdDate DESC"),
+    @NamedQuery(name = "Article.findAfterCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate >= :createdDate Order By a.createdDate DESC"),
+
+    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate Order By a.createdDate DESC"),
+    @NamedQuery(name = "Article.findByHigherRate", query = "SELECT a FROM Article a WHERE a.rate >= :rate Order By a.createdDate DESC"),
     @NamedQuery(name = "Article.findByThumbnail", query = "SELECT a FROM Article a WHERE a.thumbnail = :thumbnail")})
 public class Article implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
     @Basic(optional = false)

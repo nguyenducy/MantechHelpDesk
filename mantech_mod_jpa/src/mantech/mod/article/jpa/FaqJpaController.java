@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.article.jpa;
 
 import java.util.List;
@@ -13,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import mantech.mod.article.api.dal.AdminFAQDal;
 import mantech.mod.article.entity.Faq;
 import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
 
@@ -20,10 +20,18 @@ import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
  *
  * @author NGUYEN
  */
-public class FaqJpaController {
+public class FaqJpaController implements AdminFAQDal {
+
+    final String findAllQuery = "Faq.findAll";
+    final String findByIdQuery = "Faq.findById";
+    final String findQuestionQuery = "Faq.findQuestion";
 
     public FaqJpaController() {
         emf = Persistence.createEntityManagerFactory("mantech_mod_jpaPU");
+    }
+
+    public FaqJpaController(EntityManagerFactory entityManagerFactory) {
+        this.emf = entityManagerFactory;
     }
     private EntityManagerFactory emf = null;
 
@@ -31,7 +39,7 @@ public class FaqJpaController {
         return emf.createEntityManager();
     }
 
-    public void create(Faq faq) {
+    private void create(Faq faq) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -45,7 +53,7 @@ public class FaqJpaController {
         }
     }
 
-    public void edit(Faq faq) throws NonexistentEntityException, Exception {
+    private void edit(Faq faq) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -68,7 +76,7 @@ public class FaqJpaController {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    private void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -89,7 +97,7 @@ public class FaqJpaController {
         }
     }
 
-    public List<Faq> findFaqEntities() {
+    private List<Faq> findFaqEntities() {
         return findFaqEntities(true, -1, -1);
     }
 
@@ -113,7 +121,7 @@ public class FaqJpaController {
         }
     }
 
-    public Faq findFaq(Integer id) {
+    private Faq findFaq(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Faq.class, id);
@@ -135,4 +143,69 @@ public class FaqJpaController {
         }
     }
 
+    public boolean createFAQ(Faq faq) {
+        boolean check = false;
+        try {
+            this.create(faq);
+            check = true;
+        } catch (Exception ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean editFAQ(Faq faq) {
+        boolean check = false;
+        try {
+            this.edit(faq);
+            check = true;
+        } catch (NonexistentEntityException ex) {
+            check = false;
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean removeFAQ(int faqId) {
+        boolean check = false;
+        try {
+            this.destroy(faqId);
+            check = true;
+        } catch (NonexistentEntityException ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
+
+    public Faq findFAQById(int fqaId) {
+        Faq faq = null;
+        if (fqaId > 0) {
+            faq = this.findFaq(fqaId);
+        }
+        return faq;
+    }
+
+    public List<Faq> listAllFAQ() {
+        List<Faq> faqs = this.findFaqEntities();
+        return faqs;
+    }
+
+    public List<Faq> findQuestion(String question) {
+        List<Faq> listFaq = null;
+        if(question!=null && !question.isEmpty()){
+           EntityManager em = this.getEntityManager();
+           
+           Query query = em.createNamedQuery(this.findQuestionQuery);
+           String parameterQuestion = "%"+question+"%";
+           query.setParameter("question", parameterQuestion);
+
+           listFaq = query.getResultList();
+        }
+        return listFaq;
+    }
 }

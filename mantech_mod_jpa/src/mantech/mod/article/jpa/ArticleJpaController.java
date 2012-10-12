@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.article.jpa;
 
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import mantech.mod.article.api.dal.AdminArticleDal;
 import mantech.mod.article.entity.Article;
 import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
 import mantech.mod.article.jpa.exceptions.PreexistingEntityException;
@@ -21,10 +22,27 @@ import mantech.mod.article.jpa.exceptions.PreexistingEntityException;
  *
  * @author NGUYEN
  */
-public class ArticleJpaController {
+public class ArticleJpaController implements AdminArticleDal {
+
+    final String collectNewsArticleQuery = "Article.collectNewsArticle";
+    final String findByIdQuery = "Article.findById";
+    final String findByArticleQuery = "Article.findByArticle";
+    final String findByLikeArticleQuery = "Article.findByLikeArticle";
+    final String findByLikeArticleContantQuery = "Article.findByLikeArticleContant";
+    final String findByCreatedDateQuery = "Article.findByCreatedDate";
+    final String findBetweenCreatedDateQuery = "Article.findBetweenCreatedDate";
+    final String findAfterCreatedDate = "Article.findAfterCreatedDate";
+    final String findByRateQuery = "Article.findByRate";
+    final String findByHigherRateQuery = "Article.findByHigherRate";
+    final String findByThumbnailQuery = "Article.findByThumbnail";
 
     public ArticleJpaController() {
         emf = Persistence.createEntityManagerFactory("mantech_mod_jpaPU");
+    }
+
+    public ArticleJpaController(EntityManagerFactory entityManagerFactory) {
+        this.emf = entityManagerFactory;
+        ;
     }
     private EntityManagerFactory emf = null;
 
@@ -32,7 +50,7 @@ public class ArticleJpaController {
         return emf.createEntityManager();
     }
 
-    public void create(Article article) throws PreexistingEntityException, Exception {
+    private void create(Article article) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -51,7 +69,7 @@ public class ArticleJpaController {
         }
     }
 
-    public void edit(Article article) throws NonexistentEntityException, Exception {
+    private void edit(Article article) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -74,7 +92,7 @@ public class ArticleJpaController {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    private void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -95,7 +113,7 @@ public class ArticleJpaController {
         }
     }
 
-    public List<Article> findArticleEntities() {
+    private List<Article> findArticleEntities() {
         return findArticleEntities(true, -1, -1);
     }
 
@@ -119,7 +137,7 @@ public class ArticleJpaController {
         }
     }
 
-    public Article findArticle(Integer id) {
+    private Article findArticle(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Article.class, id);
@@ -141,4 +159,161 @@ public class ArticleJpaController {
         }
     }
 
+    public boolean createNewArticle(Article article) {
+        boolean check = false;
+        try {
+            this.create(article);
+            check = true;
+        } catch (PreexistingEntityException ex) {
+            check = false;
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
+
+    public boolean editArticle(Article article) {
+        boolean check = false;
+        try {
+            if (article.getRate() > 0) {
+                this.edit(article);
+                check = true;
+            }
+        } catch (NonexistentEntityException ex) {
+            check = false;
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
+
+    public Article findById(int id) {
+        Article article = null;
+
+        int i = (Integer) id;
+        if (i > 0) {
+            article = this.findArticle(i);
+        }
+        return article;
+    }
+
+    public List<Article> findByLikeArticle(String articleTitle) {
+        List<Article> listArticle = null;
+        EntityManager em = this.getEntityManager();
+        if (articleTitle != null || !articleTitle.isEmpty()) {
+            Query query = em.createNamedQuery(this.findByLikeArticleQuery);
+            String parameter = "%" + articleTitle + "%";
+            query.setParameter("article", parameter);
+
+            listArticle = query.getResultList();
+
+        }
+
+        return listArticle;
+    }
+
+    public List<Article> findLikeArticleContent(String contentString) {
+        List<Article> list = null;
+        if (contentString != null || !contentString.isEmpty()) {
+
+            EntityManager em = this.getEntityManager();
+            Query query = em.createNamedQuery(this.findByLikeArticleContantQuery);
+            String paramater = "%" + contentString + "%";
+            query.setParameter("contentString", paramater);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+
+    public List<Article> findByRate(int rate) {
+        List<Article> list = null;
+        if (rate > 0) {
+            EntityManager em = this.getEntityManager();
+            Query query = em.createNamedQuery(this.findByRateQuery);
+            query.setParameter("rate", rate);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+
+    public List<Article> findByHigherRate(int rate) {
+        List<Article> list = null;
+        if (rate > 0) {
+            EntityManager em = this.getEntityManager();
+            Query query = em.createNamedQuery(this.findByHigherRateQuery);
+            query.setParameter("rate", rate);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+
+    public List<Article> findByCreatedDate(Date createDate) {
+        List<Article> list = null;
+        if (createDate != null) {
+            EntityManager em = this.getEntityManager();
+            Query query = em.createNamedQuery(this.findByCreatedDateQuery);
+            query.setParameter("createdDate", createDate);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+
+    public List<Article> findBetweenCreatedDate(Date date1, Date date2) {
+        List<Article> list = null;
+        if (date1 != null && date2 != null) {
+            if (date1.before(date2)) {
+                EntityManager em = this.getEntityManager();
+                Query query = em.createNamedQuery(this.findBetweenCreatedDateQuery);
+                query.setParameter("date1", date1);
+                query.setParameter("date2", date2);
+
+                list = query.getResultList();
+            }
+        }
+        return list;
+    }
+
+    public List<Article> findByAfterCreatedDate(Date date) {
+        List<Article> list = null;
+        if (date != null) {
+            EntityManager em = this.getEntityManager();
+            Query query = em.createNamedQuery(this.findAfterCreatedDate);
+            query.setParameter("createdDate", date);
+
+            list = query.getResultList();
+        }
+        return list;
+    }
+
+    public List<Article> collectNewsArticle() {
+
+        EntityManager em = this.getEntityManager();
+
+        Query query = em.createNamedQuery(this.collectNewsArticleQuery);
+        List<Article> list = query.getResultList();
+
+        return list;
+    }
+
+    public boolean removeArticle(int articleId) {
+        boolean check = false;
+        try {
+            if (articleId > 0) {
+                this.destroy(articleId);
+                check = true;
+            }
+        } catch (NonexistentEntityException ex) {
+            check = false;
+            ex.printStackTrace();
+        }
+        return check;
+    }
 }
