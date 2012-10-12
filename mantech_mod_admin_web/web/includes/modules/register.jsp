@@ -28,15 +28,15 @@
     <div class="module_content">
         <fieldset style="width: 30%">
             <label>User name</label>
-            <input type="text" name="username" id="username" style="width: 70%" >
+            <input type="text" name="username" id="username" style="width: 70%">
         </fieldset>
         <fieldset style="width: 30%">
             <label>Password</label>
-            <input type="password" name="password"  style="width: 70%" >
+            <input type="password" name="password"  style="width: 70%">
         </fieldset>
-        <fieldset style="width: 30%">
+         <fieldset style="width: 30%">
             <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" style="width: 70%" >
+            <input type="password" name="confirmPassword" id="confirmPassword" style="width: 70%">
         </fieldset>
         <fieldset style="width: 30%">
             <label>Role</label>

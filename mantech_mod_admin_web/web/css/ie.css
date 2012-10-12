@@ -32,6 +32,10 @@ fieldset input[type=text] {
     margin-left: -10px;
 }
 
+fieldset input[type=text] {
+    margin-left: -10px;
+}
+
 
 fieldset select {
     margin-left: -10px
