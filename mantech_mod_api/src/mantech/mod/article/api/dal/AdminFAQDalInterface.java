@@ -11,7 +11,7 @@ import mantech.mod.article.entity.Faq;
  *
  * @author NDC
  */
-public interface AdminFAQDal {
+public interface AdminFAQDalInterface {
 
     boolean createFAQ(Faq faq);
 

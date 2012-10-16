@@ -13,7 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import mantech.mod.article.api.dal.AdminArticleDal;
+import mantech.mod.article.api.dal.AdminArticleDalInterface;
 import mantech.mod.article.entity.Article;
 import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
 import mantech.mod.article.jpa.exceptions.PreexistingEntityException;
@@ -22,7 +22,7 @@ import mantech.mod.article.jpa.exceptions.PreexistingEntityException;
  *
  * @author NGUYEN
  */
-public class ArticleJpaController implements AdminArticleDal {
+public class ArticleJpaController implements AdminArticleDalInterface {
 
     final String collectNewsArticleQuery = "Article.collectNewsArticle";
     final String findByIdQuery = "Article.findById";

@@ -1,0 +1,160 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mantech.mod.article.biz;
+
+import java.sql.Date;
+import java.util.List;
+import mantech.mod.article.entity.Article;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+/**
+ *
+ * @author Administrator
+ */
+public class AdminArticleBizTest {
+
+    public AdminArticleBizTest() {
+    }
+    static AdminArticleBiz adminArticleBiz;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        adminArticleBiz = new AdminArticleBiz();
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Test
+    public void testCreateNewArticle() throws Exception {
+        Article article = new Article();
+        article.setArticle("hoangvu");
+        article.setContent("hoangvubrvt@gmaasdasdasdasd");
+        article.setCreatedDate(Date.valueOf("2012-02-22"));
+        article.setRate(4);
+        article.setThumbnail("asdjahsdjahsdjas");
+        boolean check = adminArticleBiz.createNewArticle(article);
+
+        Assert.assertTrue("Test Them Article Khong Thanh Cong", check);
+    }
+
+    @Test
+    public void testEditArticle() throws Exception {
+
+        Article articleFirst = adminArticleBiz.findById(1);
+
+        Article articleUpdate = adminArticleBiz.findById(1);
+        articleUpdate.setArticle("nguyen hoang trung tin");
+        articleUpdate.setContent("da update duoc roi");
+        articleUpdate.setCreatedDate(Date.valueOf("2012-12-12"));
+        articleUpdate.setRate(1);
+
+        boolean check = adminArticleBiz.editArticle(articleUpdate);
+
+        Article articleSecond = adminArticleBiz.findById(1);
+
+        Assert.assertTrue("Update Khong Thanh Cong: " + check, check);
+        Assert.assertNotSame("Update Khong Thanh Cong", articleFirst, articleSecond);
+    }
+
+    @Test
+    public void testRemoveArticle() throws Exception {
+
+        boolean check = adminArticleBiz.removeArticle(20);
+
+        Assert.assertTrue("Remove Khong Thanh Cong: " + check, check);
+    }
+
+    @Test
+    public void testFindById() throws Exception {
+        Article articleFirst = adminArticleBiz.findById(23);
+
+        Assert.assertNotNull("TIm Kiem By Id Khong Thanh Cong", articleFirst);
+    }
+
+    @Test
+    public void testFindByLikeArticle() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findByLikeArticle("ha");
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("TIm Kiem By Like Article Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindLikeArticleContent() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findLikeArticleContent("ha");
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By Like Article va Content Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindByRate() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findByRate(4);
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By Rate Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindByHigherRate() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findByHigherRate(3);
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By HigherRate Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindByCreatedDate() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findByCreatedDate(Date.valueOf("2012-02-22"));
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By CreateDate Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindBetweenCreatedDate() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findBetweenCreatedDate(Date.valueOf("2012-01-01"), Date.valueOf("2012-02-22"));
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By BetweenCreateDate Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testFindByAfterCreatedDate() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.findByAfterCreatedDate(Date.valueOf("2012-01-01"));
+
+        int count = articleList.size();
+        System.out.println("So luong: " + count);
+        Assert.assertNotNull("Tim Kiem By AfterCreateDate Khong Thanh Cong", articleList);
+    }
+
+    @Test
+    public void testCollectNewsArticle() throws Exception {
+
+        List<Article> articleList = adminArticleBiz.collectNewsArticle();
+
+        int count = articleList.size();
+        System.out.println("So luong: "+count);
+        Assert.assertNotNull("Collect New Article Khong Thanh Cong", articleList);
+    }
+}

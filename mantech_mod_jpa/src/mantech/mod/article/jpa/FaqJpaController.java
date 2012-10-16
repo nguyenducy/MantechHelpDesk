@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import mantech.mod.article.api.dal.AdminFAQDal;
+import mantech.mod.article.api.dal.AdminFAQDalInterface;
 import mantech.mod.article.entity.Faq;
 import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
 
@@ -20,7 +20,7 @@ import mantech.mod.article.jpa.exceptions.NonexistentEntityException;
  *
  * @author NGUYEN
  */
-public class FaqJpaController implements AdminFAQDal {
+public class FaqJpaController implements AdminFAQDalInterface {
 
     final String findAllQuery = "Faq.findAll";
     final String findByIdQuery = "Faq.findById";

@@ -13,7 +13,7 @@ import mantech.mod.article.entity.Article;
  *
  * @author Administrator
  */
-public interface AdminArticleDal {
+public interface AdminArticleDalInterface {
     
     boolean createNewArticle(Article article);
 
