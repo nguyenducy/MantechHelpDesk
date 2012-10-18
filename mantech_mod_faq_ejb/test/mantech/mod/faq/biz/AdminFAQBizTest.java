@@ -46,8 +46,9 @@ public class AdminFAQBizTest {
 
     @Test
     public void testEditFAQ() throws Exception {
+        int id = idFAQ(afaqBiz.listAllFAQ());
 
-        Faq faq = afaqBiz.findFAQById(23);
+        Faq faq = afaqBiz.findFAQById(id);
 
         faq.setAnswer("em ten nguyen hung tuyen");
         faq.setQuestion("Em ten gi vay em ?");
@@ -60,8 +61,9 @@ public class AdminFAQBizTest {
     @Test
     public void testRemoveFAQ() throws Exception {
 
-//
-        boolean check = afaqBiz.removeFAQ(1);
+        int id = idFAQ(afaqBiz.listAllFAQ());
+
+        boolean check = afaqBiz.removeFAQ(id);
 
         assertTrue("Remove FAQ khong thanh cong", check);
     }
@@ -86,7 +88,17 @@ public class AdminFAQBizTest {
     public void testFindQuestion() throws Exception {
 
         List<Faq> faq = afaqBiz.findQuestion("they");
-        System.out.println("So Luong Question: "+faq.size());
+        System.out.println("So Luong Question tim duoc: "+faq.size());
         assertNotNull("Find Question khong thanh cong", faq);
+    }
+
+    private int idFAQ(List<Faq> faqs){
+        int i =0;
+        for (Faq faq : faqs) {
+            if(i<faq.getId()){
+                i = faq.getId();
+            }
+        }
+        return i;
     }
 }

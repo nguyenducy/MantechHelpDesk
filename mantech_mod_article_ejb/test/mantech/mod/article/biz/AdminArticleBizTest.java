@@ -34,8 +34,8 @@ public class AdminArticleBizTest {
     @Test
     public void testCreateNewArticle() throws Exception {
         Article article = new Article();
-        article.setArticle("hoangvu");
-        article.setContent("hoangvubrvt@gmaasdasdasdasd");
+        article.setArticle("So Dac Biet");
+        article.setContent("So Dac Biet@gmaasdasdasdasd");
         article.setCreatedDate(Date.valueOf("2012-02-22"));
         article.setRate(4);
         article.setThumbnail("asdjahsdjahsdjas");
@@ -46,10 +46,11 @@ public class AdminArticleBizTest {
 
     @Test
     public void testEditArticle() throws Exception {
+        int id = idArticle(adminArticleBiz.collectNewsArticle());
 
-        Article articleFirst = adminArticleBiz.findById(1);
+        Article articleFirst = adminArticleBiz.findById(id);
 
-        Article articleUpdate = adminArticleBiz.findById(1);
+        Article articleUpdate = adminArticleBiz.findById(id);
         articleUpdate.setArticle("nguyen hoang trung tin");
         articleUpdate.setContent("da update duoc roi");
         articleUpdate.setCreatedDate(Date.valueOf("2012-12-12"));
@@ -57,7 +58,7 @@ public class AdminArticleBizTest {
 
         boolean check = adminArticleBiz.editArticle(articleUpdate);
 
-        Article articleSecond = adminArticleBiz.findById(1);
+        Article articleSecond = adminArticleBiz.findById(id);
 
         Assert.assertTrue("Update Khong Thanh Cong: " + check, check);
         Assert.assertNotSame("Update Khong Thanh Cong", articleFirst, articleSecond);
@@ -66,7 +67,8 @@ public class AdminArticleBizTest {
     @Test
     public void testRemoveArticle() throws Exception {
 
-        boolean check = adminArticleBiz.removeArticle(20);
+        int id = idArticle(adminArticleBiz.collectNewsArticle());
+        boolean check = adminArticleBiz.removeArticle(id);
 
         Assert.assertTrue("Remove Khong Thanh Cong: " + check, check);
     }
@@ -156,5 +158,15 @@ public class AdminArticleBizTest {
         int count = articleList.size();
         System.out.println("So luong: "+count);
         Assert.assertNotNull("Collect New Article Khong Thanh Cong", articleList);
+    }
+
+    private int idArticle(List<Article> articles){
+        int id=0;
+        for (Article article : articles) {
+            if(id<article.getId()){
+                id = article.getId();
+            }
+        }
+        return id;
     }
 }
