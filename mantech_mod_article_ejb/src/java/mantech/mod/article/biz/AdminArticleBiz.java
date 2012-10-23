@@ -33,6 +33,7 @@ public class AdminArticleBiz implements mantech.mod.article.api.biz.AdminArticle
     @Override
     public boolean createNewArticle(Article article) {
         this.articleJpa = new ArticleJpaController(entityManagerFactory);
+
         boolean check = false;
         if (article != null) {
             check = articleJpa.createNewArticle(article);
@@ -147,7 +148,7 @@ public class AdminArticleBiz implements mantech.mod.article.api.biz.AdminArticle
         List<Article> listArticle = null;
         this.articleJpa = new ArticleJpaController(entityManagerFactory);
 
-            listArticle = articleJpa.collectNewsArticle();
+        listArticle = articleJpa.collectNewsArticle();
 
         return listArticle;
     }

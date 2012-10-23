@@ -33,10 +33,12 @@ public class AdminArticleBizTest {
 
     @Test
     public void testCreateNewArticle() throws Exception {
+        Date date = new Date(System.currentTimeMillis());
+
         Article article = new Article();
         article.setArticle("So Dac Biet");
         article.setContent("So Dac Biet@gmaasdasdasdasd");
-        article.setCreatedDate(Date.valueOf("2012-02-22"));
+        article.setCreatedDate(date);
         article.setRate(4);
         article.setThumbnail("asdjahsdjahsdjas");
         boolean check = adminArticleBiz.createNewArticle(article);
@@ -53,7 +55,7 @@ public class AdminArticleBizTest {
         Article articleUpdate = adminArticleBiz.findById(id);
         articleUpdate.setArticle("nguyen hoang trung tin");
         articleUpdate.setContent("da update duoc roi");
-        articleUpdate.setCreatedDate(Date.valueOf("2012-12-12"));
+        //articleUpdate.setCreatedDate(Date.valueOf("2012-12-12"));
         articleUpdate.setRate(1);
 
         boolean check = adminArticleBiz.editArticle(articleUpdate);
