@@ -7,10 +7,8 @@
 <header><h3 class="tabs_involved">Account Manager</h3>
     <ul class="tabs">
         <li><a href="#tab1">Accounts</a></li>
-
     </ul>
 </header>
-
 
 <div id="tab1" class="tab_content">
     <table class="tablesorter" cellspacing="0">
@@ -33,7 +31,9 @@
                 <td>Articles</td>
                 <td>5th April 2011</td>
                 <td></td>
-                <td><input type="image" src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"><input type="image" src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"></td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
+                </td>
             </tr>
             <tr>
                 <td><input type="checkbox"></td>
@@ -42,7 +42,7 @@
                 <td>Freebies</td>
                 <td>6th April 2011</td>
                 <td></td>
-                <td><input type="image" src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"><input type="image" src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"></td>
+                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
             </tr>
             <tr>
                 <td><input type="checkbox"></td>
@@ -51,7 +51,7 @@
                 <td>Tutorials</td>
                 <td>10th April 2011</td>
                 <td></td>
-                <td><input type="image" src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"><input type="image" src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"></td>
+                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
             </tr>
             <tr>
                 <td><input type="checkbox"></td>
@@ -60,7 +60,7 @@
                 <td>Articles</td>
                 <td>16th April 2011</td>
                 <td></td>
-                <td><input type="image" src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"><input type="image" src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"></td>
+                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
             </tr>
             <tr>
                 <td><input type="checkbox"></td>                
@@ -69,7 +69,7 @@
                 <td>Articles</td>
                 <td>16th April 2011</td>
                 <td></td>
-                <td><input type="image" src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"><input type="image" src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"></td>
+                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
             </tr>
         </tbody>
     </table>

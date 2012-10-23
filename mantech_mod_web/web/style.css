@@ -131,3 +131,21 @@ dl.news dd {margin-bottom:20px}
 #contacts-form label {float:left;width:112px;padding-bottom:5px}
 #contacts-form input {width:240px;padding:1px 0 1px 5px;background:none;border:1px solid #e5e5e5;color:#616161;float:left}
 #contacts-form textarea {width:425px;height:410px;padding:1px 0 1px 5px;background:none;border:1px solid #e5e5e5;color:#616161;margin-bottom:12px;overflow:auto;float:left}
+
+input[type=submit].alt_btn {
+    background: #D0D1D4 url(../images/btn_submit_2.png) repeat-x;
+    border: 1px solid#30B0C8;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 #fff;
+    box-shadow: 0 1px 0 #fff;
+    font-weight: bold;
+    height: 22px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #003E49;
+    text-shadow: 0 1px 0 #6CDCF9;
+    cursor: pointer;
+    margin-top: 15px;
+}

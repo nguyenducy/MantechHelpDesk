@@ -20,16 +20,18 @@
     <li class="icn_add_user"><a href="${pageContext.request.contextPath}/Accounts/Grant.jsp">Add New User</a></li>
     <li class="icn_view_users"><a href="${pageContext.request.contextPath}/Accounts/ViewAccount.jsp">View Accounts</a></li>
     <li class="icn_security"><a href="${pageContext.request.contextPath}/Accounts/ChangePassword.jsp">Change Password</a></li>
-    <li class="icn_logout"><a href="${pageContext.request.contextPath}/Accounts/DeleteAccount.jsp">Delete Account</a></li>
     <li class="icn_view_users"><a href="${pageContext.request.contextPath}/Accounts/ViewUsers.jsp">View Users</a></li>
 </ul>
-<h3>Task</h3>
+<h3>Artilce</h3>
 <ul class="toggle">
     <li class="icn_new_article"><a href="${pageContext.request.contextPath}/Articles/NewArticle.jsp">New Article</a></li>
-     <li class="icn_logout"><a href="${pageContext.request.contextPath}/Articles/DeleteArticle.jsp">Delete Article</a></li>
-    <li class="icn_photo"><a href="${pageContext.request.contextPath}/Articles/FAQ.jsp">FAQ</a></li>
-     <li class="icn_logout"><a href="${pageContext.request.contextPath}/Articles/DeleteFAQ.jsp">Delete FAQ</a></li>
-    <li class="icn_folder"><a href="#">Report</a></li>
+    <li class="icn_folder"><a href="${pageContext.request.contextPath}/Articles/ViewArticle.jsp">View Articles</a></li>
+    
+</ul>
+<h3>FAQ</h3>
+<ul class="toggle">
+    <li class="icn_photo"><a href="${pageContext.request.contextPath}/FAQ/FAQ.jsp">FAQ</a></li>
+    <li class="icn_folder"><a href="${pageContext.request.contextPath}/FAQ/ViewFAQ.jsp">View FAQs</a></li>
     
     <!--<li class="icn_audio"><a href="#">Audio</a></li>
     <li class="icn_video"><a href="#">Video</a></li>-->

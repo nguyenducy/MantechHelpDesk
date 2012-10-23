@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.admin.web.servlet;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author NGUYEN
  */
 public class Authentication extends HttpServlet {
-   
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -26,15 +25,21 @@ public class Authentication extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         try {
-          response.sendRedirect("index.jsp");
-        } finally { 
+            if (username.equals("kevin") && password.equals("123")) {
+                response.sendRedirect(request.getContextPath()+"/Technician/CompletedForm.jsp");
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+        } finally {
             out.close();
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -46,9 +51,9 @@ public class Authentication extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -59,7 +64,7 @@ public class Authentication extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -71,5 +76,4 @@ public class Authentication extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

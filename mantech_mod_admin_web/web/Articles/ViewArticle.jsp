@@ -15,11 +15,10 @@
     </head>
     <body>
         <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
-    <article class="module width_3_quarter">
+    <article class="module width_3_quarter" style="width: 90%">
         <div class="tab_container">
-            <jsp:include page="../includes/modules/contentmanager.jsp"/>
+            <jsp:include page="../includes/modules/viewarticle.jsp"/>
         </div><!-- end of .tab_container -->
-
     </article><!-- end of content manager article -->
 </body>
 </html>
