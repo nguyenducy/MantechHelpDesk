@@ -16,7 +16,7 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
  *
  * @author NGUYEN
  */
-public abstract class AbstractReport {
+public abstract class AbstractReportDocument {
 
     public final static StyleBuilder boldStyle = stl.style().bold();
     public final static StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
