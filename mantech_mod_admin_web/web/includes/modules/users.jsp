@@ -26,47 +26,40 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>5th April 2011</td>
-                <td></td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>0123456789</td>
+                <td>Learning Service</td>
+                <td>david@gmail.com</td>
+                <td>Image</td>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
-                <td>Ipsum Lorem Dolor Sit Amet</td>
-                <td></td>
-                <td>Freebies</td>
-                <td>6th April 2011</td>
-                <td></td>
-
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Sit Amet Dolor Ipsum</td>
-                <td></td>
-                <td>Tutorials</td>
-                <td>10th April 2011</td>
-                <td></td>
-
+                <td>2</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>0123456789</td>
+                <td>Learning Service</td>
+                <td>david@gmail.com</td>
+                <td>Image</td>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-
+                <td>3</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>0123456789</td>
+                <td>Learning Service</td>
+                <td>david@gmail.com</td>
+                <td>Image</td>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-
+                <td>4</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>0123456789</td>
+                <td>Learning Service</td>
+                <td>david@gmail.com</td>
+                <td>Image</td>
             </tr>
         </tbody>
     </table>

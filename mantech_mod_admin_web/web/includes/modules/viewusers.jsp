@@ -18,59 +18,42 @@
                 <th>ID</th>
                 <th>Fullname</th>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Role</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox"></td>
+                <td>1</td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td></td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
                 <td>Articles</td>
-                <td>5th April 2011</td>
-                <td></td>
+                <td>Admin</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp?id=1"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Articles</td>
+                <td>Admin</td>
                 <td>
                     <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
                 </td>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
-                <td>Ipsum Lorem Dolor Sit Amet</td>
-                <td></td>
-                <td>Freebies</td>
-                <td>6th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Sit Amet Dolor Ipsum</td>
-                <td></td>
-                <td>Tutorials</td>
-                <td>10th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
+                <td>3</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
                 <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
+                <td>Admin</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
+                </td>
             </tr>
-            <tr>
-                <td><input type="checkbox"></td>                
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
+
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

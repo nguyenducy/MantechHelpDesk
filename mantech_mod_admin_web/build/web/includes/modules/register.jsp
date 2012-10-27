@@ -14,7 +14,7 @@
                 email: {required: true, email: true, maxlength: 50},
                 address : {required: true, maxlength: 100},
                 telephone: {required: true, digits :  true, maxlength: 12},
-                image : {required: true, extension: "png|jpeg"}
+                image : {required: true, extension: "png|jpeg|jpg"}
             },
             messages:{
                 username: {
@@ -88,7 +88,7 @@
         </fieldset>
         <fieldset style="width: 30%">
             <label>Address</label>
-            <input type="text" name="address" style="width: 70%" >
+            <textarea name="address" style="width: 70%"></textarea>
         </fieldset>
         <fieldset style="width: 30%">
             <label>Email</label>

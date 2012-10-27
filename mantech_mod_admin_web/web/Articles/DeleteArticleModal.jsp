@@ -36,7 +36,7 @@
         <%
             String id = request.getParameter("id");
         %>
-        <div id="dialog-confirm" title="Empty the recycle bin?">
+        <div id="dialog-confirm" title="Remove the article?">
             <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>These <span id="idcategory"><%= id %></span> will be permanently deleted and cannot be recovered. Are you sure?</p>
         </div>
     </body>

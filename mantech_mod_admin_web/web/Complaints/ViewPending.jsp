@@ -10,7 +10,7 @@
         <title>Index</title>
     </head>
     <body>
-        <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
+        <h4 class="alert_info">Welcome to Pending View</h4>
 
     <article class="module width_3_quarter" style="width: 90%">
         <div class="tab_container" >
