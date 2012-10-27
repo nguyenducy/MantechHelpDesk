@@ -2,27 +2,29 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.report;
 
+import net.sf.dynamicreports.report.constant.HorizontalAlignment;
+import net.sf.dynamicreports.report.constant.PageType;
+import net.sf.dynamicreports.report.constant.PageOrientation;
+import java.util.Date;
 import java.util.List;
+import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
 import net.sf.jasperreports.engine.JRDataSource;
+import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 
 /**
  *
  * @author NGUYEN
  */
-public class CategoryReport extends AbstractReport{
+public class CategoryReport extends AbstractReport {
+
+    private JRDataSource dataSource;
 
     @Override
-    public void build(){
+    public void build() {
         try {
-            //Style
-            StyleBuilder boldStyle = stl.style().bold();
-            StyleBuilder boldCenteredStyle = stl.style(boldStyle).setHorizontalAlignment(HorizontalAlignment.CENTER);
-            StyleBuilder columnTitleStyle = stl.style(boldCenteredStyle).setBorder(stl.pen1Point()).setBackgroundColor(Color.LIGHT_GRAY);
-            StyleBuilder titleStyle = stl.style(boldCenteredStyle).setVerticalAlignment(VerticalAlignment.MIDDLE).setFontSize(15);
-
             //Column
             TextColumnBuilder<String> departmentColumn = col.column("Department", "department", type.stringType());
             TextColumnBuilder<String> fullnameColumn = col.column("Full Name", "fullname", type.stringType());
@@ -41,7 +43,7 @@ public class CategoryReport extends AbstractReport{
                     .title(cmp.horizontalList().add(cmp.image(getClass().getResourceAsStream("../images/report.jpg")).setDimension(80, 80),
                     cmp.text("Category Report").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT)))
                     .pageFooter(cmp.pageXofY(), cmp.currentDate())
-                    .setDataSource(createDataSource())
+                    .setDataSource(dataSource)
                     .show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,8 +52,9 @@ public class CategoryReport extends AbstractReport{
 
     @Override
     public JRDataSource covertListToDRDateSource(List list) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Object object : list) {
+
+        }
+        return dataSource;
     }
-
-
 }
