@@ -77,9 +77,11 @@ public class AdminArticleBizTest {
 
     @Test
     public void testFindById() throws Exception {
-        Article articleFirst = adminArticleBiz.findById(23);
+        Article articleFirst = adminArticleBiz.findById(1);
 
-        Assert.assertNotNull("TIm Kiem By Id Khong Thanh Cong", articleFirst);
+        Article expected = new Article(1);
+
+        Assert.assertEquals(expected.getId(), articleFirst.getId());
     }
 
     @Test

@@ -14,6 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+         <h4 class="alert_info">Welcome to Report View</h4>
+
+    <article class="module width_quarter" style="width: 50%">
+        <jsp:include page="../includes/modules/viewreport.jsp"/>
+    </article><!-- end of messages article -->
     </body>
 </html>
