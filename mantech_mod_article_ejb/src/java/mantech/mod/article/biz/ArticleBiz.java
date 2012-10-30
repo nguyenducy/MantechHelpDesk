@@ -18,14 +18,14 @@ import mantech.mod.article.jpa.ArticleJpaController;
  * @author Administrator
  */
 @Stateless(name = "AdminArticleBiz", mappedName = "ejb/mantech/saigon/AdminArticleBiz")
-@Remote(mantech.mod.article.api.biz.AdminArticleBizInterface.class)
-public class AdminArticleBiz implements mantech.mod.article.api.biz.AdminArticleBizInterface {
+@Remote(mantech.mod.article.api.biz.ArticleBiz.class)
+public class ArticleBiz implements mantech.mod.article.api.biz.ArticleBiz {
 
     final String entityManagerFactoryString = "mantech_mod_jpaPU";
     ArticleJpaController articleJpa = null;
     EntityManagerFactory entityManagerFactory = null;
 
-    public AdminArticleBiz() {
+    public ArticleBiz() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory(entityManagerFactoryString);
 
     }

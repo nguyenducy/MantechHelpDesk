@@ -20,11 +20,11 @@ public class AdminArticleBizTest {
 
     public AdminArticleBizTest() {
     }
-    static AdminArticleBiz adminArticleBiz;
+    static ArticleBiz adminArticleBiz;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        adminArticleBiz = new AdminArticleBiz();
+        adminArticleBiz = new ArticleBiz();
     }
 
     @AfterClass

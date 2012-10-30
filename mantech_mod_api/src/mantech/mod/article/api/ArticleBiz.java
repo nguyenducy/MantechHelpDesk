@@ -12,7 +12,7 @@ import mantech.mod.article.entity.Article;
  *
  * @author NDC
  */
-public interface AdminArticleBizInterface {
+public interface ArticleBiz {
 
     boolean createNewArticle(Article article);
 

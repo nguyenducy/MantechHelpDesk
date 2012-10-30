@@ -4,8 +4,9 @@
  */
 package mantech.mod.faq.biz;
 
+import mantech.mod.article.api.biz.FAQBiz;
 import java.util.List;
-import mantech.mod.article.api.biz.AdminFAQBizInterface;
+
 import mantech.mod.article.entity.Faq;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -20,11 +21,11 @@ public class AdminFAQBizTest {
 
     public AdminFAQBizTest() {
     }
-    static AdminFAQBizInterface afaqBiz = null;
+    static FAQBiz afaqBiz = null;
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        afaqBiz = new AdminFAQBiz();
+        afaqBiz = new mantech.mod.faq.biz.FAQBiz() {};
     }
 
     @AfterClass
@@ -58,20 +59,12 @@ public class AdminFAQBizTest {
         assertTrue("Update FAQ khong thanh cong", check);
     }
 
-    @Test
-    public void testRemoveFAQ() throws Exception {
-
-        int id = idFAQ(afaqBiz.listAllFAQ());
-
-        boolean check = afaqBiz.removeFAQ(id);
-
-        assertTrue("Remove FAQ khong thanh cong", check);
-    }
-
+   
     @Test
     public void testFindFAQById() throws Exception {
-
-        Faq faq = afaqBiz.findFAQById(23);
+        List<Faq> list = afaqBiz.listAllFAQ();
+        int id = idFAQ(list);
+        Faq faq = afaqBiz.findFAQById(id);
 
         assertNotNull("Find FAQID khong thanh cong", faq);
     }
@@ -92,6 +85,16 @@ public class AdminFAQBizTest {
         assertNotNull("Find Question khong thanh cong", faq);
     }
 
+     @Test
+    public void testRemoveFAQ() throws Exception {
+
+        int id = idFAQ(afaqBiz.listAllFAQ());
+
+        boolean check = afaqBiz.removeFAQ(id);
+
+        assertTrue("Remove FAQ khong thanh cong", check);
+    }
+
     private int idFAQ(List<Faq> faqs){
         int i =0;
         for (Faq faq : faqs) {
@@ -101,4 +104,5 @@ public class AdminFAQBizTest {
         }
         return i;
     }
+
 }
