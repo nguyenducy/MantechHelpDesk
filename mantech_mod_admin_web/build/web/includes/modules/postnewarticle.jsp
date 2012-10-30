@@ -3,50 +3,49 @@
     Created on : Sep 29, 2012, 8:05:08 PM
     Author     : NGUYEN
 --%>
-<%@page import="mantech.mod.article.parameter.ParameterArticle.Parameter"%>
 <script>
     $(document).ready(function(){
         $("#newArticleForm").validate({
             rules:{
-    <%=Parameter.ARTICLE_TITLE%>: {required: true, maxlength: 50},
-    <%=Parameter.ARTICLE_CONTENT%>: {required: true},
-    <%=Parameter.ARTICLE_THUMBNAIL%>: {required: true, extension: "png|jpeg|jpg"}
-                },
-                messages:{
-    <%=Parameter.ARTICLE_TITLE%>:{
+                article: {required: true, maxlength: 50},
+                content: {required: true},
+                thumbnail: {required: true, extension: "png|jpeg"}
+            },
+            messages:{
+                article:{
                     required: "Required",
                     maxlength: "Less than 51 characters"
                 },
-    <%=Parameter.ARTICLE_CONTENT%>: {
-                required: "Required"
-            },
-    <%=Parameter.ARTICLE_THUMBNAIL%>:{
-            required: "Required"
-        }
-    }
-});
+                content:{
+                    required: "Required"
+                },
+                thumbnail:{
+                    required: "Required"
+                }
+            }
+        });
 
-jQuery.validator.addMethod("extension", function(value, element, param) {
-    param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpegjpg";
-    return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
-}, jQuery.format("Only PNG or JPEG extenstion."));
-});
+        jQuery.validator.addMethod("extension", function(value, element, param) {
+            param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpeg|gif";
+            return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
+        }, jQuery.format("Only PNG or JPEG extenstion."));
+    });
 </script>
 
-<form action="../insertArticleServlet" method="post" id="newArticleForm" enctype="multipart/form-data">
+<form action="" method="post" id="newArticleForm">
     <header><h3>Post New Article</h3></header>
     <div class="module_content">
         <fieldset>
             <label>Title Article</label>
-            <input type="text" name="<%=Parameter.ARTICLE_TITLE%>"">
+            <input type="text" name="article">
         </fieldset>
         <fieldset>
             <label>Content</label>
-            <textarea rows="12" name="<%=Parameter.ARTICLE_CONTENT%>"></textarea>
+            <textarea rows="12" name="content"></textarea>
         </fieldset>
         <fieldset style="width:48%;  margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
             <label>Thumbnail</label>
-            <input type="file" name="<%=Parameter.ARTICLE_THUMBNAIL%>"/>
+            <input type="file" name="thumbnail"/>
         </fieldset>
 
     </div>

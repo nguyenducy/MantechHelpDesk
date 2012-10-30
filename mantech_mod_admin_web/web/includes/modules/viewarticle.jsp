@@ -4,25 +4,20 @@
     Author     : NGUYEN
 --%>
 
-<%@page import="java.util.List" %>
-<%@page import="mantech.mod.article.entity.Article"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header><h3 class="tabs_involved">All Articles</h3>
     <ul class="tabs">
-        <li><a href="#">Articles</a></li>
+        <li><a href="#tab1">Articles</a></li>
     </ul>
 </header>
-<% List<Article> listArticle = (List<Article>)session.getAttribute("listArticle");%>
+
+
 <div id="tab1" class="tab_content">
     <table class="tablesorter" cellspacing="0">
         <thead>
             <tr>
-
                 <th>ID</th>
                 <th>Article</th>
-
-                <%--<th>Content</th>--%>
-
+                <th>Content</th>
                 <th>Created On</th>
                 <th>Rate</th>
                 <th>Thumnail</th>
@@ -30,24 +25,57 @@
             </tr>
         </thead>
         <tbody>
-            <% for(Article article: listArticle)
-                {
-                String thumbNail = getServletContext().getRealPath("/")+"imagesThumb"+"\\"+article.getThumbnail();
-            %>
             <tr>
-                <td><%= article.getId()%></td>
-                <td><%=article.getArticle()%></td>
-                
-                <%--<td><%=article.getContent()%></td>--%>
-
-                <td><%= article.getCreatedDate()%></td>
-                <td> <%= article.getRate()%> </td>
-                <td><%= article.getThumbnail()%></td>
-                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp?id=<%= article.getId()%>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
-                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=<%= article.getId()%>&ar=<%= article.getArticle()%>&content=<%=article.getContent()%>&day=<%= article.getCreatedDate()%>&rate=<%= article.getRate() %>&thum=<%=thumbNail%>"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
+                <td>1</td>
+                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>Articles</td>
+                <td>10/5/2012</td>
+                <td>4</td>
+                <td>Image1</td>
+                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp?id=1"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=1&ar=Lorem Ipsum Dolor Sit Amet&content=Articles&day=10/5/2012&rate=4&thum=image1"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
                 </td>
             </tr>
-            <%}%>
+            <tr>
+                <td>2</td>
+                <td>Ipsum Lorem Dolor Sit Amet</td>
+                <td>Freebies</td>
+                <td>6th April 2011</td>
+                <td></td>
+                <td></td>
+                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=1&ar=Lorem Ipsum Dolor Sit Amet&content=Articles&day=5th April 2011&rate=4&thum=image1"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Sit Amet Dolor Ipsum</td>
+                <td>Tutorials</td>
+                <td>10th April 2011</td>
+                <td></td>
+                <td></td>
+                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=1&ar=Lorem Ipsum Dolor Sit Amet&content=Articles&day=5th April 2011&rate=4&thum=image1"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Dolor Lorem Amet</td>
+                <td>Articles</td>
+                <td>16th April 2011</td>
+                <td></td>
+                <td></td>
+                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=1&ar=Lorem Ipsum Dolor Sit Amet&content=Articles&day=5th April 2011&rate=4&thum=image1"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Dolor Lorem Amet</td>
+                <td>Articles</td>
+                <td>16th April 2011</td>
+                <td></td>
+                <td></td>
+                <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=1&ar=Lorem Ipsum Dolor Sit Amet&content=Articles&day=5th April 2011&rate=4&thum=image1"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a></td>
+            </tr>
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

@@ -4,7 +4,6 @@
     Author     : NGUYEN
 --%>
 
-<%@page import="mantech.mod.FAQ.parameter.ParameterFAQ.Parameter"%>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#newFAQ").validate({
@@ -16,16 +15,16 @@
     });
 </script>
 
-<form action="../insertFAQ" method="get" id="newFAQ">
+<form action="" method="post" id="newFAQ">
     <header><h3>Post New FAQ</h3></header>
     <div class="module_content">
         <fieldset>
             <label>Question</label>
-            <textarea rows="12" name="<%= Parameter.FAQ_QUESTION%>" id="question"></textarea>
+            <textarea rows="12" name="question"></textarea>
         </fieldset>
         <fieldset>
             <label>Answer</label>
-            <textarea rows="12" name="<%= Parameter.FAQ_ANSWER %>" id="answer"></textarea>
+            <textarea rows="12" name="answer"></textarea>
         </fieldset>
 
 

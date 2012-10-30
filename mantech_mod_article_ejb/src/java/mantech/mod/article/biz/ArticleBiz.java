@@ -4,6 +4,7 @@
  */
 package mantech.mod.article.biz;
 
+
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Remote;

@@ -4,7 +4,6 @@
     Author     : NGUYEN
 --%>
 
-<%@page import="mantech.mod.FAQ.parameter.ParameterFAQ.Parameter"%>
 <html>
     <head>
         <title></title>
@@ -74,14 +73,14 @@
                             bValid = bValid && checkRequired(answer, 'Answer', 'is required');
 
                             if(bValid){
-                                var url = "../updateFAQ?<%=Parameter.FAQ_ID%>="+${"id"}.val()+"&<%=Parameter.FAQ_QUESTION%>="+$("#question").val()+"&<%=Parameter.FAQ_ANSWER%>="+$("#answer").val();
+                                var url = "UpdateServlet?category="+category.val();
                                 window.location.href = url;
                                 $(this).dialog("close");
                             }
                            
                         },
                         Cancel: function(){
-                            var url = "../loadFAQ"
+                            var url = "ViewFAQ.jsp"
                             window.location.href = url;
                             $(this).dialog("close");
                         }
