@@ -10,5 +10,5 @@ package mantech.mod.report.api;
  * @author NDC
  */
 public interface ReportBiz {
-
+    
 }
