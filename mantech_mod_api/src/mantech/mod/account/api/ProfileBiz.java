@@ -11,7 +11,7 @@ import mantech.mod.account.entity.Profile;
  *
  * @author NDC
  */
-public interface AdminProfileBiz {
+public interface ProfileBiz {
 
     void create(Profile profile);
 

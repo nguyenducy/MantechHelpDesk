@@ -11,7 +11,7 @@ import mantech.mod.account.entity.Account;
  *
  * @author NDC
  */
-public interface AdminAccountBiz {
+public interface AccountBiz {
 
     void create(Account account);
 

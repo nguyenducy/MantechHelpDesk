@@ -11,7 +11,7 @@ import mantech.mod.complaint.entity.Category;
  *
  * @author NDC
  */
-public interface AdminCategoryBiz {
+public interface CategoryBiz {
 
     void create(Category category);
 

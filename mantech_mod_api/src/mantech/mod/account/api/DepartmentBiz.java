@@ -11,7 +11,7 @@ import mantech.mod.account.entity.Department;
  *
  * @author NDC
  */
-public interface AdminDepartmentBiz {
+public interface DepartmentBiz {
 
     void create(Department department);
 

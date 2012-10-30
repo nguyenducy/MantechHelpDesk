@@ -11,7 +11,7 @@ import mantech.mod.account.entity.Role;
  *
  * @author NDC
  */
-public interface AdminRoleBiz {
+public interface RoleBiz {
 
     void create(Role role);
 

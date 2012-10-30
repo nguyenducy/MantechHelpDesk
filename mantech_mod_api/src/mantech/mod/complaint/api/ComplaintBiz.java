@@ -11,7 +11,7 @@ import mantech.mod.complaint.entity.Complaint;
  *
  * @author NDC
  */
-public interface AdminComplaintBiz {
+public interface ComplaintBiz {
 
     void create(Complaint complaint);
 

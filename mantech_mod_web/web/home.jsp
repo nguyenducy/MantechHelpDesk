@@ -4,6 +4,8 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.article.entity.Article"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -93,6 +95,18 @@
                                 <p>The website template goes with two packages – with PSD source files and without them. PSD source files are available for free for the registered members of Templates.com. The basic package (without PSD is available for anyone without registration).</p>
 							This website template has several pages: <a href="#">Home</a>, <a href="#">About us</a>, <a href="#">Services</a>, <a href="#">Support</a>, <a href="#">Contacts</a> (note that contact us form – doesn’t work), <a href="#">Site Map</a>.
                             </div>
+                            <%
+                                        InitialContext context = null;
+                                        try {
+                                            context = new InitialContext();
+                                            
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+                                            context.close();
+                                        }
+
+                            %>
                             <h2>Recent Articles</h2>
                             <ul class="img-list">
                                 <li>

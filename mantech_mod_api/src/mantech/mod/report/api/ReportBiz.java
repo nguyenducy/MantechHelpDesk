@@ -9,6 +9,6 @@ package mantech.mod.report.api;
  *
  * @author NDC
  */
-public interface AdminReportBiz {
+public interface ReportBiz {
 
 }
