@@ -71,9 +71,11 @@ public class AdminFAQBizTest {
     @Test
     public void testFindFAQById() throws Exception {
 
-        Faq faq = afaqBiz.findFAQById(23);
+        Faq faq = afaqBiz.findFAQById(1);
 
-        assertNotNull("Find FAQID khong thanh cong", faq);
+        Faq expected = new Faq(1);
+
+        assertEquals(expected.getId(), faq.getId());
     }
 
     @Test
