@@ -25,21 +25,14 @@
 <h3>Artilce</h3>
 <ul class="toggle">
     <li class="icn_new_article"><a href="${pageContext.request.contextPath}/Articles/NewArticle.jsp">New Article</a></li>
-    <li class="icn_folder"><a href="${pageContext.request.contextPath}/Articles/ViewArticle.jsp">View Articles</a></li>
-
+    <li class="icn_folder"><a href="${pageContext.request.contextPath}/loadCollectArticle">View Articles</a></li>
+    
 </ul>
 <h3>FAQ</h3>
 <ul class="toggle">
     <li class="icn_photo"><a href="${pageContext.request.contextPath}/FAQ/FAQ.jsp">FAQ</a></li>
-    <li class="icn_folder"><a href="${pageContext.request.contextPath}/FAQ/ViewFAQ.jsp">View FAQs</a></li>
-
-    <!--<li class="icn_audio"><a href="#">Audio</a></li>
-    <li class="icn_video"><a href="#">Video</a></li>-->
-</ul>
-<h3>Report</h3>
-<ul class="toggle">
-    <li class="icn_folder"><a href="${pageContext.request.contextPath}/Reports/ViewReport.jsp">View Reports</a></li>
-
+    <li class="icn_folder"><a href="../loadFAQ">View FAQs</a></li>
+    
     <!--<li class="icn_audio"><a href="#">Audio</a></li>
     <li class="icn_video"><a href="#">Video</a></li>-->
 </ul>

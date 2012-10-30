@@ -19,8 +19,8 @@
                 <th>Category</th>
                 <th>Employee</th>
                 <th>Created On</th>
-                <th>Pending</th>
                 <th>Issued</th>
+                <th>Pending</th>
                 <th>Completed</th>
                 <th>Completed On</th>
                 <th>Technician</th>
@@ -29,67 +29,48 @@
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
+                <td><input type="checkbox"></td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Kevin</td>
+                <td></td>
                 <td>Articles</td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td>12/23/2012</td>
-                <td>John</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>5th April 2011</td>
+                <td></td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Kevin</td>
-                <td>Articles</td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td>12/23/2012</td>
-                <td>John</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td><input type="checkbox"></td>
+                <td>Ipsum Lorem Dolor Sit Amet</td>
+                <td></td>
+                <td>Freebies</td>
+                <td>6th April 2011</td>
+                <td></td>
+
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Sit Amet Dolor Ipsum</td>
+                <td></td>
+                <td>Tutorials</td>
+                <td>10th April 2011</td>
+                <td></td>
+
             </tr>
             <tr>
-                <td>3</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Kevin</td>
+                <td><input type="checkbox"></td>
+                <td>Dolor Lorem Amet</td>
+                <td></td>
                 <td>Articles</td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td>12/23/2012</td>
-                <td>John</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>16th April 2011</td>
+                <td></td>
+
             </tr>
             <tr>
-                <td>4</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Kevin</td>
+                <td><input type="checkbox"></td>
+                <td>Dolor Lorem Amet</td>
+                <td></td>
                 <td>Articles</td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td>12/23/2012</td>
-                <td>John</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td>16th April 2011</td>
+                <td></td>
+
             </tr>
-            <tr>
-                <td>5</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Kevin</td>
-                <td>Articles</td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td><input type="checkbox" disabled="true" checked="true"/></td>
-                <td>12/23/2012</td>
-                <td>John</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-            </tr>
-          
-          
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

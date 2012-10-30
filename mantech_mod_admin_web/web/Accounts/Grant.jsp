@@ -14,7 +14,7 @@
         <title>Index</title>
     </head>
     <body>
-        <h4 class="alert_info">Welcome to Grant View</h4>
+        <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
 
         <div class="clear"></div>
 

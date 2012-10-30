@@ -38,10 +38,13 @@ public class LoadCollectArticleServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
+        String url = request.getContextPath()+"/Articles/ViewArticle.jsp";
+        String realPath = getServletContext().getRealPath("/")+"imagesThumb";
         List<Article> listArticle = articleBiz.collectNewsArticle();
-
+        
         if (listArticle != null || listArticle.size() > 0) {
             session.setAttribute("listArticle", listArticle);
+            response.sendRedirect(url);
         } else {
             session.setAttribute("listArticle", "fail");
         }

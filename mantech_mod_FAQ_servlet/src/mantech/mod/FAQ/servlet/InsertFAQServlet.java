@@ -37,6 +37,8 @@ public class InsertFAQServlet extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+
+        final String url = request.getContextPath()+"/loadFAQ";
         final String question = request.getParameter(Parameter.FAQ_QUESTION);
         final String answer = request.getParameter(Parameter.FAQ_ANSWER);
         Faq faq = new Faq();
@@ -45,7 +47,8 @@ public class InsertFAQServlet extends HttpServlet {
         faq.setQuestion(question);
         boolean check = faqBizz.createFAQ(faq);
         if(check){
-            session.setAttribute("insertFAQ", "success");
+            //session.setAttribute("insertFAQ", "success");
+            response.sendRedirect(url);
         }else{
             session.setAttribute("insertFAQ", "fail");
         }

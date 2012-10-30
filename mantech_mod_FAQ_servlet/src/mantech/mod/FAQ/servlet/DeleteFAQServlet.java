@@ -36,11 +36,13 @@ public class DeleteFAQServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        final String url = request.getContextPath()+"/loadFAQ";
         final int id = Integer.parseInt(request.getParameter(Parameter.FAQ_ID));
 
         boolean check = faqBizz.removeFAQ(id);
         if (check) {
-            session.setAttribute("deleteFAQ", "success");
+            //session.setAttribute("deleteFAQ", "success");
+            response.sendRedirect(url);
         } else {
             session.setAttribute("deleteFAQ", "fail");
         }

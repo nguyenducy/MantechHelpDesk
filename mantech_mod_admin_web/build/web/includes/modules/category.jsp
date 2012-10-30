@@ -23,19 +23,36 @@
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
+                <td><input type="checkbox"></td>
                 <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+                <td></td>
+                
             </tr>
-             <tr>
-                <td>2</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Ipsum Lorem Dolor Sit Amet</td>
+                <td></td>
+               
+
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Sit Amet Dolor Ipsum</td>
+                <td></td>
+               
             </tr>
-             <tr>
-                <td>3</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Dolor Lorem Amet</td>
+                <td></td>
+               
+
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Dolor Lorem Amet</td>
+                <td></td>
+                
+
             </tr>
         </tbody>
     </table>

@@ -4,6 +4,7 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.FAQ.parameter.ParameterFAQ.Parameter"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,12 +20,12 @@
                     modal: true,
                     buttons:{
                         "Delete this item": function(){
-                            var url = "DeleteServlet?id=" + id;
+                            var url = "../deleteFAQ?<%=Parameter.FAQ_ID%>=" + id;
                             window.location.href = url;
                             $(this).dialog("close");
                         },
                         Cancel: function(){
-                            var url = "ViewFAQ.jsp";
+                            var url = "../loadFAQ";
                             window.location.href = url;
                             $(this).dialog("close");
                         }

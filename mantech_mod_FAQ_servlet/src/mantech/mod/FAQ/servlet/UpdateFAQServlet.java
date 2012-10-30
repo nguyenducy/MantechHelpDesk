@@ -39,6 +39,8 @@ public class UpdateFAQServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
 
+        final String url = request.getContextPath()+"/loadFAQ";
+        
         final int id = Integer.parseInt(request.getParameter(Parameter.FAQ_ID));
         final String question = request.getParameter(Parameter.FAQ_QUESTION);
         final String answer = request.getParameter(Parameter.FAQ_ANSWER);
@@ -49,9 +51,11 @@ public class UpdateFAQServlet extends HttpServlet {
         faq.setQuestion(question);
         boolean check = faqBizz.editFAQ(faq);
         if(check){
-            session.setAttribute("updateFAQ", SUCCESS);
+            //session.setAttribute("updateFAQ", SUCCESS);
+            response.sendRedirect(url);
         }else{
             session.setAttribute("updateFAQ", FAIL);
+            response.sendRedirect(url);
         }
     }
 

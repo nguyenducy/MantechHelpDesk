@@ -4,6 +4,8 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="java.io.File"%>
+<%@page import="mantech.mod.article.parameter.ParameterArticle.Parameter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -78,14 +80,16 @@
 
                             bValid = bValid && checkRequired(ar, 'Article', 'is required');
                             bValid = bValid && checkRequired(content, 'Content', 'is required');
-                            bValid = bValid && checkRequired(day, 'Created Date', 'is required');
-                            bValid = bValid && checkRegexp(day, /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/ , 'Enter a valid date (mm/dd/yyyy)');
+                           // bValid = bValid && checkRequired(day, 'Created Date', 'is required');
+                           // bValid = bValid && checkRegexp(day, /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/ , 'Enter a valid date (mm/dd/yyyy)');
                             bValid = bValid && checkRegexp(thum, /\.(jpg|jpeg|png)$/i, 'Only png and jpg');
 
                            
                             if(bValid){
-                                var url = "ViewArticle.jsp";
-                                window.location.href = url;
+
+                                //var url = "../updateArticle";
+                                ${"newCategoryForm"}.submit();
+                                //window.location.href = url;
                                 $(this).dialog("close");
                             }
                             
@@ -100,11 +104,7 @@
                         allFields.val( "" ).removeClass( "ui-state-error" );
                     }
                 });
-
-
                 $( "#dialog-form" ).dialog( "open" );
-
-
             });
         </script>
 
@@ -115,41 +115,42 @@
                     String day = request.getParameter("day");
                     String rate = request.getParameter("rate");
                     String thum = request.getParameter("thum");
+                   
         %>
 
         <div id="dialog-form" title="Update Article">
             <p class="validateTips">Article, Content and Create On fields are required.</p>
-            <form action="" method="" id="newCategoryForm">
+            <form action="../updateArticle" method="post" id="newCategoryForm" enctype="multipart/form-data">
                 <fieldset class="modalForm">
                     <table>
                         <tr>
                             <td><label for="id">ID</label></td>
-                            <td><input name="id" id="id" class="text ui-widget-content ui-corner-all" value="<%= id%>" disabled="true" size="1"/></td>
+                            <td><input name="<%=Parameter.ARTICLE_ID%>" id="id" class="text ui-widget-content ui-corner-all" value="<%= id%>" readonly="true" size="1"/></td>
                         </tr>
                         <tr>
                             <td><label for="article">Article</label></td>
                             <td>
-                                <textarea cols="" rows=""  name="article" id="article" class="text ui-widget-content ui-corner-all"><%= ar%></textarea>
+                                <textarea cols="" rows=""  name="<%=Parameter.ARTICLE_TITLE%>" id="article" class="text ui-widget-content ui-corner-all"><%= ar%></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="content">Content</label></td>
-                            <td><textarea cols="" rows=""  name="content" id="content" class="text ui-widget-content ui-corner-all" ><%= content%></textarea>
-                        <tr>
-                        <tr>
+                            <td><textarea cols="" rows="" name="<%=Parameter.ARTICLE_CONTENT%>" id="content" class="text ui-widget-content ui-corner-all" ><%= content%></textarea>
+                        </tr>
+                      <%--  <tr>
                             <td><label for="day">Created on</label></td>
                             <td><input name="day" id="day" class="text ui-widget-content ui-corner-all" value="<%= day%>" /></td>
-                        </tr>
-                        <tr>
+                        </tr> --%>
+                      <%--  <tr>
                             <td><label for="rate">Rate</label></td>
                             <td><input name="rate" id="rate" class="text ui-widget-content ui-corner-all" value="<%= rate%>" size="1"></td>
-                        </tr>
+                        </tr> --%>
                         <tr>
                             <td><label for="thum">Thumbnail</label></td>
                             <td>
-                                <input type="file" name="thum" value="<%= thum %>"/>
+                                <input type="file" id="thum" name="<%=Parameter.ARTICLE_THUMBNAIL%>" value="<%=thum%>"/>
                             </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </fieldset>
             </form>

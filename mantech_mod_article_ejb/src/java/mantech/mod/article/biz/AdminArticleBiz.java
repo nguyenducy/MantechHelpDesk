@@ -44,9 +44,16 @@ public class AdminArticleBiz implements mantech.mod.article.api.biz.AdminArticle
     @Override
     public boolean editArticle(Article article) {
         this.articleJpa = new ArticleJpaController(entityManagerFactory);
+
+        Article a = findById(article.getId());
+
+        a.setArticle(article.getArticle());
+        a.setContent(article.getContent());
+        a.setThumbnail(article.getThumbnail());
+        
         boolean check = false;
-        if (article != null || article.getId() != null) {
-            check = articleJpa.editArticle(article);
+        if (a != null) {
+            check = articleJpa.editArticle(a);
         }
         return check;
     }
