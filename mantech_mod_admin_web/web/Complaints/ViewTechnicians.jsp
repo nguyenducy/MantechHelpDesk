@@ -14,7 +14,7 @@
         <title>Index</title>
     </head>
     <body>
-        <h4 class="alert_info">Welcome to Technician.</h4>
+        <h4 class="alert_info">Welcome to Technician View.</h4>
 
     <article class="module width_3_quarter" style="width: 90%">
         <div class="tab_container" >

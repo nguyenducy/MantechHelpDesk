@@ -6,6 +6,8 @@
 package mantech.mod.account.ejb;
 
 import java.util.List;
+import mantech.mod.account.entity.Department;
+import mantech.mod.account.entity.Job;
 import mantech.mod.account.entity.Profile;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -37,5 +39,20 @@ public class TestProfileBizImpl {
 
         assertNotNull(result);
         assertEquals("Technician", p.getJob().getJob());
+    }
+
+    @Test
+    public void testCreate_NoImage(){
+        ProfileBizImpl bizImpl = new ProfileBizImpl();
+        Profile p = new Profile();
+        p.setFullName("technician_demo");
+        p.setAddress("123 abc");
+        p.setDepartment(new Department(1));
+        p.setEmail("demo@gmail.com");
+        p.setTelephone("123456789");
+        p.setJob(new Job(2));
+        boolean result = bizImpl.create(p);
+
+        assertTrue(result);
     }
 }

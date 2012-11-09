@@ -37,8 +37,9 @@ public class UploadServlet extends HttpServlet {
         String name = UUID.randomUUID().toString();
         try {
            FileUpload fileUpload = new FileUpload(uploadFoler, request, name);
+           String fileName = fileUpload.getFileName();
             if (fileUpload.save()) {
-                out.println("Success");
+                out.println("Success " + fileName);
             }else{
                out.println("Fail");
             }

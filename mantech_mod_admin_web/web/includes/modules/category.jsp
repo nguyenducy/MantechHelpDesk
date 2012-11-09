@@ -65,10 +65,10 @@
                 "Create an cateogry": function() {
                     var bValid = true;
                     allFields.removeClass( "ui-state-error" );
-                    bValid = bValid && checkRequired(category, 'Cateogry', 'is required');
+                    bValid = bValid && checkRequired(category, 'Category', 'is required');
                     bValid = bValid && checkRequired(description, 'Description', 'is required');
                     if(bValid){
-                        var url = "ViewArticle.jsp";
+                        var url = "../InsertCategoryServlet?category="+category.val()+"&description="+description.val();
                         window.location.href = url;
                         $(this).dialog("close");
                     }
@@ -133,14 +133,14 @@
 
 <button id="create-category" >Create new category</button>
 
-<div id="dialog-form" title="Create a new category">
+<div id="dialog-form" title="Create  new category">
     <p class="validateTips">All fields are required.</p>
     <form action="../InsertCategoryServlet" method="post" id="newCategoryForm">
         <fieldset class="modalForm">
             <table>
                 <tr>
                     <td><label for="category">Category</label></td>
-                    <td><input name="category" id="category" class="text ui-widget-content ui-corner-all"/></td>
+                    <td><textarea id="category" name="category" class="text ui-widget-content ui-corner-all"></textarea></td>
                 </tr>
                 <tr>
                     <td><label for="description">Description</label></td>

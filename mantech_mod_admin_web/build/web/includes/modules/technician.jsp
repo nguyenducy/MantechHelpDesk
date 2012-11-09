@@ -4,6 +4,8 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.account.entity.Department"%>
+<%@page import="mantech.mod.account.api.DepartmentBiz"%>
 <%@page import="mantech.mod.account.entity.Profile"%>
 <%@page import="mantech.mod.account.api.ProfileBiz"%>
 <%@page import="java.util.List"%>
@@ -12,11 +14,12 @@
 <script>
     $(function() {
         var fullname = $( "#fullName" ),
+        department = $( "#department" ),
         address = $( "#address" ),
-        telephone = $( "#address" ),
+        telephone = $( "#telephone" ),
         email = $( "#email" ),
         image = $("#image"),
-        allFields = $( [] ).add(fullname ).add( address ).add(telephone).add(email).add(image),
+        allFields = $( [] ).add(fullname ).add(department).add( address ).add(telephone).add(email).add(image),
         tips = $( ".validateTips" );
 
         function updateTips( t ) {
@@ -61,8 +64,8 @@
 
         $( "#dialog-form" ).dialog({
             autoOpen: false,
-            height: 370,
-            width: 500,
+            height: 400,
+            width: 508,
             modal: true,
             buttons: {
                 "Create a technician": function() {
@@ -76,7 +79,9 @@
                     bValid = bValid && checkRegexp(email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i , 'Enter a valid email');
                     bValid = bValid && checkRegexp(image, /\.(jpg|jpeg|png)$/i, 'Only png and jpg');
                     if(bValid){
-                        var url = "ViewArticle.jsp";
+                        var d = department.children(':selected').val();
+                        var url = "../InsertTechnicianServlet?fullName="+fullname.val()+"&department="+d+"&address="
+                            +address.val()+"&telephone="+telephone.val()+"email="+email.val();
                         window.location.href = url;
                         $(this).dialog("close");
                     }
@@ -89,7 +94,7 @@
                 allFields.val( "" ).removeClass( "ui-state-error" );
             }
         });
-
+       
         $( "#create-category" )
         .button()
         .click(function() {
@@ -110,6 +115,7 @@
             <tr>
                 <th>ID</th>
                 <th>Full Name</th>
+                <th>Department</th>
                 <th>Address</th>
                 <th>Telephone</th>
                 <th>Email</th>
@@ -128,17 +134,14 @@
             <tr>
                 <td><%= t.getId()%></td>
                 <td><%= t.getFullName()%></td>
+                <td><%= t.getDepartment().getName()%></td>
                 <td><%= t.getAddress()%></td>
                 <td><%= t.getTelephone()%></td>
                 <td><%= t.getEmail()%></td>
                 <td><%= t.getImage()%></td>
             </tr>
             <%                     }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            context.close();
-                        }
+
             %>
         </tbody>
     </table>
@@ -154,6 +157,28 @@
                 <tr>
                     <td><label for="fullName">Full Name</label></td>
                     <td><textarea id="fullName" name="fullName" class="text ui-widget-content ui-corner-all"></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="department">Department</label></td>
+                    <td>
+                        <select name="department" id="department">
+                            <%
+
+                                                        DepartmentBiz departmentBiz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
+                                                        List<Department> listD = departmentBiz.findAll();
+                                                        for (Department d : listD) {
+                            %>
+                            <option value="<%= d.getId().toString()%>" ><%= d.getName()%></option>
+                            <%
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+                                            context.close();
+                                        }
+                            %>
+                        </select>
+                    <td>
                 </tr>
                 <tr>
                     <td><label for="address">Address</label></td>
