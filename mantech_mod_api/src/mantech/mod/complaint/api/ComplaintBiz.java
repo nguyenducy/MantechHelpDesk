@@ -13,27 +13,23 @@ import mantech.mod.complaint.entity.Complaint;
  */
 public interface ComplaintBiz {
 
-    void create(Complaint complaint);
+    boolean create(Complaint complaint);
 
-    void edit(Complaint complaint);
+    boolean edit(Complaint complaint);
 
-    void remove(Complaint complaint);
+    boolean remove(int id);
 
-    Complaint find(Object id);
+    Complaint find(int id);
 
     List<Complaint> findAll();
 
-    boolean updateComplaintIssued(String id);
+    List<Complaint> find(int length, int start);
 
-    boolean updateComplaintPending(String id);
+    List<Complaint> findPendingOnly();
 
-    boolean updateComplaintCompleted(String id);
+    List<Complaint> findByTechnicianIDAndNotCompleted(int id);
 
-    Complaint searchByCatagory(String categoryName);
+    boolean updateIssued(int id, int technicianID);
 
-    Complaint searchByDepartment(String departmentName);
-
-    Complaint searchByTechnician(String technicianName);
-
-    Complaint searchByProfile(String name);
+    boolean updateCompleted(int id);
 }

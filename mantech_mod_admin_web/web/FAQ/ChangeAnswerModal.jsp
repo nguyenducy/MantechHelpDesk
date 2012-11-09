@@ -115,12 +115,12 @@
                         <tr>
                             <td><label for="question">Question</label></td>
                             <td>
-                                <textarea name="question" id="question" class="text ui-widget-content ui-corner-all"><%= ques%></textarea>
+                                <textarea cols="20" rows="10"  name="question" id="question" class="text ui-widget-content ui-corner-all"><%= ques%></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td><label for="answer">Answer</label></td>
-                            <td><textarea cols="" rows=""  name="answer" id="answer" class="text ui-widget-content ui-corner-all" ><%= ans%></textarea>
+                            <td><textarea cols="20" rows="10"  name="answer" id="answer" class="text ui-widget-content ui-corner-all" ><%= ans%></textarea>
                         </tr>
                     </table>
                 </fieldset>

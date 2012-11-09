@@ -4,98 +4,84 @@
     Author     : NGUYEN
 --%>
 
-<form action="" >
-<header><h3 class="tabs_involved">All Pending Complaints</h3>
-    <ul class="tabs">
-        <li><a href="#tab1">Complaints</a></li>
-    </ul>
-</header>
+<%@page import="mantech.mod.account.entity.Profile"%>
+<%@page import="mantech.mod.account.api.ProfileBiz"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.complaint.entity.Complaint"%>
+<%@page import="mantech.mod.complaint.api.ComplaintBiz"%>
+<%@page import="javax.naming.InitialContext"%>
+<script type="text/javascript">
+    $(function(){
+        $('#update').click(function(){
+            var technicianID = $(this).parent().prev().children('').children(':selected').attr('value');
+            var id = $(this).parent().parent().children(':first').html();
+            var url = '../UpdateTechnicianServlet?id='+id+'&technicianID='+technicianID
+            window.location.href = url;
+        });
+    });
+</script>
+<form action="../UpdateTechnicianServlet" method="get" >
+    <header><h3 class="tabs_involved">All Pending Complaints</h3>
+        <ul class="tabs">
+            <li><a href="#tab1">Complaints</a></li>
+        </ul>
+    </header>
 
 
-<div id="tab1" class="tab_content">
-    <table class="tablesorter" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Category</th>
-                <th>Employee</th>
-                <th>Created On</th>
-                <th>Note</th>
-                <th>Technician</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>5th April 2011</td>
-                <td>
-                    <select>
-                        <option>Kevin</option>
-                        <option>John</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Ipsum Lorem Dolor Sit Amet</td>
-                <td></td>
-                <td>Freebies</td>
-                <td>6th April 2011</td>
-                <td>
-                     <select>
-                        <option>Kevin</option>
-                        <option>John</option>
-                    </select>
-                </td>
+    <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Employee</th>
+                    <th>Created On</th>
+                    <th>Note</th>
+                    <th>Technician</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                            InitialContext context = null;
+                            try {
+                                context = new InitialContext();
+                                ComplaintBiz biz = (ComplaintBiz) context.lookup("ejb/mantech/saigon/ComplaintBiz");
+                                ProfileBiz profileBiz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
+                                List<Complaint> list = biz.findPendingOnly();
+                                List<Profile> technicians = profileBiz.findTechnician();
+                                for (Complaint c : list) {
 
-            <tr>
-                <td>1</td>
-                <td>Sit Amet Dolor Ipsum</td>
-                <td></td>
-                <td>Tutorials</td>
-                <td>10th April 2011</td>
-                <td>
-                     <select>
-                        <option>Kevin</option>
-                        <option>John</option>
-                    </select>
-                </td>
+                %>
+                <tr>
+                    <td><%= c.getId()%></td>
+                    <td><%= c.getCategory().getName()%></td>
+                    <td><%= c.getProfile().getFullName()%></td>
+                    <td><%= c.getCreatedDate()%> 4</td>
+                    <td><%= c.getNote()%></td>
+                    <td>
+                        <select name="technicianID">
+                            <%
+                                                                for (Profile t : technicians) {
+                            %>
+                            <option   value="<%= t.getId()%>"><%= t.getFullName()%></option>
+                            <%
+                                                                }
+                            %>
+                        </select>
+                    </td>
+                    <td><p id="update" style="cursor: pointer">Update<p></td>
+                </tr>
+                <%
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                context.close();
+                            }
+                %>
+            </tbody>
+        </table>
+    </div><!-- end of #tab1 -->
 
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td>
-                     <select>
-                        <option>Kevin</option>
-                        <option>John</option>
-                    </select>
-                </td>
-
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td>
-                     <select>
-                        <option>Kevin</option>
-                        <option>John</option>
-                    </select>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-</div><!-- end of #tab1 -->
-<input type="submit" value="Update"/>
 </form>

@@ -4,6 +4,11 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.complaint.entity.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.complaint.api.CategoryBiz"%>
+<%@page import="mantech.mod.complaint.api.ComplaintBiz"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -38,51 +43,7 @@
 
     <body id="page5" onload="new ElementMaxHeight();">
         <!-- header -->
-        <div id="header">
-            <div class="bg">
-                <div class="container">
-                    <div class="row-1">
-                        <div class="wrapper">
-                            <div class="fleft"><a href="home.jsp"><img src="images/logo.jpg" alt="" /></a></div>
-                            <ul class="top-links">
-                                <li class="first"><a href="home.jsp" class="home"></a></li>
-                                <li><a href="contacts.jsp" class="mail-current"></a></li>
-                                <li class="last"><a href="sitemap.jsp" class="sitemap"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row-2">
-                        <!-- .nav -->
-                        <ul class="nav">
-                            <li><a href="home.jsp">Home</a></li>
-                            <li><a href="about.jsp">About</a></li>
-                            <li><a href="services.jsp">Services</a></li>
-                            <li><a href="support.jsp">Support</a></li>
-                            <li><a href="contacts.jsp" class="current">Complaint</a></li>
-                        </ul>
-                        <!-- /.nav -->
-                    </div>
-                    <div class="row-3">
-                        <img src="images/slogan.jpg" alt="" class="slogan" /><br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                        <form action="" id="login-form">
-                            <table>
-                                <tr>
-                                    <td>Username: <input name="username" title="Username" alt="Username"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Password: &nbsp;<input name="password" type="password" title="Password"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="submit" value="Login" class="alt_btn"/></td>
-                                </tr>
-
-                            </table>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="header.jsp"/>
         <!-- content -->
         <div id="content"><div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
             <div class="container">
@@ -103,24 +64,37 @@
                     <div class="mainContent maxheight">
                         <div class="indent">
                             <h2>Complaint</h2>
-                            <form id="contacts-form" action="" method="post">
+                            <form id="contacts-form" action="InsertComplaintServlet" method="post">
                                 <p>All fields are required</p>
                                 <fieldset>
                                     <div class="field">
-                                        <label>Your Name:</label>
-                                        <input type="text" value="" name="name"/>
-                                    </div>
-                                    <div class="field">
                                         <label>Category:</label>
-                                        <select>
-                                            <option>Software</option>
-                                            <option>Hardware</option>
+
+                                        <select name="category">
+                                            <%
+                                                        InitialContext context = null;
+                                                        try {
+                                                            context = new InitialContext();
+                                                            CategoryBiz biz = (CategoryBiz) context.lookup("ejb/mantech/saigon/CategoryBiz");
+                                                            List<Category> list = biz.findAll();
+                                                            for (Category c : list) {
+                                            %>
+                                            <option value="<%= c.getId()%>"><%= c.getName()%></option>
+                                            <%                                                                }
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        } finally {
+                                                            context.close();
+                                                        }
+
+                                            %>
                                         </select>
                                     </div>
                                     <div class="field">
                                         <label>Note:</label>
                                         <textarea cols="1" rows="1" name="note"></textarea>
                                     </div>
+                                            <input type="hidden" value="<%= request.getServletPath() %>" name="return"/>
                                 </fieldset>
                                 <div class="alignright"><input type="submit" value="Send" /></div>
                             </form>

@@ -112,7 +112,7 @@ public class Department implements Serializable {
 
     @Override
     public String toString() {
-        return "matech.mod.account.entity.Department[id=" + id + "]";
+        return "mantech.mod.account.entity.Department[id=" + id + "]";
     }
 
 }

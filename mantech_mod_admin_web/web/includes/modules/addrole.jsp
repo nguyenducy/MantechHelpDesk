@@ -20,7 +20,7 @@
 </script>
 
 <header><h3>Add New Role</h3></header>
-<form class="post_message" id="newRoleForm" action="" method="get">
+<form class="post_message" id="newRoleForm" action="../InsertRoleServlet" method="get">
     <div class="message_list">
         <div class="module_content">
             <div class="message">Role: <input name="role"/></div>

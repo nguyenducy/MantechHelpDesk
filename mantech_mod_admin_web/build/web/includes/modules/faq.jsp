@@ -15,7 +15,7 @@
     });
 </script>
 
-<form action="" method="post" id="newFAQ">
+<form action="../InsertFAQServlet" method="post" id="newFAQ">
     <header><h3>Post New FAQ</h3></header>
     <div class="module_content">
         <fieldset>

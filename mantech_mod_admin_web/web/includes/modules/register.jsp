@@ -3,6 +3,12 @@
     Created on : Oct 8, 2012, 11:38:22 PM
     Author     : NGUYEN
 --%>
+<%@page import="mantech.mod.account.entity.Role"%>
+<%@page import="mantech.mod.account.api.RoleBiz"%>
+<%@page import="mantech.mod.account.entity.Department"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.account.api.DepartmentBiz"%>
+<%@page import="javax.naming.InitialContext"%>
 <script>
     $(document).ready(function(){
         $("#grantForm").validate({
@@ -14,7 +20,7 @@
                 email: {required: true, email: true, maxlength: 50},
                 address : {required: true, maxlength: 100},
                 telephone: {required: true, digits :  true, maxlength: 12},
-                image : {required: true, extension: "png|jpeg"}
+                image : {required: true, extension: "png|jpeg|jpg"}
             },
             messages:{
                 username: {
@@ -60,7 +66,7 @@
     });
 </script>
 
-<form action="" id="grantForm" method="post">
+<form action="../InsertAccountServlet" id="grantForm" method="post" enctype="multipart/form-data">
     <header><h3>Grant</h3></header>
     <div class="module_content">
         <fieldset style="width: 30%">
@@ -77,9 +83,23 @@
         </fieldset>
         <fieldset style="width: 30%">
             <label>Role</label>
-            <select style="width: 50%">
-                <option>User</option>
-                <option>Admin</option>
+            <select style="width: 50%" name="role">
+                <%
+                            InitialContext context = null;
+                            try {
+                                context = new InitialContext();
+                                RoleBiz biz = (RoleBiz) context.lookup("ejb/mantech/saigon/RoleBiz");
+                                List<Role> list = biz.findAll();
+                                if (list != null) {
+                                    for (Role r : list) {
+                %>
+                <option value="<%= r.getId() %>"><%= r.getRole() %></option>
+                <%                       }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                %>
             </select>
         </fieldset>
         <fieldset style="width: 30%">
@@ -100,9 +120,21 @@
         </fieldset>
         <fieldset style="width: 30%">
             <label>Department</label>
-            <select style="width: 50%">
-                <option>Education Services</option>
-                <option>Learning Service</option>
+            <select style="width: 50%" name="department">
+                <%             
+                            try {
+                                DepartmentBiz biz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
+                                List<Department> list = biz.findAll();
+                                if (list != null) {
+                                    for (Department d : list) {
+                %>
+                <option value="<%= d.getId()%>"><%= d.getName()%></option>
+                <%                       }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                %>
             </select>
         </fieldset>
         <fieldset style="width: 30%">

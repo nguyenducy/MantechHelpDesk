@@ -4,11 +4,9 @@
  */
 package mantech.mod.test.upload;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,10 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mantech.mod.util.FileUpload;
-import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -39,9 +34,9 @@ public class UploadServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String uploadFoler = "D:\\File_Uploaded";
-          
+        String name = UUID.randomUUID().toString();
         try {
-           FileUpload fileUpload = new FileUpload(uploadFoler, request);
+           FileUpload fileUpload = new FileUpload(uploadFoler, request, name);
             if (fileUpload.save()) {
                 out.println("Success");
             }else{

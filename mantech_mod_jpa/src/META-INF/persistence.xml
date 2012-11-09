@@ -11,6 +11,7 @@
     <class>mantech.mod.complaint.entity.Category</class>
     <class>mantech.mod.complaint.entity.Complaint</class>
     <class>mantech.mod.complaint.entity.Technician</class>
+    <class>mantech.mod.account.entity.Job</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Mantech"/>
       <property name="javax.persistence.jdbc.password" value="123"/>

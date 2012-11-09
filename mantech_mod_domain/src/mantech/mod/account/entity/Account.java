@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.account.entity;
 
 import java.io.Serializable;
@@ -31,10 +30,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username"),
     @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")})
 public class Account implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
     @Basic(optional = false)
@@ -125,7 +125,6 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "matech.mod.account.entity.Account[id=" + id + "]";
+        return "mantech.mod.account.entity.Account[id=" + id + "]";
     }
-
 }

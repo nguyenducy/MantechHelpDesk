@@ -13,15 +13,16 @@ import mantech.mod.complaint.entity.Category;
  */
 public interface CategoryBiz {
 
-    void create(Category category);
+    boolean create(Category category);
 
-    void edit(Category category);
+    boolean edit(Category category);
 
-    void remove(Category category);
+    boolean remove(int id);
 
-    Category find(Object id);
+    Category find(int id);
 
     List<Category> findAll();
 
-    Category searchByName(String name);
+    List<Category> find(int length, int start);
+
 }

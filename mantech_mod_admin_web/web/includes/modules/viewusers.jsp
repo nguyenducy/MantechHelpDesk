@@ -4,6 +4,10 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.account.entity.Account"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.account.api.AccountBiz"%>
+<%@page import="javax.naming.InitialContext"%>
 <header><h3 class="tabs_involved">Account Manager</h3>
     <ul class="tabs">
         <li><a href="#tab1">Accounts</a></li>
@@ -14,63 +18,38 @@
     <table class="tablesorter" cellspacing="0">
         <thead>
             <tr>
-                <th></th>
                 <th>ID</th>
                 <th>Fullname</th>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Role</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
+            <%
+                        InitialContext context = null;
+                        try {
+                            context = new InitialContext();
+                            AccountBiz biz = (AccountBiz) context.lookup("ejb/mantech/saigon/AccountBiz");
+                            List<Account> list = biz.findAll();
+                            for (Account a : list) {
+            %>
             <tr>
-                <td><input type="checkbox"></td>
-                <td>Lorem Ipsum Dolor Sit Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>5th April 2011</td>
-                <td></td>
+                <td><%= a.getId() %></td>
+                <td><%= a.getProfile().getFullName() %></td>
+                <td><%= a.getUsername() %></td>
+                <td><%= a.getRole().getRole() %></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
+                    <a href="${pageContext.request.contextPath}/Accounts/DeleteModal.jsp?id=<%= a.getId() %>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a>
                 </td>
             </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Ipsum Lorem Dolor Sit Amet</td>
-                <td></td>
-                <td>Freebies</td>
-                <td>6th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Sit Amet Dolor Ipsum</td>
-                <td></td>
-                <td>Tutorials</td>
-                <td>10th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>                
-                <td>Dolor Lorem Amet</td>
-                <td></td>
-                <td>Articles</td>
-                <td>16th April 2011</td>
-                <td></td>
-                <td><a href="#"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash"/></a></td>
-            </tr>
+            <%                     }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            context.close();
+                        }
+            %>
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

@@ -4,6 +4,8 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.article.api.ArticleBiz"%>
 <%@page import="mantech.mod.article.entity.Article"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,51 +27,7 @@
 
     <body id="page1" onload="new ElementMaxHeight();">
         <!-- header -->
-        <div id="header">
-            <div class="bg">
-                <div class="container">
-                    <div class="row-1">
-                        <div class="wrapper">
-                            <div class="fleft"><a href="home.jsp"><img src="images/logo.jpg" alt="" /></a></div>
-                            <ul class="top-links">
-                                <li class="first"><a href="home.jsp" class="home-current"></a></li>
-                                <li><a href="contacts.jsp" class="mail"></a></li>
-                                <li class="last"><a href="sitemap.jsp" class="sitemap"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row-2">
-                        <!-- .nav -->
-                        <ul class="nav">
-                            <li><a href="home.jsp" class="current">Home</a></li>
-                            <li><a href="about.jsp">About</a></li>
-                            <li><a href="services.jsp">Services</a></li>
-                            <li><a href="support.jsp">Support</a></li>
-                            <li><a href="contacts.jsp">Complaint</a></li>
-                        </ul>
-                        <!-- /.nav -->
-                    </div>
-                    <div class="row-3">
-                        <img src="images/slogan.jpg" alt="" class="slogan" /><br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                        <form action="" id="login-form">
-                            <table>
-                                <tr>
-                                    <td>Username: <input name="username" title="Username" alt="Username"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Password: &nbsp;<input name="password" type="password" title="Password"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="submit" value="Login" class="alt_btn"/></td>
-                                </tr>
-
-                            </table>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="header.jsp"/>
         <!-- content -->
         <div id="content"><div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
             <div class="container">
@@ -95,35 +53,32 @@
                                 <p>The website template goes with two packages – with PSD source files and without them. PSD source files are available for free for the registered members of Templates.com. The basic package (without PSD is available for anyone without registration).</p>
 							This website template has several pages: <a href="#">Home</a>, <a href="#">About us</a>, <a href="#">Services</a>, <a href="#">Support</a>, <a href="#">Contacts</a> (note that contact us form – doesn’t work), <a href="#">Site Map</a>.
                             </div>
-                            <%
-                                        InitialContext context = null;
-                                        try {
-                                            context = new InitialContext();
-                                            
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        } finally {
-                                            context.close();
-                                        }
-
-                            %>
                             <h2>Recent Articles</h2>
                             <ul class="img-list">
+                                <%
+                                            InitialContext context = null;
+                                            try {
+                                                context = new InitialContext();
+                                                ArticleBiz biz = (ArticleBiz) context.lookup("ejb/mantech/saigon/ArticleBiz");
+                                                List<Article> list = biz.collectNewsArticle();
+                                                for (Article a : list) {
+                                %>
+
                                 <li>
                                     <img src="images/img1.jpg" alt="" />
-                                    <h3><a href="#">High Technologies</a></h3>
-								Technical progress doesn’t stand still and picks up steam every year. The most innovative technologies are developed and put on the market.
+                                    <h3><a href="#"><%= a.getArticle()%></a></h3>
+                                    <%= a.getContent()%>
                                 </li>
-                                <li>
-                                    <img src="images/img1.jpg" alt="" />
-                                    <h3><a href="#">About High Technologies Website</a></h3>
-								Free 1024/768 Optimized Website Template from Templates.com. We really hope that you will like this template and use it for your website.
-                                </li>
-                                <li>
-                                    <img src="images/img1.jpg" alt="" />
-                                    <h3><a href="#">Our services</a></h3>
-								The complete information regarding our services you will find on the "Service" page.
-                                </li>
+
+                                <%                                                                }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            } finally {
+                                                context.close();
+                                            }
+
+                                %>
+
                             </ul>
                         </div>
                     </div>

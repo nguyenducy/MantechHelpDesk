@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mantech.mod.article.api.biz;
+package mantech.mod.article.api;
 
 import java.util.List;
 import mantech.mod.article.entity.Faq;

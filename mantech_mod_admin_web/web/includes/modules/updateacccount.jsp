@@ -32,7 +32,7 @@
 </script>
 
 <header><h3>Change Username OR Password</h3></header>
-<form class="post_message" action="" id="updateAccountForm" >
+<form class="post_message" action="../ChangePasswordServlet" id="updateAccountForm" >
     <div class="message_list">
         <div class="module_content">
             <table>

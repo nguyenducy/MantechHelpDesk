@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.complaint.entity;
 
 import java.io.Serializable;
@@ -19,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import mantech.mod.account.entity.Job;
+import mantech.mod.account.entity.Profile;
 
 /**
  *
@@ -36,14 +37,21 @@ import javax.persistence.Table;
     @NamedQuery(name = "Complaint.findByCompletedDate", query = "SELECT c FROM Complaint c WHERE c.completedDate = :completedDate"),
     @NamedQuery(name = "Complaint.findByNote", query = "SELECT c FROM Complaint c WHERE c.note = :note")})
 public class Complaint implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
+    @JoinColumn(name = "CategoryID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Category category;
+    @JoinColumn(name = "ProfileID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Profile profile;
     @Basic(optional = false)
-    @Column(name = "CreatedDate", nullable = false)
+    @Column(name = "CreatedDate", nullable = false, length = 10)
     private Date createdDate;
     @Basic(optional = false)
     @Column(name = "Issued", nullable = false)
@@ -54,16 +62,12 @@ public class Complaint implements Serializable {
     @Basic(optional = false)
     @Column(name = "Completed", nullable = false)
     private boolean completed;
-    @Column(name = "CompletedDate")
+    @Column(name = "CompletedDate", length = 10)
     private Date completedDate;
+    @Column(name = "TechnicianID", nullable = true)
+    private Integer technicianID;
     @Column(name = "Note", length = 1000)
     private String note;
-    @JoinColumn(name = "TechnicianID", referencedColumnName = "ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Technician technician;
-    @JoinColumn(name = "CategoryID", referencedColumnName = "ID", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Category category;
 
     public Complaint() {
     }
@@ -136,20 +140,28 @@ public class Complaint implements Serializable {
         this.note = note;
     }
 
-    public Technician getTechnician() {
-        return technician;
-    }
-
-    public void setTechnician(Technician technician) {
-        this.technician = technician;
-    }
-
     public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public int getTechnicianID() {
+        return technicianID;
+    }
+
+    public void setTechnicianID(int technicianID) {
+        this.technicianID = technicianID;
     }
 
     @Override
@@ -174,7 +186,6 @@ public class Complaint implements Serializable {
 
     @Override
     public String toString() {
-        return "matech.mod.complaint.entity.Complaint[id=" + id + "]";
+        return "mantech.mod.complaint.entity.Complaint[id=" + id + "]";
     }
-
 }

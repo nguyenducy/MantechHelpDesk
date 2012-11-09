@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mantech.mod.article.api.biz;
+package mantech.mod.article.api;
 
 import java.sql.Date;
 import java.util.List;

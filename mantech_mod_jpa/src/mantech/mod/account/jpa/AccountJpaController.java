@@ -11,7 +11,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import mantech.mod.account.entity.Account;
 import mantech.mod.account.entity.Role;
@@ -194,4 +197,43 @@ public class AccountJpaController {
         }
     }
 
+    public Account findAccountByUserNameAndPassword(String username, String password) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Account> q = cb.createQuery(Account.class);
+            Root<Account> a = q.from(Account.class);
+            ParameterExpression<String> p = cb.parameter(String.class);
+            ParameterExpression<String> p1 = cb.parameter(String.class);
+            q.select(a).where(cb.and(cb.equal(a.get("username"), p), cb.equal(a.get("password"), p1)));
+
+            TypedQuery<Account> query = em.createQuery(q);
+            query.setParameter(p, username);
+            query.setParameter(p1, password);
+            Account result = query.getSingleResult();
+
+            return result;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Account findAccountByUserName(String username) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Account> q = cb.createQuery(Account.class);
+            Root<Account> a = q.from(Account.class);
+            ParameterExpression<String> p = cb.parameter(String.class);
+            q.select(a).where(cb.equal(a.get("username"), p));
+
+            TypedQuery<Account> query = em.createQuery(q);
+            query.setParameter(p, username);
+            Account result = query.getSingleResult();
+
+            return result;
+        } finally {
+            em.close();
+        }
+    }
 }

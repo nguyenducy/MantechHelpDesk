@@ -6,10 +6,16 @@ package mantech.mod.admin.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import mantech.mod.account.api.AccountBiz;
+import mantech.mod.account.api.ProfileBiz;
+import mantech.mod.account.entity.Account;
 
 /**
  *
@@ -30,14 +36,40 @@ public class Authentication extends HttpServlet {
         PrintWriter out = response.getWriter();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        InitialContext context = null;
         try {
-            if (username.equals("kevin") && password.equals("123")) {
-                response.sendRedirect(request.getContextPath()+"/Technician/CompletedForm.jsp");
+            context = new InitialContext();
+            AccountBiz biz = (AccountBiz) context.lookup("ejb/mantech/saigon/AccountBiz");
+            if (biz.usernameAvailable(username)) {
+                Account a = biz.checkLogin(username, password);
+                if (a != null) {
+                    String name = a.getProfile().getFullName();
+                    HttpSession session = request.getSession();
+                    session.putValue("username", name);
+                    session.putValue("idCurrentUser", a.getId().toString());
+                    if (a.getRole().getRole().equalsIgnoreCase("admin")) {
+                        response.sendRedirect("index.jsp");
+                    } else if (a.getRole().getRole().equalsIgnoreCase("technician")) {
+                        response.sendRedirect("Technician/CompletedForm.jsp");
+                    } else {
+                        response.sendRedirect("login.html");
+                    }
+                } else {
+                    response.sendRedirect("login.html");
+                }
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("login.html");
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             out.close();
+            try {
+                context.close();
+            } catch (NamingException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

@@ -13,13 +13,13 @@ import mantech.mod.account.entity.Role;
  */
 public interface RoleBiz {
 
-    void create(Role role);
+    boolean create(Role role);
 
-    void edit(Role role);
+    boolean edit(Role role);
 
-    void remove(Role role);
-
-    Role find(Object id);
+    boolean remove(int id);
 
     List<Role> findAll();
+
+    List<Role> find(int length, int start);
 }

@@ -13,20 +13,21 @@ import mantech.mod.account.entity.Account;
  */
 public interface AccountBiz {
 
-    void create(Account account);
+    boolean create(Account account);
 
-    void edit(Account account);
+    boolean edit(Account account);
 
-    void remove(Account account);
-
-    Account find(Object id);
+    boolean remove(int id);
 
     List<Account> findAll();
 
     Account checkLogin(String username, String password);
 
-    List<Account> findByRole(String roleId);
-    // Updapte role admin or user
+    boolean usernameAvailable(String username);
 
-    boolean unvailableAccount(String id);
+    List<Account> find(int length, int start);
+
+    boolean changePassword(String username,String newPass);
+
+    Account findByID(int id);
 }

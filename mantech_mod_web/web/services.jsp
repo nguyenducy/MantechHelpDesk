@@ -4,6 +4,10 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.account.entity.Department"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.account.api.DepartmentBiz"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -22,51 +26,7 @@
 
     <body id="page3" onload="new ElementMaxHeight();">
         <!-- header -->
-        <div id="header">
-            <div class="bg">
-                <div class="container">
-                    <div class="row-1">
-                        <div class="wrapper">
-                            <div class="fleft"><a href="home.jsp"><img src="images/logo.jpg" alt="" /></a></div>
-                            <ul class="top-links">
-                                <li class="first"><a href="home.jsp" class="home"></a></li>
-                                <li><a href="contacts.jsp" class="mail"></a></li>
-                                <li class="last"><a href="sitemap.jsp" class="sitemap"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row-2">
-                        <!-- .nav -->
-                        <ul class="nav">
-                            <li><a href="home.jsp">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.jsp" class="current">Services</a></li>
-                            <li><a href="support.jsp">Support</a></li>
-                            <li><a href="contacts.jsp">Complaint</a></li>
-                        </ul>
-                        <!-- /.nav -->
-                    </div>
-                    <div class="row-3">
-                        <img src="images/slogan.jpg" alt="" class="slogan" /><br />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-                        <form action="" id="login-form">
-                            <table>
-                                <tr>
-                                    <td>Username: <input name="username" title="Username" alt="Username"/></td>
-                                </tr>
-                                <tr>
-                                    <td>Password: &nbsp;<input name="password" type="password" title="Password"/></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="submit" value="Login" class="alt_btn"/></td>
-                                </tr>
-
-                            </table>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="header.jsp"/>
         <!-- content -->
         <div id="content"><div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
             <div class="container">
@@ -89,31 +49,26 @@
                             <h2>Services</h2>
                             <p>The complete information regarding our services you will find on the "Service" page.</p>
                             <ul class="img-list">
+                                <%
+                                            InitialContext context = null;
+                                            try {
+                                                context = new InitialContext();
+                                                DepartmentBiz biz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
+                                                List<Department> list = biz.findAll();
+                                                for (Department d : list) {
+                                %>
                                 <li>
                                     <img src="images/img5.jpg" alt="" />
-                                    <h3><a href="#">Educational Services</a></h3>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione. Neque porro quisquam est, qui dolorem ipsum quia dolor.
+                                    <h3><a href="#"><%= d.getName() %></a></h3>
+                                    <%= d.getLocation() %>
                                 </li>
-                                <li>
-                                    <img src="images/img5.jpg" alt="" />
-                                    <h3><a href="#">Management Services</a></h3>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione. Neque porro quisquam est, qui dolorem ipsum quia dolor.
-                                </li>
-                                <li>
-                                    <img src="images/img5.jpg" alt="" />
-                                    <h3><a href="#">Learning Services</a></h3>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione. Neque porro quisquam est, qui dolorem ipsum quia dolor.
-                                </li>
-                                <li>
-                                    <img src="images/img5.jpg" alt="" />
-                                    <h3><a href="#">Internal Systems</a></h3>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione. Neque porro quisquam est, qui dolorem ipsum quia dolor.
-                                </li>
-                                <li>
-                                    <img src="images/img5.jpg" alt="" />
-                                    <h3><a href="#">Human Resources</a></h3>
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione. Neque porro quisquam est, qui dolorem ipsum quia dolor.
-                                </li>
+                                <%                                              }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            } finally {
+                                                context.close();
+                                            }
+                                %>
                             </ul>
                         </div>
                     </div>

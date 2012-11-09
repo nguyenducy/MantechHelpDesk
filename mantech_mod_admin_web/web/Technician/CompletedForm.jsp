@@ -4,6 +4,13 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.account.entity.Profile"%>
+<%@page import="mantech.mod.account.entity.Account"%>
+<%@page import="mantech.mod.account.api.AccountBiz"%>
+<%@page import="mantech.mod.complaint.entity.Complaint"%>
+<%@page import="java.util.List"%>
+<%@page import="mantech.mod.complaint.api.ComplaintBiz"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,11 +33,6 @@
                     width: 1062,
                     modal: true,
                     buttons:{
-                        "Complete": function(){
-                            var url = "UpdateServlet?category="+category.val();
-                            window.location.href = url;
-                            $(this).dialog("close");
-                        },
                         Cancel: function(){
                             var url = "../login.html";
                             window.location.href = url;
@@ -48,7 +50,7 @@
         </script>
 
         <%
-                    String name = "Kevin";
+                    String name = (String) request.getSession(true).getValue("username");
 
         %>
 
@@ -65,19 +67,38 @@
                                 <th style="color: black;">Employee</th>
                                 <th style="color: black;">Created On</th>
                                 <th style="color: black;">Note</th>
-                                <th style="color: black;">Completed</th>
+                                <th style="color: black;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <%
+                                        InitialContext context = null;
+                                        String id = (String) request.getSession(true).getValue("idCurrentUser");
+                                        try {
+                                            context = new InitialContext();
+                                            AccountBiz biz = (AccountBiz) context.lookup("ejb/mantech/saigon/AccountBiz");
+                                            ComplaintBiz complaintBiz = (ComplaintBiz) context.lookup("ejb/mantech/saigon/ComplaintBiz");
+                                            Account a = biz.findByID(Integer.parseInt(id));
+                                            List<Complaint> list = complaintBiz.findByTechnicianIDAndNotCompleted(a.getProfile().getId());
+                                            for (Complaint c : list) {
+
+                            %>
                             <tr>
-                                <td>1</td>
-                                <td>Lorem Ipsum Dolor Sit Amet</td>
-                                <td>Lorem Ipsum Dolor Sit Amet</td>
-                                <td>Articles</td>
-                                <td>5th April 2011</td>
-                                <td>Lorem Ipsum Dolor Sit Amet</td>
-                                <td><input type="checkbox" name="" value="" /></td>
+                                <td><%= c.getId()%></td>
+                                <td><%= c.getCategory().getName()%></td>
+                                <td><%= c.getProfile().getDepartment().getName()%></td>
+                                <td><%= c.getProfile().getFullName()%></td>
+                                <td><%= c.getCreatedDate()%></td>
+                                <td><%= c.getNote()%></td>
+                                <td><a href="../UpdateCompletedServlet?id=<%= c.getId() %>" style="background-color: red">Complete</a></td>
                             </tr>
+                            <%                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+                                            context.close();
+                                        }
+                            %>
                         </tbody>
                     </table>
                 </div><!-- end of #tab1 -->

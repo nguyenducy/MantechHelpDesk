@@ -11,11 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Index</title>
+        <title>New Role</title>
     </head>
     <body>
          
-        <h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
+        <h4 class="alert_info">Welcome to New Role View</h4>
 
     <article class="module width_quarter" style="width: 50%">
         <jsp:include page="../includes/modules/addrole.jsp"/>

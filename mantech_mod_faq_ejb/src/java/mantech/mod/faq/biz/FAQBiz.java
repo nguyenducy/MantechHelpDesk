@@ -16,9 +16,9 @@ import mantech.mod.article.jpa.FaqJpaController;
  *
  * @author Administrator
  */
-@Stateless(name = "AdminFAQBiz", mappedName = "ejb/mantech/saigon/AdminFAQBiz")
-@Remote(mantech.mod.article.api.biz.FAQBiz.class)
-public class FAQBiz implements mantech.mod.article.api.biz.FAQBiz {
+@Stateless(name = "FAQBiz", mappedName = "ejb/mantech/saigon/FAQBiz")
+@Remote(mantech.mod.article.api.FAQBiz.class)
+public class FAQBiz implements mantech.mod.article.api.FAQBiz {
 
     final String entityManagerString = "mantech_mod_jpaPU";
     EntityManagerFactory entityManagerFactory = null;

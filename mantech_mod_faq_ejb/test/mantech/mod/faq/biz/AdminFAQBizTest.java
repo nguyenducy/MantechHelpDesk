@@ -4,7 +4,7 @@
  */
 package mantech.mod.faq.biz;
 
-import mantech.mod.article.api.biz.FAQBiz;
+import mantech.mod.article.api.FAQBiz;
 import java.util.List;
 
 import mantech.mod.article.entity.Faq;

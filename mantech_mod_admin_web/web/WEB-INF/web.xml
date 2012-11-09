@@ -20,6 +20,50 @@
         <servlet-name>CheckRoleAvailable</servlet-name>
         <servlet-class>mantech.mod.admin.web.servlet.CheckRoleAvailable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteAccountServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.DeleteAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertRoleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.role.servlet.InsertRoleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertFAQServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.InsertFAQServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFAQServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.DeleteFAQServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRoleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.role.servlet.DeleteRoleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTechnicianServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.UpdateTechnicianServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCompletedServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.UpdateCompletedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertAccountServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.InsertAccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertCategoryServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.InsertCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertTechnicianServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.InsertTechnicianServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/Authentication</url-pattern>
@@ -31,6 +75,50 @@
     <servlet-mapping>
         <servlet-name>CheckRoleAvailable</servlet-name>
         <url-pattern>/CheckRoleAvailable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAccountServlet</servlet-name>
+        <url-pattern>/DeleteAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertRoleServlet</servlet-name>
+        <url-pattern>/InsertRoleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordServlet</servlet-name>
+        <url-pattern>/ChangePasswordServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertFAQServlet</servlet-name>
+        <url-pattern>/InsertFAQServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFAQServlet</servlet-name>
+        <url-pattern>/DeleteFAQServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoleServlet</servlet-name>
+        <url-pattern>/DeleteRoleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTechnicianServlet</servlet-name>
+        <url-pattern>/UpdateTechnicianServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCompletedServlet</servlet-name>
+        <url-pattern>/UpdateCompletedServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertAccountServlet</servlet-name>
+        <url-pattern>/InsertAccountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertCategoryServlet</servlet-name>
+        <url-pattern>/InsertCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertTechnicianServlet</servlet-name>
+        <url-pattern>/InsertTechnicianServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

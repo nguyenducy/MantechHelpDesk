@@ -21,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import mantech.mod.complaint.entity.Complaint;
 
 /**
  *
@@ -58,9 +59,14 @@ public class Profile implements Serializable {
     private String image;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profile", fetch = FetchType.LAZY)
     private List<Account> accountList;
+    @JoinColumn(name = "JobID", referencedColumnName = "ID", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Job job;
     @JoinColumn(name = "DepartmentID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Department department;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profile", fetch = FetchType.LAZY)
+    private List<Complaint> complaintList;
 
     public Profile() {
     }
@@ -132,12 +138,28 @@ public class Profile implements Serializable {
         this.accountList = accountList;
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
     public Department getDepartment() {
         return department;
     }
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public List<Complaint> getComplaintList() {
+        return complaintList;
+    }
+
+    public void setComplaintList(List<Complaint> complaintList) {
+        this.complaintList = complaintList;
     }
 
     @Override
@@ -162,7 +184,7 @@ public class Profile implements Serializable {
 
     @Override
     public String toString() {
-        return "matech.mod.account.entity.Profile[id=" + id + "]";
+        return "mantech.mod.account.entity.Profile[id=" + id + "]";
     }
 
 }

@@ -13,15 +13,17 @@ import mantech.mod.account.entity.Profile;
  */
 public interface ProfileBiz {
 
-    void create(Profile profile);
+    boolean create(Profile profile);
 
-    void edit(Profile profile);
+    boolean edit(Profile profile);
 
-    void remove(Profile profile);
+    boolean remove(int id);
 
-    Profile find(Object id);
+    Profile find(int id);
 
     List<Profile> findAll();
 
-    Profile searchDeparment(String deparmentId);
+    List<Profile> find(int length, int start);
+
+    List<Profile> findTechnician();
 }

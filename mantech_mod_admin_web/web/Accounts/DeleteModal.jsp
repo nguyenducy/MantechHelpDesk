@@ -20,7 +20,7 @@
                     modal: true,
                     buttons:{
                         "Delete this item": function(){
-                            var url = "DeleteServlet?id=" + id;
+                            var url = "../DeleteAccountServlet?id=" + id;
                             window.location.href = url;
                             $(this).dialog("close");
                         },
@@ -33,9 +33,12 @@
                 });
             });
         </script>
-        
-        <div id="dialog-confirm" title="Empty the recycle bin?">
-            <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>These <span id="idcategory"></span> will be permanently deleted and cannot be recovered. Are you sure?</p>
+
+        <%
+            String id = request.getParameter("id");
+        %>
+        <div id="dialog-confirm" title="Remove the account?">
+            <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>These <span id="idcategory"><%= id %></span> will be permanently deleted and cannot be recovered. Are you sure?</p>
         </div>
     </body>
 </html>

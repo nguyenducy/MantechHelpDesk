@@ -44,7 +44,6 @@ public class FileUpload {
         this.uploadDirPath = uploadDirPath;
         this.request = request;
         this.fileName = fileRename;
-
         this.getIterator();
     }
     //Lấy tên file.
@@ -77,19 +76,17 @@ public class FileUpload {
         Iterator iter = null;
         Hashtable hashtable = new Hashtable();
         if (isMultipart) {
-            System.out.println("Chay Multipart");
             try {
                 DiskFileItemFactory factory = new DiskFileItemFactory();
                 ServletFileUpload upload = new ServletFileUpload(factory);
                 List items = upload.parseRequest(request);
                 iter = items.iterator();
-
                 while (iter.hasNext()) {
-                    FileItem item = (FileItem) iter.next();
-                    if (item.isFormField()) {
-                        hashtable.put(item.getFieldName(), item.getString());
+                    FileItem i = (FileItem) iter.next();
+                    if (i.isFormField()) {
+                        hashtable.put(i.getFieldName(), i.getString());
                     } else {
-                        this.item = item;
+                        this.item = i;
                     }
                 }
 
@@ -105,18 +102,13 @@ public class FileUpload {
         boolean check = false;
         try {
             String nameFile = this.getFileName();
-            System.out.println("File Name: " + nameFile);
-            System.out.println("File Field: " + item.getFieldName());
             File file = new File(uploadDirPath + "\\" + nameFile);
-            System.out.println("Write to: " + uploadDirPath);
             item.write(file);
-          
             check = true;
-
         } catch (Exception ex) {
             check = false;
             ex.printStackTrace();
         }
         return check;
-    }   
+    }
 }

@@ -3,9 +3,11 @@
     Created on : Sep 29, 2012, 7:29:38 PM
     Author     : NGUYEN
 --%>
-
+<%
+    String user = (String)request.getSession(true).getValue("username");
+%>
 <div class="user">
-    <p>John Doe</p>
+    <p><%= user %></p>
     <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 </div>
 <div class="breadcrumbs_container">

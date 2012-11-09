@@ -13,13 +13,15 @@ import mantech.mod.account.entity.Department;
  */
 public interface DepartmentBiz {
 
-    void create(Department department);
+    boolean create(Department department);
 
-    void edit(Department department);
+    boolean edit(Department department);
 
-    void remove(Department department);
+    boolean remove(int id);
 
-    Department find(Object id);
+    Department find(int id);
 
     List<Department> findAll();
+
+    List<Department> find(int length, int start);
 }
