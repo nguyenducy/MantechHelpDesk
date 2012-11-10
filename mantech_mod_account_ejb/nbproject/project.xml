@@ -6,8 +6,8 @@
             <name>mantech_mod_account_ejb</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <included-library dirs="200">reference.mantech_mod_domain.jar</included-library>
-            <included-library dirs="200">reference.mantech_mod_api.jar</included-library>
             <included-library dirs="200">reference.mantech_mod_jpa.jar</included-library>
+            <included-library dirs="200">reference.mantech_mod_api.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

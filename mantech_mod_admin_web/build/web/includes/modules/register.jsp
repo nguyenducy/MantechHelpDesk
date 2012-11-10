@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="mantech.mod.account.api.DepartmentBiz"%>
 <%@page import="javax.naming.InitialContext"%>
+
 <script>
     $(document).ready(function(){
         $("#grantForm").validate({
@@ -65,6 +66,7 @@
         }, jQuery.format("Only PNG or JPEG extenstion."));
     });
 </script>
+
 
 <form action="../InsertAccountServlet" id="grantForm" method="post" enctype="multipart/form-data">
     <header><h3>Grant</h3></header>

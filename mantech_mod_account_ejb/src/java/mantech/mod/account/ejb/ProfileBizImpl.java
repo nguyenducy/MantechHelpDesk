@@ -105,4 +105,22 @@ public class ProfileBizImpl implements ProfileBiz {
             return null;
         }
     }
+
+    @Override
+    public Profile find(String image) {
+        Profile profile = new Profile();
+        try {
+            List<Profile> all = findAll();
+            for (Profile p : all) {
+                System.out.println(p.getImage());
+                if (p.getImage().equalsIgnoreCase(image)) {
+                    profile = p;
+                }
+            }
+            return profile;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

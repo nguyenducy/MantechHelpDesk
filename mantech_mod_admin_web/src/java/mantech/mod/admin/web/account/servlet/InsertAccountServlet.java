@@ -7,10 +7,22 @@ package mantech.mod.admin.web.account.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Hashtable;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mantech.mod.account.api.AccountBiz;
+import mantech.mod.account.api.ProfileBiz;
+import mantech.mod.account.entity.Account;
+import mantech.mod.account.entity.Department;
+import mantech.mod.account.entity.Job;
+import mantech.mod.account.entity.Profile;
+import mantech.mod.account.entity.Role;
 import mantech.mod.util.FileUpload;
 
 /**
@@ -30,10 +42,12 @@ public class InsertAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String uploadFolder = "D:\\File_Uploaded";
+        String uploadFolder = getServletContext().getRealPath("images\\profiles");
         FileUpload fileUpload = null;
+        String name = UUID.randomUUID().toString();
+        InitialContext context = null;
         try {
-            fileUpload = new FileUpload(uploadFolder, request);
+            fileUpload = new FileUpload(uploadFolder, request, name);
             Hashtable parameter = fileUpload.getParameter();
             String username = (String) parameter.get("username");
             String password = (String) parameter.get("password");
@@ -43,9 +57,42 @@ public class InsertAccountServlet extends HttpServlet {
             String email = (String) parameter.get("email");
             String telephone = (String) parameter.get("telephone");
             String department = (String) parameter.get("department");
-            out.println(username + password + role + fullname + address + email + telephone + department);
+            String image = fileUpload.getFileName();
+            context = new InitialContext();
+            ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
+            AccountBiz accountBiz = (AccountBiz) context.lookup("ejb/mantech/saigon/AccountBiz");
+            Profile p = new Profile();
+            p.setAddress(address);
+            p.setDepartment(new Department(Integer.parseInt(department)));
+            p.setEmail(email);
+            p.setFullName(fullname);
+            p.setImage(image);
+            p.setJob(new Job(1));
+            p.setTelephone(telephone);
+            if (biz.create(p)) {
+                Profile temp = biz.find(image);
+                Account a = new Account();
+                a.setUsername(username);
+                a.setPassword(password);
+                a.setRole(new Role(Integer.parseInt(role)));
+                a.setProfile(new Profile(temp.getId()));
+                if (accountBiz.create(a)) {
+                    fileUpload.save();
+                    out.println("<h4 class='alert_info'>Created Successfully!</h4>");
+                }
+            } else {
+                out.println("<h4 class='alert_info'>Created Faily!</h4>");
+            }
+
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         } finally {
             out.close();
+            try {
+                context.close();
+            } catch (NamingException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

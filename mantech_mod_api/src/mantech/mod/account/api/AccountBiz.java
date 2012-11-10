@@ -27,7 +27,7 @@ public interface AccountBiz {
 
     List<Account> find(int length, int start);
 
-    boolean changePassword(String username,String newPass);
+    boolean changePassword(String username, String newPass);
 
     Account findByID(int id);
 }

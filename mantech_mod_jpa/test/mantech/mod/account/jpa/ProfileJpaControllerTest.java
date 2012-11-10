@@ -41,6 +41,7 @@ public class ProfileJpaControllerTest {
      */
     @Test
     public void testCreate() {
+       
     }
 
     /**

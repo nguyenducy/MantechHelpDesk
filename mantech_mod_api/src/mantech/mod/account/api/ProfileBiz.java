@@ -20,10 +20,14 @@ public interface ProfileBiz {
     boolean remove(int id);
 
     Profile find(int id);
+    
+    Profile find(String image);
 
     List<Profile> findAll();
 
     List<Profile> find(int length, int start);
 
     List<Profile> findTechnician();
+
+
 }
