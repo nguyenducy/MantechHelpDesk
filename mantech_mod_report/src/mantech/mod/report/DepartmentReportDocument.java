@@ -30,18 +30,17 @@ public class DepartmentReportDocument extends AbstractReportDocument{
             //Column
             TextColumnBuilder<String> departmentColumn = col.column("Department", "department", type.stringType());
             TextColumnBuilder<String> fullnameColumn = col.column("Full Name", "fullname", type.stringType());
-            TextColumnBuilder<Date> createdDateColumn = col.column("Created Date", "createddDate", type.dateType());
-            TextColumnBuilder<Date> completedDateColumn = col.column("Completed Date", "completedDate", type.dateType());
+            TextColumnBuilder<String> createdDateColumn = col.column("Created Date", "createdDate", type.stringType());
+            TextColumnBuilder<String> completedDateColumn = col.column("Completed Date", "completedDate", type.stringType());
             TextColumnBuilder<String> technicianColumn = col.column("Technician", "technician", type.stringType());
             TextColumnBuilder<String> categoryColumn = col.column("Category", "category", type.stringType());
-            TextColumnBuilder<Integer> timeTakenColumn = col.column("Time Taken", "timeTaken", type.integerType());
+            TextColumnBuilder<String> timeTakenColumn = col.column("Time Taken", "timeTaken", type.stringType());
 
             report()
                     .setPageFormat(PageType.A4, PageOrientation.LANDSCAPE)
                     .columns(departmentColumn, fullnameColumn, createdDateColumn, completedDateColumn, categoryColumn, technicianColumn, timeTakenColumn)
                     .setColumnTitleStyle(columnTitleStyle)
                     .highlightDetailEvenRows()
-                    .groupBy(departmentColumn)
                     .title(cmp.horizontalList().add(cmp.image("images/report.jpg").setDimension(80, 80),
                     cmp.text("Department Report").setStyle(titleStyle).setHorizontalAlignment(HorizontalAlignment.LEFT)))
                     .pageFooter(cmp.pageXofY(), cmp.currentDate())
@@ -54,9 +53,9 @@ public class DepartmentReportDocument extends AbstractReportDocument{
 
     @Override
     public JRDataSource covertListToDRDateSource(List list) {
-        dataSource = new DRDataSource("technician", "createdDate", "completedDate","fullname", "category", "timeTaken");
+        dataSource = new DRDataSource("department","technician", "createdDate", "completedDate","fullname", "category", "timeTaken");
         for (DepartmentReport dr : (List<DepartmentReport>)list) {
-            dataSource.add(dr.getTechnician(), dr.getCreatedDate(),
+            dataSource.add(dr.getDepartment(), dr.getTechnician(), dr.getCreatedDate(),
                     dr.getCompletedDate(), dr.getFullName(),
                     dr.getCategory(), dr.getTimeTaken());
         }

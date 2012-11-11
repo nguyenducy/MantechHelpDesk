@@ -66,7 +66,9 @@
                     var bValid = true;
                     allFields.removeClass( "ui-state-error" );
                     bValid = bValid && checkRequired(category, 'Category', 'is required');
+                    bValid = bValid && checkLength(category, 'Category', 0, 51);
                     bValid = bValid && checkRequired(description, 'Description', 'is required');
+                    bValid = bValid && checkLength(description, 'Description', 0, 5001);
                     if(bValid){
                         var url = "../InsertCategoryServlet?category="+category.val()+"&description="+description.val();
                         window.location.href = url;

@@ -20,7 +20,7 @@
                 fullName : {required: true, maxlength: 30},
                 email: {required: true, email: true, maxlength: 50},
                 address : {required: true, maxlength: 100},
-                telephone: {required: true, digits :  true, maxlength: 12},
+                telephone: {required: true, digits :  true, rangelength: [9,12]},
                 image : {required: true, extension: "png|jpeg|jpg"}
             },
             messages:{
@@ -53,7 +53,7 @@
                 telephone:{
                     required: "Required",
                     digits: "Only numbers",
-                    maxlength: "Less than 11 characters"
+                    rangelength: "Between 9 and 12 digits"
                 },
                 image:{
                     required : "Required"
@@ -64,6 +64,14 @@
             param = typeof param === "string" ? param.replace(/,/g, '|') : "png|jpeg|gif";
             return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
         }, jQuery.format("Only PNG or JPEG extenstion."));
+
+        $("#username").blur(function(){
+            $("#Info").load('../CheckUsernameAvaibleForGrantServlet', {username: $("#username").val()})
+        });
+
+        $('#reset').click(function(){
+            $('#Info').html("");
+        });
     });
 </script>
 
@@ -74,6 +82,7 @@
         <fieldset style="width: 30%">
             <label>User name</label>
             <input type="text" name="username" id="username" style="width: 70%">
+            <div id="Info" style="color: red;"></div>
         </fieldset>
         <fieldset style="width: 30%">
             <label>Password</label>
@@ -95,7 +104,7 @@
                                 if (list != null) {
                                     for (Role r : list) {
                 %>
-                <option value="<%= r.getId() %>"><%= r.getRole() %></option>
+                <option value="<%= r.getId()%>"><%= r.getRole()%></option>
                 <%                       }
                                 }
                             } catch (Exception e) {
@@ -123,7 +132,7 @@
         <fieldset style="width: 30%">
             <label>Department</label>
             <select style="width: 50%" name="department">
-                <%             
+                <%
                             try {
                                 DepartmentBiz biz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
                                 List<Department> list = biz.findAll();
@@ -147,7 +156,7 @@
     <footer>
         <div class="submit_link">
             <input type="submit" value="Grant" class="alt_btn">
-            <input type="reset" value="Reset">
+            <input type="reset" value="Reset" id="reset">
         </div>
     </footer>
 </form>

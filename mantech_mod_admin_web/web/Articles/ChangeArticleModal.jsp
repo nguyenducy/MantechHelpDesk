@@ -21,8 +21,7 @@
                 content = $("#content"),
                 day = $("#day"),
                 rate = $("#rate"),
-                thum = $("#thum"),
-                allFields = $([]).add(id).add(ar).add(content).add(day).add(rate).add(thum),
+                allFields = $([]).add(id).add(ar).add(content).add(day).add(rate);
                 tips = $( ".validateTips" );
 
                 function updateTips( t ) {
@@ -67,31 +66,27 @@
 
                 $("#dialog-form").dialog({
                     autoOpen: false,
-                    height: 400,
-                    width: 400,
+                    height: 470,
+                    width: 477,
                     modal: true,
                     buttons:{
                         "Update": function(){
                             var bValid = true;
                             allFields.removeClass( "ui-state-error" );
-
-
                             bValid = bValid && checkRequired(ar, 'Article', 'is required');
                             bValid = bValid && checkRequired(content, 'Content', 'is required');
                             bValid = bValid && checkRequired(day, 'Created Date', 'is required');
-                            bValid = bValid && checkRegexp(day, /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/ , 'Enter a valid date (mm/dd/yyyy)');
-                            bValid = bValid && checkRegexp(thum, /\.(jpg|jpeg|png)$/i, 'Only png and jpg');
-
-                           
+                            bValid = bValid && checkRegexp(day, /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/ , 'Enter a valid date (yyyy-mm-dd)');
                             if(bValid){
-                                var url = "ViewArticle.jsp";
+                                var url = "../ChangeArticleServlet?id="+id.val()+"&article="+ar.val()+"&content="+content.val()
+                                    +"&day="+day.val()+"&rate="+rate.val();
                                 window.location.href = url;
                                 $(this).dialog("close");
                             }
                             
                         },
                         Cancel: function(){
-                            var url = "ViewArticle.jsp"
+                            var url = "ViewArticle.jsp";
                             window.location.href = url;
                             $(this).dialog("close");
                         }
@@ -114,12 +109,12 @@
                     String content = request.getParameter("content");
                     String day = request.getParameter("day");
                     String rate = request.getParameter("rate");
-                    String thum = request.getParameter("thum");
+
         %>
 
         <div id="dialog-form" title="Update Article">
             <p class="validateTips">Article, Content and Create On fields are required.</p>
-            <form action="" method="" id="newCategoryForm">
+            <form action="" method="" id="newCategoryForm" >
                 <fieldset class="modalForm">
                     <table>
                         <tr>
@@ -134,7 +129,7 @@
                         </tr>
                         <tr>
                             <td><label for="content">Content</label></td>
-                            <td><textarea cols="" rows=""  name="content" id="content" class="text ui-widget-content ui-corner-all" ><%= content%></textarea>
+                            <td><textarea cols="" rows="7"  name="content" id="content" class="text ui-widget-content ui-corner-all" ><%= content%></textarea>
                         <tr>
                         <tr>
                             <td><label for="day">Created on</label></td>
@@ -143,13 +138,7 @@
                         <tr>
                             <td><label for="rate">Rate</label></td>
                             <td><input name="rate" id="rate" class="text ui-widget-content ui-corner-all" value="<%= rate%>" size="1"></td>
-                        </tr>
-                        <tr>
-                            <td><label for="thum">Thumbnail</label></td>
-                            <td>
-                                <input type="file" name="thum" value="<%= thum %>"/>
-                            </td>
-                        </tr>
+                        </tr>    
                     </table>
                 </fieldset>
             </form>

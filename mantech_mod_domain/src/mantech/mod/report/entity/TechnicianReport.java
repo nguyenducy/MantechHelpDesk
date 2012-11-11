@@ -14,16 +14,16 @@ import java.util.Date;
 public class TechnicianReport implements Serializable {
 
     private String technician;
-    private Date createdDate;
-    private Date completedDate;
+    private String createdDate;
+    private String completedDate;
     private String fullName;
     private String category;
-    private int timeTaken;
+    private String timeTaken;
 
     public TechnicianReport() {
     }
 
-    public TechnicianReport(String technician, Date createdDate, Date completedDate, String fullName, String category, int timeTaken) {
+    public TechnicianReport(String technician, String createdDate, String completedDate, String fullName, String category, String timeTaken) {
         this.technician = technician;
         this.createdDate = createdDate;
         this.completedDate = completedDate;
@@ -38,22 +38,6 @@ public class TechnicianReport implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Date getCompletedDate() {
-        return completedDate;
-    }
-
-    public void setCompletedDate(Date completedDate) {
-        this.completedDate = completedDate;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getFullName() {
@@ -72,11 +56,27 @@ public class TechnicianReport implements Serializable {
         this.technician = technician;
     }
 
-    public int getTimeTaken() {
+    public String getCompletedDate() {
+        return completedDate;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getTimeTaken() {
         return timeTaken;
     }
 
-    public void setTimeTaken(int timeTaken) {
+    public void setTimeTaken(String timeTaken) {
         this.timeTaken = timeTaken;
     }
 }

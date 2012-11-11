@@ -4,9 +4,10 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.article.api.ArticleBiz"%>
 <%@page import="mantech.mod.article.entity.Article"%>
 <%@page import="java.util.List"%>
-<%@page import="mantech.mod.article.api.ArticleBiz"%>
+
 <%@page import="javax.naming.InitialContext"%>
 <header><h3 class="tabs_involved">All Articles</h3>
     <ul class="tabs">
@@ -43,7 +44,7 @@
                 <td><%= a.getContent() %></td>
                 <td><%= a.getCreatedDate() %></td>
                 <td><%= a.getRate() %></td>
-                <td><%= a.getThumbnail() %></td>
+                <td><img src="${pageContext.request.contextPath}/images/articles/<%= a.getThumbnail() %>" width="50" height="50"/></td>
                 <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp?id=<%= a.getId()  %>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
                     <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=<%= a.getId() %>&ar=<%= a.getArticle() %>&content=<%= a.getContent() %>&day=<%= a.getCreatedDate() %>&rate=<%= a.getRate() %>&thum=<%= a.getThumbnail() %>"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
                 </td>

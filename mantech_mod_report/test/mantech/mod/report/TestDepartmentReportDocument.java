@@ -5,8 +5,8 @@
 package mantech.mod.report;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import mantech.mod.report.dal.DepartmentReportJpaController;
 import mantech.mod.report.entity.DepartmentReport;
 
 /**
@@ -16,9 +16,9 @@ import mantech.mod.report.entity.DepartmentReport;
 public class TestDepartmentReportDocument {
 
     public static void main(String[] args) {
-        List list = new ArrayList();
-        list.add(new DepartmentReport("Human Resources", "Morgana Mayers", new Date(2012, 2, 8), new Date(2012, 6, 24), "Software", "Celestine Bastionn", 137));
-        list.add(new DepartmentReport("Learning Services", "Hugo Bullard",new Date(2012, 3, 9), new Date(2012, 5, 3), "Hardware", "Nancy Ramsey", 55));
+        List<DepartmentReport> list = new ArrayList<DepartmentReport>();
+        DepartmentReportJpaController controller = new DepartmentReportJpaController();
+        list = controller.findAll();
 
         DepartmentReportDocument document = new DepartmentReportDocument();
         document.covertListToDRDateSource(list);

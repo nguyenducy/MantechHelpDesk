@@ -64,6 +64,46 @@
         <servlet-name>InsertTechnicianServlet</servlet-name>
         <servlet-class>mantech.mod.admin.web.account.servlet.InsertTechnicianServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertArticleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.InsertArticleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteArticleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.DeleteArticleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeArticleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.ChangeArticleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeFAQServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.ChangeFAQServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReportServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.report.servlet.ViewReportServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckRoleAvaibleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.CheckRoleAvaibleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckQuestionAvailableServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.CheckQuestionAvailableServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckArticleAvailableServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.faq.servlet.CheckArticleAvailableServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckUsernameAvailable</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.CheckUsernameAvailable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckUsernameAvaibleForGrantServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.CheckUsernameAvaibleForGrantServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/Authentication</url-pattern>
@@ -119,6 +159,46 @@
     <servlet-mapping>
         <servlet-name>InsertTechnicianServlet</servlet-name>
         <url-pattern>/InsertTechnicianServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertArticleServlet</servlet-name>
+        <url-pattern>/InsertArticleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteArticleServlet</servlet-name>
+        <url-pattern>/DeleteArticleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeArticleServlet</servlet-name>
+        <url-pattern>/ChangeArticleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeFAQServlet</servlet-name>
+        <url-pattern>/ChangeFAQServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReportServlet</servlet-name>
+        <url-pattern>/ViewReportServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckRoleAvaibleServlet</servlet-name>
+        <url-pattern>/CheckRoleAvaibleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckQuestionAvailableServlet</servlet-name>
+        <url-pattern>/CheckQuestionAvailableServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckArticleAvailableServlet</servlet-name>
+        <url-pattern>/CheckArticleAvailableServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckUsernameAvailable</servlet-name>
+        <url-pattern>/CheckUsernameAvailable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckUsernameAvaibleForGrantServlet</servlet-name>
+        <url-pattern>/CheckUsernameAvaibleForGrantServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

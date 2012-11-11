@@ -5,16 +5,15 @@
 --%>
 
 <header><h3>Report</h3></header>
-<form class="post_message" action="" id="updateAccountForm" >
+<form class="post_message" action="../ViewReportServlet" id="updateAccountForm" >
     <div class="message_list">
         <div class="module_content">
             <table>
                 <tr>
                     <td><div class="message">Type of Report: 
-                            <select>
-                                <option>Category</option>
-                                <option>Department</option>
-                                <option>Technician</option>
+                            <select name="type">
+                                <option value="1">Category</option>
+                                <option value="2">Department</option>                  
                             </select>
                         </div></td>
                 </tr>

@@ -44,7 +44,7 @@
                 <td><%= p.getTelephone() %></td>
                 <td><%= p.getDepartment().getName() %></td>
                 <td><%= p.getEmail() %></td>
-                <td><%= p.getImage() %></td>
+                <td><img src="${pageContext.request.contextPath}/images/profiles/<%= p.getImage() %>" width="50" height="50"/></td>
             </tr>
             <%                            }
                         } catch (Exception e) {

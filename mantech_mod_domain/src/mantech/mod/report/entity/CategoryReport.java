@@ -14,17 +14,17 @@ import java.util.Date;
 public class CategoryReport implements Serializable {
 
     private String category;
-    private Date createdDate;
-    private Date completedDate;
+    private String createdDate;
+    private String completedDate;
     private String note;
     private String fullName;
     private String technician;
-    private int timeTaken;
+    private String timeTaken;
 
     public CategoryReport() {
     }
 
-    public CategoryReport(String category, Date createdDate, Date completedDate, String note, String fullName, String technician, int timeTaken) {
+    public CategoryReport(String category, String createdDate, String completedDate, String note, String fullName, String technician, String timeTaken) {
         this.category = category;
         this.createdDate = createdDate;
         this.completedDate = completedDate;
@@ -40,22 +40,6 @@ public class CategoryReport implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Date getCompletedDate() {
-        return completedDate;
-    }
-
-    public void setCompletedDate(Date completedDate) {
-        this.completedDate = completedDate;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getFullName() {
@@ -82,11 +66,27 @@ public class CategoryReport implements Serializable {
         this.technician = technician;
     }
 
-    public int getTimeTaken() {
+    public String getCompletedDate() {
+        return completedDate;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getTimeTaken() {
         return timeTaken;
     }
 
-    public void setTimeTaken(int timeTaken) {
+    public void setTimeTaken(String timeTaken) {
         this.timeTaken = timeTaken;
     }
 }

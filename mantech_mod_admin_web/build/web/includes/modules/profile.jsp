@@ -48,7 +48,7 @@
                 <td><%= p.getTelephone() %></td>
                 <td><%= p.getDepartment().getName() %></td>
                 <td><%= p.getEmail() %></td>
-                <td><%= p.getImage() %></td>
+                <td><img src="${pageContext.request.contextPath}/images/profiles/<%= p.getImage() %>" width="50" height="50"/></td>
                 <td>
                     <a href="${pageContext.request.contextPath}/Profiles/EditProfileModal.jsp?id=<%= p.getId() %>&name=<%= p.getFullName() %>&addr=<%= p.getAddress() %>&tele=<%= p.getTelephone() %>&depa=<%= p.getDepartment().getId() %>&emai=<%= p.getEmail() %>&imag=<%= p.getImage() %>"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
                 </td>

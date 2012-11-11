@@ -19,7 +19,7 @@
                     modal: true,
                     buttons:{
                         "Delete this item": function(){
-                            var url = "DeleteServlet?id=" + id;
+                            var url = "../DeleteArticleServlet?id=" + id;
                             window.location.href = url;
                             $(this).dialog("close");
                         },

@@ -11,6 +11,11 @@
 <decorators defaultdir="/decorators">
     <excludes>
         <pattern>/login.html</pattern>
+        <pattern>/CheckRoleAvaibleServlet</pattern>
+        <pattern>/CheckQuestionAvailableServlet</pattern>
+        <pattern>/CheckArticleAvailableServlet</pattern>
+        <pattern>/CheckUsernameAvailable</pattern>
+        <pattern>/CheckUsernameAvaibleForGrantServlet</pattern>
     </excludes>
     <decorator name="admin-theme" page="admin-theme.jsp">
         <pattern>/*</pattern>

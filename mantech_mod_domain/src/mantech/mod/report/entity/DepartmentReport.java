@@ -5,7 +5,6 @@
 package mantech.mod.report.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -15,16 +14,16 @@ public class DepartmentReport implements Serializable {
 
     private String department;
     private String fullName;
-    private Date createdDate;
-    private Date completedDate;
+    private String createdDate;
+    private String completedDate;
     private String category;
     private String technician;
-    private int timeTaken;
+    private String timeTaken;
 
     public DepartmentReport() {
     }
 
-    public DepartmentReport(String department, String fullName, Date createdDate, Date completedDate, String category, String technician, int timeTaken) {
+    public DepartmentReport(String department, String fullName, String createdDate, String completedDate, String category, String technician, String timeTaken) {
         this.department = department;
         this.fullName = fullName;
         this.createdDate = createdDate;
@@ -40,22 +39,6 @@ public class DepartmentReport implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Date getCompletedDate() {
-        return completedDate;
-    }
-
-    public void setCompletedDate(Date completedDate) {
-        this.completedDate = completedDate;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getDepartment() {
@@ -82,11 +65,27 @@ public class DepartmentReport implements Serializable {
         this.technician = technician;
     }
 
-    public int getTimeTaken() {
+    public String getCompletedDate() {
+        return completedDate;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getTimeTaken() {
         return timeTaken;
     }
 
-    public void setTimeTaken(int timeTaken) {
+    public void setTimeTaken(String timeTaken) {
         this.timeTaken = timeTaken;
     }
 }

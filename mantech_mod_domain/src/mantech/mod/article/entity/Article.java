@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.article.entity;
 
 import java.io.Serializable;
@@ -25,25 +24,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Article", catalog = "Mantech", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Article.collectNewsArticle", query = "SELECT a FROM Article a Order By a.createdDate DESC"),
+    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
     @NamedQuery(name = "Article.findById", query = "SELECT a FROM Article a WHERE a.id = :id"),
-
     @NamedQuery(name = "Article.findByArticle", query = "SELECT a FROM Article a WHERE a.article = :article"),
-    @NamedQuery(name = "Article.findByLikeArticle", query = "SELECT a FROM Article a WHERE a.article like :article Order By a.createdDate DESC"),
-    @NamedQuery(name = "Article.findByLikeArticleContant", query = "SELECT a FROM Article a WHERE a.article like :contentString or a.content like :contentString Order By a.createdDate DESC"),
-
     @NamedQuery(name = "Article.findByCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate = :createdDate"),
-    @NamedQuery(name = "Article.findBetweenCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate BETWEEN :date1 AND :date2 Order By a.createdDate DESC"),
-    @NamedQuery(name = "Article.findAfterCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate >= :createdDate Order By a.createdDate DESC"),
-
-    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate Order By a.createdDate DESC"),
-    @NamedQuery(name = "Article.findByHigherRate", query = "SELECT a FROM Article a WHERE a.rate >= :rate Order By a.createdDate DESC"),
+    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate"),
     @NamedQuery(name = "Article.findByThumbnail", query = "SELECT a FROM Article a WHERE a.thumbnail = :thumbnail")})
 public class Article implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Integer id;
     @Basic(optional = false)
@@ -54,7 +46,7 @@ public class Article implements Serializable {
     @Column(name = "Content", nullable = false, length = 2147483647)
     private String content;
     @Basic(optional = false)
-    @Column(name = "CreatedDate", nullable = false)
+    @Column(name = "CreatedDate", nullable = false, length = 10)
     private Date createdDate;
     @Column(name = "Rate")
     private Integer rate;
@@ -147,5 +139,4 @@ public class Article implements Serializable {
     public String toString() {
         return "mantech.mod.article.entity.Article[id=" + id + "]";
     }
-
 }

@@ -6,8 +6,8 @@
 package mantech.mod.report;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import mantech.mod.report.dal.CategoryReportJpaController;
 import mantech.mod.report.entity.CategoryReport;
 
 /**
@@ -17,13 +17,9 @@ import mantech.mod.report.entity.CategoryReport;
 public class TestCategoryReportDocument {
 
     public static void main(String[] arg){
-        List list = new ArrayList();
-        list.add(new CategoryReport("Software", new Date(2012, 2, 8),
-                new Date(2012, 6, 24), "protostar reaches the gas and a USD33.12 the in After capture Through",
-                "Morgana Mayers", "Celestine Bastion", 137));
-        list.add(new CategoryReport("Hardware", new Date(2012, 3, 9), 
-                new Date(2012, 5, 3), "protostar reaches the gas and a USD33.12 the in After capture Through",
-                "Hugo Bullard", "Nancy Ramsey", 55));
+        List<CategoryReport> list = new ArrayList<CategoryReport>();
+        CategoryReportJpaController controller = new CategoryReportJpaController();
+        list = controller.findAll();
         CategoryReportDocument document = new CategoryReportDocument();
         document.covertListToDRDateSource(list);
         document.build();

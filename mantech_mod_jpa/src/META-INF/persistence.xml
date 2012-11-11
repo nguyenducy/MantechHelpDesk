@@ -6,12 +6,12 @@
     <class>mantech.mod.account.entity.Department</class>
     <class>mantech.mod.account.entity.Profile</class>
     <class>mantech.mod.account.entity.Role</class>
-    <class>mantech.mod.article.entity.Article</class>
     <class>mantech.mod.article.entity.Faq</class>
     <class>mantech.mod.complaint.entity.Category</class>
     <class>mantech.mod.complaint.entity.Complaint</class>
     <class>mantech.mod.complaint.entity.Technician</class>
     <class>mantech.mod.account.entity.Job</class>
+    <class>mantech.mod.article.entity.Article</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Mantech"/>
       <property name="javax.persistence.jdbc.password" value="123"/>

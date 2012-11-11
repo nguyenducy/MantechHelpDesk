@@ -28,6 +28,14 @@
                 }
             }
         });
+
+        $("#username").blur(function(){
+            $("#Info").load('../CheckUsernameAvailable', {username: $("#username").val()})
+        });
+
+        $('#reset').click(function(){
+            $('#Info').html("");
+        });
     });
 </script>
 
@@ -37,7 +45,9 @@
         <div class="module_content">
             <table>
                 <tr>
-                    <td><div class="message">Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="username"/></div></td>
+                    <td><div class="message">Username: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="username" id="username"/></div>
+                    <div id="Info" style="color: red;"></div>
+                    </td>
                 </tr>
                 <tr>
                     <td><div class="message">Old-Password: &nbsp;&nbsp;<input type="password" name="password"/></div></td>
@@ -50,6 +60,6 @@
     </div>
     <footer>
         <input type="submit"  value="Change" class="alt_btn" />
-        <input type="reset" value="Reset"/>
+        <input type="reset" value="Reset" id="reset"/>
     </footer>
 </form>

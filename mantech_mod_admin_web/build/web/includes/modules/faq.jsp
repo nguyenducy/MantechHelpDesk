@@ -21,6 +21,7 @@
         <fieldset>
             <label>Question</label>
             <textarea rows="12" name="question"></textarea>
+            <div id="Info" style="color: red;"></div>
         </fieldset>
         <fieldset>
             <label>Answer</label>

@@ -73,7 +73,7 @@
                             bValid = bValid && checkRequired(answer, 'Answer', 'is required');
 
                             if(bValid){
-                                var url = "UpdateServlet?category="+category.val();
+                                var url = "../ChangeFAQServlet?id="+id.val()+"&question="+question.val()+"&answer="+answer.val();
                                 window.location.href = url;
                                 $(this).dialog("close");
                             }
