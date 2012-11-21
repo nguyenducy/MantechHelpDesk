@@ -12,21 +12,26 @@
 <%@page import="mantech.mod.account.entity.Profile"%>
 <%@page import="mantech.mod.account.api.ProfileBiz"%>
 <%@page import="javax.naming.InitialContext"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <header><h3 class="tabs_involved">My Profile</h3>
     <ul class="tabs">
         <li><a href="#tab1">Profile</a></li>
     </ul>
 </header>
-
+<sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                   url="jdbc:sqlserver://localhost:1433;database=Mantech"
+                   user="mantech" password="123" var="ds" scope="page"/>
 
 <div id="tab1" class="tab_content">
     <table class="tablesorter" cellspacing="0">
-        <thead>
+         <thead>
             <tr>
+
                 <th>Full Name</th>
+                <th>Department</th>
                 <th>Address</th>
                 <th>Telephone</th>
-                <th>Department</th>
                 <th>Email</th>
                 <th>Image</th>
                 <th>Action</th>
@@ -34,32 +39,30 @@
         </thead>
         <tbody>
             <%
-                        InitialContext context = null;
+                       
                         String id = (String) request.getSession(true).getValue("idCurrentUser");
-                        try {
-                            context = new InitialContext();
-                            AccountBiz biz = (AccountBiz) context.lookup("ejb/mantech/saigon/AccountBiz");                  
-                            Account a = biz.findByID(Integer.parseInt(id));
-                            Profile p = a.getProfile();
+                        
             %>
-            <tr>
-                <td><%= p.getFullName() %></td>
-                <td><%= p.getAddress() %></td>
-                <td><%= p.getTelephone() %></td>
-                <td><%= p.getDepartment().getName() %></td>
-                <td><%= p.getEmail() %></td>
-                <td><img src="${pageContext.request.contextPath}/images/profiles/<%= p.getImage() %>" width="50" height="50"/></td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/Profiles/EditProfileModal.jsp?id=<%= p.getId() %>&name=<%= p.getFullName() %>&addr=<%= p.getAddress() %>&tele=<%= p.getTelephone() %>&depa=<%= p.getDepartment().getId() %>&emai=<%= p.getEmail() %>&imag=<%= p.getImage() %>"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
-                </td>
+ <sql:query var="profile" dataSource="${ds}">
+    SELECT     dbo.Profile.ID, dbo.Profile.FullName, dbo.Profile.Address, dbo.Profile.Email, dbo.Profile.Telephone, dbo.Profile.Image, dbo.Department.Name,
+                      dbo.Profile.DepartmentID
+    FROM         dbo.Profile INNER JOIN
+                      dbo.Department ON dbo.Profile.DepartmentID = dbo.Department.ID
+    WHERE     (dbo.Profile.ID = ?)
+    <sql:param value="<%=id%>"/>
+</sql:query>
+           <c:forEach var="row" begin="0" items="${profile.rowsByIndex}">
+                <tr>
+
+                        <td><c:out value="${row[1]}"/></td>
+                        <td><c:out value="${row[6]}"/></td>
+                        <td><c:out value="${row[2]}"/></td>
+                        <td><c:out value="${row[4]}"/></td>
+                        <td><c:out value="${row[3]}"/></td>
+                <td><img src="${pageContext.request.contextPath}/ImageProfile/${row[5]}" width="50" height="50"/></td>
+                <td><a href="${pageContext.request.contextPath}/Profiles/EditProfileModal.jsp?id=${row[0]}&fullName=${row[1]}&department=${row[7]}&address=${row[2]}&telephone=${row[4]}&email=${row[3]}"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit" /></a></td>
             </tr>
-            <%
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            context.close();
-                        }
-            %>
+           </c:forEach>
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Hashtable;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -42,7 +40,7 @@ public class InsertAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String uploadFolder = getServletContext().getRealPath("images\\profiles");
+        String uploadFolder = getServletContext().getRealPath("\\ImageProfile");
         FileUpload fileUpload = null;
         String name = UUID.randomUUID().toString();
         InitialContext context = null;
@@ -57,6 +55,7 @@ public class InsertAccountServlet extends HttpServlet {
             String email = (String) parameter.get("email");
             String telephone = (String) parameter.get("telephone");
             String department = (String) parameter.get("department");
+            String job = (String)parameter.get("job");
             String image = fileUpload.getFileName();
             context = new InitialContext();
             ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
@@ -67,7 +66,7 @@ public class InsertAccountServlet extends HttpServlet {
             p.setEmail(email);
             p.setFullName(fullname);
             p.setImage(image);
-            p.setJob(new Job(1));
+            p.setJob(new Job(Integer.parseInt(job)));
             p.setTelephone(telephone);
             if (biz.create(p)) {
                 Profile temp = biz.find(image);

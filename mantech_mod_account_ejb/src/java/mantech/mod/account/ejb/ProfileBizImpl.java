@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import mantech.mod.account.api.ProfileBiz;
+import mantech.mod.account.dal.Update;
 import mantech.mod.account.entity.Profile;
 import mantech.mod.account.jpa.ProfileJpaController;
 
@@ -43,7 +44,7 @@ public class ProfileBizImpl implements ProfileBiz {
             return false;
         }
     }
-
+    
     @Override
     public boolean remove(int id) {
         try {
@@ -112,7 +113,6 @@ public class ProfileBizImpl implements ProfileBiz {
         try {
             List<Profile> all = findAll();
             for (Profile p : all) {
-                System.out.println(p.getImage());
                 if (p.getImage().equalsIgnoreCase(image)) {
                     profile = p;
                 }
@@ -122,5 +122,11 @@ public class ProfileBizImpl implements ProfileBiz {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean UpdateProfileTechnician(Profile profile) {
+            Update account = new  Update();
+           return account.UpdateTechnicant(profile);
     }
 }

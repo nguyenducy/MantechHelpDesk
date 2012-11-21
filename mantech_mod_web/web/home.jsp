@@ -4,13 +4,17 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="org.apache.jasper.tagplugins.jstl.ForEach"%>
 <%@page import="java.util.List"%>
 <%@page import="mantech.mod.article.api.ArticleBiz"%>
 <%@page import="mantech.mod.article.entity.Article"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<c:if test="${empty sessionScope.listArticle}">
+            <c:redirect url="/ListArticleServlet"/>
+      </c:if>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <title>Home - Home Page </title>
@@ -24,7 +28,9 @@
         <script src="js/Myriad_Pro_300.font.js" type="text/javascript"></script>
         <script src="js/Myriad_Pro_400.font.js" type="text/javascript"></script>
     </head>
-
+   <%
+        List<Article> articles = (List< Article>)session.getAttribute("listArticle");
+   %>
     <body id="page1" onload="new ElementMaxHeight();">
         <!-- header -->
         <jsp:include page="header.jsp"/>
@@ -36,12 +42,18 @@
                         <div class="indent">
                             <h2>Latest News</h2>
                             <dl class="news">
-                                <dt><a href="#">February 15, 2010</a></dt>
-                                <dd>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</dd>
-                                <dt><a href="#">January 31, 2010</a></dt>
-                                <dd>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</dd>
-                                <dt><a href="#">January 22, 2010</a></dt>
-                                <dd>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugitd quia.</dd>
+                                 <%
+                                   for(int i=0;i<=articles.size();i++){
+                                       if(i==5){
+                                           break;
+                                           }
+                                       Article article = articles.get(i);
+
+
+                                %>
+                                <dt><a href="ViewArticle?id=<%= article.getId().toString() %>"><%= article.getArticle() %></a></dt>
+                                    <dd><%=article.getContent() %> ></dd>
+                                 <%}%>
                             </dl>
                         </div>
                     </div>
@@ -66,7 +78,7 @@
 
                                 <li>
                                     <img src="images/img1.jpg" alt="" />
-                                    <h3><a href="#"><%= a.getArticle()%></a></h3>
+                                    <h3><a href="ViewArticle?id=<%= a.getId().toString() %>"><%= a.getArticle()%></a></h3>
                                     <%= a.getContent()%>
                                 </li>
 

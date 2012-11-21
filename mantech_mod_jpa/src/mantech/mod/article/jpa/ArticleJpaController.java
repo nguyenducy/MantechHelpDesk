@@ -103,6 +103,7 @@ public class ArticleJpaController {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Article.class));
             Query q = em.createQuery(cq);
+
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -121,7 +122,15 @@ public class ArticleJpaController {
             em.close();
         }
     }
+    public List<Article> listArticle(){
+        List<Article> listArticle = null;
+        
+        EntityManager em = getEntityManager();
+        Query query = em.createNamedQuery("Article.findAll");
+        listArticle = query.getResultList();
 
+        return listArticle;
+    }
     public int getArticleCount() {
         EntityManager em = getEntityManager();
         try {

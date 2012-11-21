@@ -49,12 +49,13 @@ public class FileUpload {
     //Lấy tên file.
 
     public String getFileName() {
-        if (fileName == null) {
-            fileName = item.getName();
-        } else {
-            String[] extendFileName = item.getName().split("[.]");
-            fileName += "." + extendFileName[1];
-        }
+//         if (fileName == null) {
+//            fileName = item.getName();
+//        }
+            //else {
+//            String[] extendFileName = item.getName().split("[.]");
+//            fileName += "." + extendFileName[1];
+//        }
         return fileName;
     }
 
@@ -103,7 +104,9 @@ public class FileUpload {
         try {
             String nameFile = this.getFileName();
             File file = new File(uploadDirPath + "\\" + nameFile);
+          
             item.write(file);
+
             check = true;
         } catch (Exception ex) {
             check = false;

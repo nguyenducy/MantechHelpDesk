@@ -104,6 +104,34 @@
         <servlet-name>CheckUsernameAvaibleForGrantServlet</servlet-name>
         <servlet-class>mantech.mod.admin.web.account.servlet.CheckUsernameAvaibleForGrantServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.DeleteCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.UpdateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTechnicianServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.DeleteTechnicianServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditTechnicianServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.EditTechnicianServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckEmailAvaibleServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.account.servlet.CheckEmailAvaibleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Category</servlet-name>
+        <servlet-class>mantech.mod.admin.web.report.servlet.Category</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewTechnicianServlet</servlet-name>
+        <servlet-class>mantech.mod.admin.web.complaint.servlet.ViewTechnicianServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/Authentication</url-pattern>
@@ -199,6 +227,34 @@
     <servlet-mapping>
         <servlet-name>CheckUsernameAvaibleForGrantServlet</servlet-name>
         <url-pattern>/CheckUsernameAvaibleForGrantServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryServlet</servlet-name>
+        <url-pattern>/DeleteCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategoryServlet</servlet-name>
+        <url-pattern>/UpdateCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTechnicianServlet</servlet-name>
+        <url-pattern>/DeleteTechnicianServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditTechnicianServlet</servlet-name>
+        <url-pattern>/EditTechnicianServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckEmailAvaibleServlet</servlet-name>
+        <url-pattern>/CheckEmailAvaibleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Category</servlet-name>
+        <url-pattern>/Category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewTechnicianServlet</servlet-name>
+        <url-pattern>/ViewTechnicianServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

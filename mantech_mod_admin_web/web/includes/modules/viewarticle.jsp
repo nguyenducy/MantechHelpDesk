@@ -44,7 +44,9 @@
                 <td><%= a.getContent() %></td>
                 <td><%= a.getCreatedDate() %></td>
                 <td><%= a.getRate() %></td>
-                <td><img src="${pageContext.request.contextPath}/images/articles/<%= a.getThumbnail() %>" width="50" height="50"/></td>
+                <% 
+                System.out.println(request.getContextPath()+"/ImageArticle/"+a.getThumbnail()); %>
+                <td><img src="<%=a.getThumbnail()%>" width="100" height="100" alt="Unavailable"/></td>
                 <td><a href="${pageContext.request.contextPath}/Articles/DeleteArticleModal.jsp?id=<%= a.getId()  %>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
                     <a href="${pageContext.request.contextPath}/Articles/ChangeArticleModal.jsp?id=<%= a.getId() %>&ar=<%= a.getArticle() %>&content=<%= a.getContent() %>&day=<%= a.getCreatedDate() %>&rate=<%= a.getRate() %>&thum=<%= a.getThumbnail() %>"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit"/></a>
                 </td>

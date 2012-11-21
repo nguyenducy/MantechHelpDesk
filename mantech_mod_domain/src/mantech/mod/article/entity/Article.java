@@ -24,11 +24,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Article", catalog = "Mantech", schema = "dbo")
 @NamedQueries({
-    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
-    @NamedQuery(name = "Article.findById", query = "SELECT a FROM Article a WHERE a.id = :id"),
+    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a ORDER BY a.createdDate DESC"),
+    @NamedQuery(name = "Article.findById", query = "SELECT a FROM Article a WHERE a.id = :id "),
     @NamedQuery(name = "Article.findByArticle", query = "SELECT a FROM Article a WHERE a.article = :article"),
     @NamedQuery(name = "Article.findByCreatedDate", query = "SELECT a FROM Article a WHERE a.createdDate = :createdDate"),
-    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate"),
+    @NamedQuery(name = "Article.findByRate", query = "SELECT a FROM Article a WHERE a.rate = :rate ORDER BY a.createdDate desc"),
     @NamedQuery(name = "Article.findByThumbnail", query = "SELECT a FROM Article a WHERE a.thumbnail = :thumbnail")})
 public class Article implements Serializable {
 
@@ -50,7 +50,7 @@ public class Article implements Serializable {
     private Date createdDate;
     @Column(name = "Rate")
     private Integer rate;
-    @Column(name = "Thumbnail", length = 50)
+    @Column(name = "Thumbnail", length = Integer.MAX_VALUE)
     private String thumbnail;
 
     public Article() {

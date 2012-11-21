@@ -63,5 +63,7 @@
         </div>
     </article><!-- end of styles article -->
     <div class="spacer"></div>
+
+    <a href="http://localhost:8080/Mantech/profiles/default_profile.jpg">Click</a>
 </body>
 </html>

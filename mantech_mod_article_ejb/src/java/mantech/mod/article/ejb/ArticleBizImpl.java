@@ -67,12 +67,15 @@ public class ArticleBizImpl implements mantech.mod.article.api.ArticleBiz {
 
     @Override
     public List<Article> collectNewsArticle() {
+        List<Article> list=null;
         try {
             ArticleJpaController controller = new ArticleJpaController();
-            return controller.findArticleEntities();
+            list = controller.listArticle();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            
+        }finally{
+            return  list;
         }
     }
 }

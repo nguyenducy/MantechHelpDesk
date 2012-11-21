@@ -25,4 +25,6 @@ public interface CategoryBiz {
 
     List<Category> find(int length, int start);
 
+     boolean UpdateCategory(Category category);
+
 }

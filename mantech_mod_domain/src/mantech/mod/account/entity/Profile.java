@@ -36,6 +36,7 @@ import mantech.mod.complaint.entity.Complaint;
     @NamedQuery(name = "Profile.findByAddress", query = "SELECT p FROM Profile p WHERE p.address = :address"),
     @NamedQuery(name = "Profile.findByEmail", query = "SELECT p FROM Profile p WHERE p.email = :email"),
     @NamedQuery(name = "Profile.findByTelephone", query = "SELECT p FROM Profile p WHERE p.telephone = :telephone"),
+    //@NamedQuery(name = "Profile.updateTechnician", query = "update Profile  set [Address] =?, DepartmentID=?, Email=?, FullName=?,Telephone=? where ID = ?"),
     @NamedQuery(name = "Profile.findByImage", query = "SELECT p FROM Profile p WHERE p.image = :image")})
 public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;

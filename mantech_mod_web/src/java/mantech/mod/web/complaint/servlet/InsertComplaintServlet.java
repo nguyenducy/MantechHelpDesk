@@ -74,8 +74,10 @@ public class InsertComplaintServlet extends HttpServlet {
                 c.setNote(note);
                 if (biz.create(c)) {
                     out.println("Created Successfully");
+                    out.println("<a href='" + url + "'>Back to</a>");
                 }else{
                     out.println("Created Faily");
+                    out.println("<a href='" + url + "'>Back to</a>");
                 }
             }
         } catch (NamingException ex) {

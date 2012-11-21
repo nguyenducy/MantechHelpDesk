@@ -6,20 +6,10 @@ package mantech.mod.admin.web.report.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mantech.mod.report.CategoryReportDocument;
-import mantech.mod.report.DepartmentReportDocument;
-import mantech.mod.report.dal.CategoryReportJpaController;
-import mantech.mod.report.dal.DepartmentReportJpaController;
-import mantech.mod.report.entity.CategoryReport;
-import mantech.mod.report.entity.DepartmentReport;
 
 /**
  *
@@ -43,13 +33,19 @@ public class ViewReportServlet extends HttpServlet {
             int type = Integer.parseInt(request.getParameter("type"));
             switch (type) {
                 case 1:
-                    buildCategoryReport();
+                    response.sendRedirect("categoryServlet");
                     break;
-                default:
-                    buildDepartmentReport();
+                case 2:
+                    response.sendRedirect("departmentServlet");
+                    break;
+                case 3:
+                    response.sendRedirect("detailedServlet");
+                    break;
+                case 4:
+                    response.sendRedirect("technicianServlet");
                     break;
             }
-            response.sendRedirect("Reports/ViewReport.jsp");
+            //response.sendRedirect("Reports/ViewReport.jsp");
         } finally {
             out.close();
         }
@@ -91,29 +87,5 @@ public class ViewReportServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void buildCategoryReport() {
-        try {
-            List<CategoryReport> list = new ArrayList<CategoryReport>();
-            CategoryReportJpaController controller = new CategoryReportJpaController();
-            list = controller.findAll();
-            CategoryReportDocument document = new CategoryReportDocument();
-            document.covertListToDRDateSource(list);
-            document.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void buildDepartmentReport() {
-        try {
-            List<DepartmentReport> list = new ArrayList<DepartmentReport>();
-            DepartmentReportJpaController controller = new DepartmentReportJpaController();
-            list = controller.findAll();
-            DepartmentReportDocument document = new DepartmentReportDocument();
-            document.covertListToDRDateSource(list);
-            document.build();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+   
 }

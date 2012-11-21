@@ -21,6 +21,7 @@
             <tr>
                 <th>ID</th>
                 <th>Full Name</th>
+                <th>Job</th>
                 <th>Address</th>
                 <th>Telephone</th>
                 <th>Department</th>
@@ -34,17 +35,18 @@
                         try {
                             context = new InitialContext();
                             ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
-                            List<Profile> list = biz.find(5, 0);
+                            List<Profile> list = biz.findAll();
                             for (Profile p : list) {
             %>
             <tr>
                 <td><%= p.getId() %></td>
                 <td><%= p.getFullName() %></td>
+                <td><%= p.getJob().getJob() %></td>
                 <td><%= p.getAddress() %></td>
                 <td><%= p.getTelephone() %></td>
                 <td><%= p.getDepartment().getName() %></td>
                 <td><%= p.getEmail() %></td>
-                <td><img src="${pageContext.request.contextPath}/images/profiles/<%= p.getImage() %>" width="50" height="50"/></td>
+                <td><img src="http://localhost:8080/Mantech/profiles/<%= p.getImage() %>" width="50" height="50"/></td>
             </tr>
             <%                            }
                         } catch (Exception e) {

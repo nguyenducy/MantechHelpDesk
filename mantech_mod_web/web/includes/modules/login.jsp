@@ -10,19 +10,38 @@
             String name = (String) s.getValue(SessionName.Name);
             if (name == null) {
 %>
+<script type="text/javascript">
+     $(document).ready(function(){
+        $("#login-form").validate({
+            rules:{
+                username: {required: true, maxlength: 50},
+                password: {required: true}
+            },
+            messages:{
+                username:{
+                    required: "Required",
+                    maxlength: "Less than 51 characters"
+                },
+                password:{
+                    required: "Required"
+                }
+            }
+        });       
+    });
+</script>
 <form action="Authentication" id="login-form">
     <table>
         <tr>
-            <td>Username: <input name="username" title="Username" alt="Username"/></td>
+            <td>Username: <input name="username" id="username" title="Username" type="text" alt="Username"/></td>
         </tr>
         <tr>
-            <td>Password: &nbsp;<input name="password" type="password" title="Password"/></td>
+            <td>Password: &nbsp;<input name="password" id="password" type="password" title="Password"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Login" class="alt_btn"/></td>
         </tr>
         <tr>
-            <td><input name="return" type="hidden" value="<%= request.getServletPath()%>" /></td>
+            <td><input name="return" type="hidden" value="<%=request.getServletPath()%>" /></td>
         </tr>
     </table>
 </form>

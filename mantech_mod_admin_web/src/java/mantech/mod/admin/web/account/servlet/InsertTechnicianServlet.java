@@ -6,6 +6,8 @@ package mantech.mod.admin.web.account.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Hashtable;
+import java.util.UUID;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import mantech.mod.account.api.ProfileBiz;
 import mantech.mod.account.entity.Department;
 import mantech.mod.account.entity.Job;
 import mantech.mod.account.entity.Profile;
+import mantech.mod.util.FileUpload;
 
 /**
  *
@@ -34,33 +37,44 @@ public class InsertTechnicianServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String fullName = request.getParameter("fullName");
-        String address = request.getParameter("address");
-        String telephone = request.getParameter("telephone");
-        String image = request.getParameter("image");
-        String email = request.getParameter("email");
-        String department = request.getParameter("department");
+        String uploadFolder = getServletContext().getRealPath("//ImageProfile");
+        FileUpload fileUpload = null;
+        String name = UUID.randomUUID().toString();
         InitialContext context = null;
         try {
-//            context = new InitialContext();
-//            ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
-//            Profile p = new Profile();
-//            p.setFullName(fullName);
-//            p.setAddress(address);
-//            p.setDepartment(new Department(Integer.parseInt(department)));
-//            p.setEmail(email);
-//            p.setTelephone(telephone);
-//            p.setJob(new Job(2));
-//            if (biz.create(p)) {
-//                out.println("<h4 class='alert_info'>Created Successfully!</h4>");
-//            } else {
-//                out.println("<h4 class='alert_info'>Created Faily!</h4>");
-//            }
-//        } catch (NamingException ex) {
-//            ex.printStackTrace();
+            fileUpload = new FileUpload(uploadFolder, request, name);
+            Hashtable parameter = fileUpload.getParameter();
+            //Retrieve parameter
+            String fullName = (String) parameter.get("fullName");
+            String address = (String) parameter.get("address");
+            String telephone = (String) parameter.get("telephone");
+            String email = (String) parameter.get("email");
+            String department = (String) parameter.get("department");
+            String image = fileUpload.getFileName();
+            //Create a instance of InitialContext
+            context = new InitialContext();
+            //Create a instance of ProfileBiz to create new technician
+            ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
+            //Create new technician
+            Profile p = new Profile();
+            p.setFullName(fullName);
+            p.setDepartment(new Department(Integer.parseInt(department)));
+            p.setAddress(address);
+            p.setTelephone(telephone);
+            p.setEmail(email);
+            p.setImage(image);
+            p.setJob(new Job(2));
+            if (biz.create(p)) {
+                fileUpload.save();
+                out.println("<h4 class='alert_info'>Created Successfully!</h4>");
+            } else {
+                out.println("<h4 class='alert_info'>Created Faily!</h4>");
+            }
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         } finally {
+            out.close();
             try {
-                out.close();
                 context.close();
             } catch (NamingException ex) {
                 ex.printStackTrace();

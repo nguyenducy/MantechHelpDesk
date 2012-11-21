@@ -4,6 +4,8 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.article.entity.Article"%>
+<%@page import="mantech.mod.article.entity.Article"%>
 <%@page import="mantech.mod.account.entity.Department"%>
 <%@page import="java.util.List"%>
 <%@page import="mantech.mod.account.api.DepartmentBiz"%>
@@ -34,13 +36,22 @@
                     <div class="aside maxheight">
                         <div class="indent">
                             <h2>Latest News</h2>
+                             <%
+                                        List<Article> articles = (List<Article>) session.getAttribute("listArticle");
+                            %>
                             <dl class="news">
-                                <dt><a href="#">February 15, 2010</a></dt>
-                                <dd>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</dd>
-                                <dt><a href="#">January 31, 2010</a></dt>
-                                <dd>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</dd>
-                                <dt><a href="#">January 22, 2010</a></dt>
-                                <dd>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugitd quia.</dd>
+                                 <%
+                                   for(int i=0;i<=articles.size();i++){
+                                       if(i==5){
+                                           break;
+                                           }
+                                       Article article = articles.get(i);
+
+
+                                %>
+                                <dt><a href="ViewArticle?id=<%= article.getId().toString() %>"><%= article.getArticle() %></a></dt>
+                                    <dd><%=article.getContent() %> ></dd>
+                                 <%}%>
                             </dl>
                         </div>
                     </div>

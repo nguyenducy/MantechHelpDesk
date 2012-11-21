@@ -40,7 +40,6 @@ public class TestAccountBizImpl {
     public void testCheckLoginOk() {
         Account actual = bizImpl.checkLogin("admin", "admin");
         Account exceptd = new Account(1, "admin", "admin");
-
         assertEquals(exceptd, actual);
     }
 

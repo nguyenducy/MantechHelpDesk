@@ -36,7 +36,10 @@ public class InsertArticleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String uploadFolder = getServletContext().getRealPath("images/articles");
+        String uploadFolder = getServletContext().getRealPath("\\ImageArticle");
+        //String uploadFolder = "C:\\Mantech\\images\\Articles";
+  
+
         FileUpload fileUpload = null;
         String name = UUID.randomUUID().toString();
         InitialContext context = null;
@@ -46,9 +49,15 @@ public class InsertArticleServlet extends HttpServlet {
             String article = (String) parameter.get("article");
             String content = (String) parameter.get("content");
             String rate = (String) parameter.get("rate");
-            String thumbnail = fileUpload.getFileName();
+            String thumbnails = request.getContextPath()+"/ImageArticle/"+fileUpload.getFileName();
+            thumbnails.replaceAll("/", "//");
+            String thumbnail =  fileUpload.getFileName();
+            System.out.println("Thumbnail: "+thumbnails);
+
             context = new InitialContext();
+            
             ArticleBiz biz = (ArticleBiz) context.lookup("ejb/mantech/saigon/ArticleBiz");
+
             Article a = new Article();
             a.setArticle(article);
             a.setContent(content);
@@ -59,14 +68,13 @@ public class InsertArticleServlet extends HttpServlet {
             Date date = new Date(y, m, dd);
             a.setCreatedDate(date);
             a.setRate(Integer.parseInt(rate));
-            a.setThumbnail(thumbnail);
+            a.setThumbnail(thumbnails);
             if (biz.createNewArticle(a)) {
                 fileUpload.save();
-                out.println("<h4 class='alert_info'>Created Successfully!</h4>");
+                out.println("<h4 class='alert_info'>Created Successsfull</h4>");
             } else {
                 out.println("<h4 class='alert_info'>Created Faily!</h4>");
             }
-            out.print(uploadFolder);
         } catch (NamingException ex) {
             ex.printStackTrace();
         } finally {

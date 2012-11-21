@@ -10,15 +10,16 @@
 <%@page import="mantech.mod.account.api.ProfileBiz"%>
 <%@page import="java.util.List"%>
 <%@page import="javax.naming.InitialContext"%>
-
-<script>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<script type="text/javascript">
     $(function() {
         var fullname = $( "#fullName" ),
         department = $( "#department" ),
         address = $( "#address" ),
         telephone = $( "#telephone" ),
         email = $( "#email" ),
-        image = $("#image"),
+        image = $('#image'),
         allFields = $( [] ).add(fullname ).add(department).add( address ).add(telephone).add(email).add(image),
         tips = $( ".validateTips" );
 
@@ -83,10 +84,7 @@
                     bValid = bValid && checkLength(email, 'Email', 0, 51);
                     bValid = bValid && checkRegexp(image, /\.(jpg|jpeg|png)$/i, 'Only png and jpg');
                     if(bValid){
-                        var d = department.children(':selected').val();
-                        var url = "../InsertTechnicianServlet?fullName="+fullname.val()+"&department="+d+"&address="
-                            +address.val()+"&telephone="+telephone.val()+"email="+email.val();
-                        window.location.href = url;
+                        $('#submitTechnician').trigger('click');
                         $(this).dialog("close");
                     }
                 },
@@ -106,12 +104,24 @@
         });
     });
 </script>
+
+<sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                   url="jdbc:sqlserver://localhost:1433;database=Mantech"
+                   user="mantech" password="123" var="ds" scope="page"/>
+
 <header><h3 class="tabs_involved">My Technicians</h3>
     <ul class="tabs">
         <li><a href="#tab1">Technicians</a></li>
     </ul>
 </header>
 
+<sql:query var="technician" dataSource="${ds}">
+    SELECT     dbo.Profile.ID, dbo.Profile.FullName, dbo.Profile.Address, dbo.Profile.Email, dbo.Profile.Telephone, dbo.Profile.Image, dbo.Department.Name,
+                      dbo.Profile.DepartmentID
+    FROM         dbo.Profile INNER JOIN
+                      dbo.Department ON dbo.Profile.DepartmentID = dbo.Department.ID
+    WHERE     (dbo.Profile.JobID = 2)
+</sql:query>
 
 <div id="tab1" class="tab_content">
     <table class="tablesorter" cellspacing="0">
@@ -124,27 +134,48 @@
                 <th>Telephone</th>
                 <th>Email</th>
                 <th>Image</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <%
-                        InitialContext context = null;
-                        try {
-                            context = new InitialContext();
-                            ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
-                            List<Profile> list = biz.findTechnician();
-                            for (Profile t : list) {
-            %>
-            <tr>
-                <td><%= t.getId()%></td>
-                <td><%= t.getFullName()%></td>
-                <td><%= t.getDepartment().getName()%></td>
-                <td><%= t.getAddress()%></td>
-                <td><%= t.getTelephone()%></td>
-                <td><%= t.getEmail()%></td>
-                <td><%= t.getImage()%></td>
-            </tr>
-            <%                     }
+            <c:forEach var="row" begin="0" items="${technician.rowsByIndex}">
+                <tr>
+                        <td><c:out value="${row[0]}"/></td>
+                        <td><c:out value="${row[1]}"/></td>
+                        <td><c:out value="${row[6]}"/></td>
+                        <td><c:out value="${row[2]}"/></td>
+                        <td><c:out value="${row[4]}"/></td>
+                        <td><c:out value="${row[3]}"/></td>                       
+                        <td><img src="${pageContext.request.contextPath}/ImageProfile/${row[5]}"  alt="Unavailable" width="50" height="50" /></td>
+                <td><a href="${pageContext.request.contextPath}/Complaints/DeleteTechnicianModal.jsp?id=${row[0]}"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Complaints/EditTechnicianModal.jsp?id=${row[0]}&fullName=${row[1]}&department=${row[7]}&address=${row[2]}&telephone=${row[4]}&email=${row[3]} "><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit" /></a>
+                </td>
+               </tr>
+             
+            </c:forEach> 
+
+              <%
+                         InitialContext context = null;
+                         try {
+                             context = new InitialContext();
+                             ProfileBiz biz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
+                             List<Profile> list = biz.findTechnician();
+                             //for (Profile t : list) {
+             %>
+             <%--<tr>
+                 <td><%= t.getId()%></td>
+                 <td><%= t.getFullName()%></td>
+                 <td><%= t.getDepartment().getName()%></td>
+                 <td><%= t.getAddress()%></td>
+                 <td><%= t.getTelephone()%></td>
+                 <td><%= t.getEmail()%></td>
+
+                <td><img src="${pageContext.request.contextPath}/ImageProfile/<%=t.getImage()%>"  alt="Unavailable" width="100" height="100" /></td>
+                <td><a href="${pageContext.request.contextPath}/Complaints/DeleteTechnicianModal.jsp?id=<%= t.getId()  %>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Complaints/EditTechnicianModal.jsp?id=<%= t.getId().toString() %>&fullName=<%=t.getFullName()%>&department=<%=t.getDepartment().getId()%>&address=<%=t.getAddress()%>&telephone=<%=t.getTelephone()%>&email=<%=t.getEmail() %> "><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit" /></a>
+                </td>
+            </tr>--%>
+            <%              //       }
 
             %>
         </tbody>
@@ -155,7 +186,7 @@
 
 <div id="dialog-form" title="Create new technician">
     <p class="validateTips">All fields are required.</p>
-    <form action="../InsertTechnicianServlet" method="post" id="newCategoryForm">
+    <form action="../InsertTechnicianServlet" method="post" id="newCategoryForm" enctype="multipart/form-data">
         <fieldset class="modalForm">
             <table>
                 <tr>
@@ -168,16 +199,35 @@
                         <select name="department" id="department">
                             <%
 
-                                                        DepartmentBiz departmentBiz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
-                                                        List<Department> listD = departmentBiz.findAll();
-                                                        for (Department d : listD) {
+                                        DepartmentBiz departmentBiz = (DepartmentBiz) context.lookup("ejb/mantech/saigon/DepartmentBiz");
+                                        List<Department> listD = departmentBiz.findAll();
+                                        for (Department d : listD) {
                             %>
                             <option value="<%= d.getId().toString()%>" ><%= d.getName()%></option>
                             <%
-                                            }
-                                        } catch (Exception e) {
+                                    }
+                                }
+                                catch
+
+
+
+                                    (
+
+
+
+                                Exception e) {
                                             e.printStackTrace();
-                                        } finally {
+                                        }
+
+
+
+
+
+
+
+
+
+                            finally {
                                             context.close();
                                         }
                             %>
@@ -198,10 +248,11 @@
                 </tr>
                 <tr>
                     <td><label for="image">Image</label></td>
-                    <td><input type="file" id="image" name="image"/></td>
+                    <td><input type="file" name="image" id="image"/></td>
                 </tr>
             </table>
         </fieldset>
+        <input type="submit" style="visibility: hidden" id="submitTechnician"/>
     </form>
 </div>
 

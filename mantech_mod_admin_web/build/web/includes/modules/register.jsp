@@ -3,6 +3,8 @@
     Created on : Oct 8, 2012, 11:38:22 PM
     Author     : NGUYEN
 --%>
+<%@page import="mantech.mod.account.entity.Job"%>
+<%@page import="mantech.mod.account.api.JobBiz"%>
 <%@page import="mantech.mod.account.entity.Role"%>
 <%@page import="mantech.mod.account.api.RoleBiz"%>
 <%@page import="mantech.mod.account.entity.Department"%>
@@ -10,7 +12,7 @@
 <%@page import="mantech.mod.account.api.DepartmentBiz"%>
 <%@page import="javax.naming.InitialContext"%>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function(){
         $("#grantForm").validate({
             rules:{
@@ -66,7 +68,12 @@
         }, jQuery.format("Only PNG or JPEG extenstion."));
 
         $("#username").blur(function(){
-            $("#Info").load('../CheckUsernameAvaibleForGrantServlet', {username: $("#username").val()})
+            $("#InfoUsername").load('../CheckUsernameAvaibleForGrantServlet', {username: $("#username").val()})
+        });
+
+        $("#email").blur(function(){
+            $("#InfoEmail").load('../CheckEmailAvaibleServlet', {email: $("#email").val()});
+            
         });
 
         $('#reset').click(function(){
@@ -82,7 +89,7 @@
         <fieldset style="width: 30%">
             <label>User name</label>
             <input type="text" name="username" id="username" style="width: 70%">
-            <div id="Info" style="color: red;"></div>
+            <div id="InfoUsername" style="color: red;"></div>
         </fieldset>
         <fieldset style="width: 30%">
             <label>Password</label>
@@ -114,16 +121,36 @@
             </select>
         </fieldset>
         <fieldset style="width: 30%">
+            <label>Job</label>
+            <select style="width: 50%" name="job">
+                <%
+                            try {
+                                JobBiz jobBiz = (JobBiz) context.lookup("ejb/mantech/saigon/JobBiz");
+                                List<Job> listJob = jobBiz.findAll();
+                                if (listJob != null) {
+                                    for (Job j : listJob) {
+                %>
+                <option value="<%= j.getId()%>"><%= j.getJob()%></option>
+                <%                       }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } 
+                %>
+            </select>
+        </fieldset>
+        <fieldset style="width: 30%">
             <label>Full Name</label>
-            <input type="text" name="fullName" style="width: 70%" >
+            <input type="text" name="fullName" style="width: 70%" id="fullName">
         </fieldset>
         <fieldset style="width: 30%">
             <label>Address</label>
-            <input type="text" name="address" style="width: 70%" >
+            <input type="text" name="address" style="width: 70%" id="address" >
         </fieldset>
         <fieldset style="width: 30%">
             <label>Email</label>
-            <input type="text" name="email" style="width: 70%" >
+            <input type="text" name="email" style="width: 70%"id="email" >
+            <div id="InfoEmail" style="color: red;"></div>
         </fieldset>
         <fieldset style="width: 30%">
             <label>Telephone</label>

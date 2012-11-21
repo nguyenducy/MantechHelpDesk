@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mantech.mod.account.jpa;
 
 import javax.persistence.EntityManager;
@@ -148,10 +147,12 @@ public class ProfileJpaController {
                 profile.setJob(jobNew);
             }
             List<Account> attachedAccountListNew = new ArrayList<Account>();
-            for (Account accountListNewAccountToAttach : accountListNew) {
-                accountListNewAccountToAttach = em.getReference(accountListNewAccountToAttach.getClass(), accountListNewAccountToAttach.getId());
-                attachedAccountListNew.add(accountListNewAccountToAttach);
-            }
+           
+                for (Account accountListNewAccountToAttach : accountListNew) {
+                    accountListNewAccountToAttach = em.getReference(accountListNewAccountToAttach.getClass(), accountListNewAccountToAttach.getId());
+                    attachedAccountListNew.add(accountListNewAccountToAttach);
+                }
+           
             accountListNew = attachedAccountListNew;
             profile.setAccountList(accountListNew);
             List<Complaint> attachedComplaintListNew = new ArrayList<Complaint>();
@@ -311,5 +312,4 @@ public class ProfileJpaController {
             em.close();
         }
     }
-
 }

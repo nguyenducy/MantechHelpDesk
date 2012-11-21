@@ -16,6 +16,18 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>mantech.mod.web.servlet.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListArticleServlet</servlet-name>
+        <servlet-class>mantech.mod.web.article.servlet.ListArticleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListFAQServlet</servlet-name>
+        <servlet-class>mantech.mod.web.article.servlet.ListFAQServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewArticle</servlet-name>
+        <servlet-class>mantech.mod.web.article.servlet.ViewArticle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/HomeServlet</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListArticleServlet</servlet-name>
+        <url-pattern>/ListArticleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListFAQServlet</servlet-name>
+        <url-pattern>/ListFAQServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewArticle</servlet-name>
+        <url-pattern>/ViewArticle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

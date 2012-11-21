@@ -50,10 +50,9 @@ public class Authentication extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.putValue(SessionName.ID_CURRENT_USER, a.getId() );
                 session.putValue(SessionName.Name, a.getProfile().getFullName());
-                response.sendRedirect(request.getContextPath()+backto);
+               
             }
-
-
+             response.sendRedirect(request.getContextPath()+backto);
         } catch (Exception ex) {
            ex.printStackTrace();
         } finally { 

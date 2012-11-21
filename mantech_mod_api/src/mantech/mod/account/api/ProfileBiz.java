@@ -29,5 +29,5 @@ public interface ProfileBiz {
 
     List<Profile> findTechnician();
 
-
+    boolean UpdateProfileTechnician(Profile profile);
 }

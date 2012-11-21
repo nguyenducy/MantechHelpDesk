@@ -8,7 +8,8 @@
 <%@page import="mantech.mod.complaint.entity.Category"%>
 <%@page import="mantech.mod.complaint.api.CategoryBiz"%>
 <%@page import="javax.naming.InitialContext"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <script>
     $(function() {
         var category = $( "#category" ),
@@ -96,8 +97,13 @@
         <li><a href="#tab1">Categories</a></li>
     </ul>
 </header>
+<sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                   url="jdbc:sqlserver://localhost:1433;database=Mantech"
+                   user="mantech" password="123" var="ds" scope="page"/>
 
-
+<sql:query var="category" dataSource="${ds}">
+    select ID,Name,[Description] from Category
+</sql:query>
 <div id="tab1" class="tab_content">
     <table class="tablesorter" cellspacing="0">
         <thead>
@@ -105,11 +111,23 @@
                 <th>ID</th>
                 <th>Category</th>
                 <th>Description</th>
-
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <%
+             <c:forEach var="row" begin="0" items="${category.rowsByIndex}">
+                <tr>
+                        <td><c:out value="${row[0]}"/></td>
+                        <td><c:out value="${row[1]}"/></td>
+                        <td><c:out value="${row[2]}"/></td>
+                        <td><a href="${pageContext.request.contextPath}/Complaints/DeleteCategoryModal.jsp?id=${row[0]}"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Complaints/EditCategoryModal.jsp?id=${row[0]}&category=${row[1]}&des=${row[2]}"><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit" /></a>
+                </td>
+
+               </tr>
+
+            </c:forEach>
+           <%-- <%
                         InitialContext context = null;
                         try {
                             context = new InitialContext();
@@ -121,6 +139,9 @@
                 <td><%= c.getId()%></td>
                 <td><%= c.getName()%></td>
                 <td><%= c.getDescription()%></td>
+                <td><a href="${pageContext.request.contextPath}/Complaints/DeleteCategoryModal.jsp?id=<%= c.getId()  %>"><img src="${pageContext.request.contextPath}/images/icn_trash.png" title="Trash" /></a>
+                    <a href="${pageContext.request.contextPath}/Complaints/EditCategoryModal.jsp?id=<%= c.getId()%>&category=<%=c.getName()%>&des=<%=c.getDescription() %> "><img src="${pageContext.request.contextPath}/images/icn_edit.png" title="Edit" /></a>
+                </td>
             </tr>
             <%                     }
                         } catch (Exception e) {
@@ -128,7 +149,7 @@
                         } finally {
                             context.close();
                         }
-            %>
+            %> --%>
         </tbody>
     </table>
 </div><!-- end of #tab1 -->

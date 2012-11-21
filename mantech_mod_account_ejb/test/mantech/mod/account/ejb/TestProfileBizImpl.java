@@ -5,6 +5,7 @@
 package mantech.mod.account.ejb;
 
 import java.util.List;
+import mantech.mod.account.entity.Department;
 import mantech.mod.account.entity.Profile;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -57,7 +58,15 @@ public class TestProfileBizImpl {
         ProfileBizImpl bizImpl = new ProfileBizImpl();
         String image = "567f038c-db63-41cf-a638-b5a8e07a0584.jpg";
         Profile find = bizImpl.find(image);
-
         assertNotNull(find);
+    }
+
+    @Test
+    public void testEdit_ok(){
+        ProfileBizImpl bizImpl = new ProfileBizImpl();
+        Profile p = bizImpl.find(200);
+        p.setDepartment(new Department(1));
+        boolean result = bizImpl.edit(p);
+        assertTrue(result);
     }
 }

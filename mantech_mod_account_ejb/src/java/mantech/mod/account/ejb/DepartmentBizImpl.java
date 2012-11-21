@@ -18,7 +18,7 @@ import mantech.mod.account.jpa.DepartmentJpaController;
  */
 @Stateless(name = "DepartmentBiz", mappedName = "ejb/mantech/saigon/DepartmentBiz")
 @Remote(mantech.mod.account.api.DepartmentBiz.class)
-public class DepartmentBizImpl implements DepartmentBiz{
+public class DepartmentBizImpl implements DepartmentBiz {
 
     @Override
     public boolean create(Department department) {
@@ -37,7 +37,7 @@ public class DepartmentBizImpl implements DepartmentBiz{
         try {
             DepartmentJpaController controller = new DepartmentJpaController();
             controller.edit(department);
-            return true;
+            return  true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -88,6 +88,5 @@ public class DepartmentBizImpl implements DepartmentBiz{
             return null;
         }
     }
-
 
 }

@@ -7,6 +7,7 @@ package mantech.mod.complaint.ejb;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import mantech.mod.account.dal.Update;
 import mantech.mod.complaint.api.CategoryBiz;
 import mantech.mod.complaint.entity.Category;
 import mantech.mod.complaint.jpa.CategoryJpaController;
@@ -86,6 +87,12 @@ public class CategoryBizImpl implements CategoryBiz {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean UpdateCategory(Category category) {
+        Update update = new Update();
+        return update.UpdateCategory(category);
     }
 
     

@@ -4,6 +4,7 @@
     Author     : NGUYEN
 --%>
 
+<%@page import="mantech.mod.article.entity.Article"%>
 <%@page import="mantech.mod.complaint.entity.Category"%>
 <%@page import="java.util.List"%>
 <%@page import="mantech.mod.complaint.api.CategoryBiz"%>
@@ -50,14 +51,23 @@
                 <div class="wrapper">
                     <div class="aside maxheight">
                         <div class="indent">
+                            <%
+                                        List<Article> articles = (List<Article>) session.getAttribute("listArticle");
+                            %>
                             <h2>Latest News</h2>
                             <dl class="news">
-                                <dt><a href="#">February 15, 2010</a></dt>
-                                <dd>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</dd>
-                                <dt><a href="#">January 31, 2010</a></dt>
-                                <dd>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</dd>
-                                <dt><a href="#">January 22, 2010</a></dt>
-                                <dd>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugitd quia.</dd>
+                                 <%
+                                   for(int i=0;i<=articles.size();i++){
+                                       if(i==5){
+                                           break;
+                                           }
+                                       Article article = articles.get(i);
+
+
+                                %>
+                                <dt><a href="ViewArticle?id=<%= article.getId().toString() %>"><%= article.getArticle() %></a></dt>
+                                    <dd><%=article.getContent() %> ></dd>
+                                 <%}%>
                             </dl>
                         </div>
                     </div>
@@ -94,7 +104,7 @@
                                         <label>Note:</label>
                                         <textarea cols="1" rows="1" name="note"></textarea>
                                     </div>
-                                            <input type="hidden" value="<%= request.getServletPath() %>" name="return"/>
+                                    <input type="hidden" value="<%= request.getServletPath()%>" name="return"/>
                                 </fieldset>
                                 <div class="alignright"><input type="submit" value="Send" /></div>
                             </form>

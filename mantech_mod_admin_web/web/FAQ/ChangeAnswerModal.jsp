@@ -70,7 +70,9 @@
 
 
                             bValid = bValid && checkRequired(question, 'Question', 'is required');
+                            bValid = bValid && checkLength(question, 'Question', 0, 51);
                             bValid = bValid && checkRequired(answer, 'Answer', 'is required');
+                            bValid = bValid && checkLength(answer, 'Answer', 0, 501);
 
                             if(bValid){
                                 var url = "../ChangeFAQServlet?id="+id.val()+"&question="+question.val()+"&answer="+answer.val();

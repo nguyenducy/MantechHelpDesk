@@ -39,7 +39,7 @@
                         try {
                             context = new InitialContext();
                             ComplaintBiz biz = (ComplaintBiz) context.lookup("ejb/mantech/saigon/ComplaintBiz");
-                            List<Complaint> list = biz.find(10, 0);
+                            List<Complaint> list = biz.findAll();
                             for (Complaint c : list) {
                                 ProfileBiz profileBiz = (ProfileBiz) context.lookup("ejb/mantech/saigon/ProfileBiz");
                                 Profile p = profileBiz.find(c.getTechnicianID());

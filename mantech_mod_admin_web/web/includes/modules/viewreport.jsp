@@ -13,7 +13,9 @@
                     <td><div class="message">Type of Report: 
                             <select name="type">
                                 <option value="1">Category</option>
-                                <option value="2">Department</option>                  
+                                <option value="2">Department</option>
+                                <option value="3">Details</option>
+                                <option value="4">Technician</option>
                             </select>
                         </div></td>
                 </tr>

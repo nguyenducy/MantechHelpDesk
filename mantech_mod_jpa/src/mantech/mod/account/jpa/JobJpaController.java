@@ -5,7 +5,6 @@
 
 package mantech.mod.account.jpa;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,6 +13,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import mantech.mod.account.entity.Job;
+import mantech.mod.account.entity.Profile;
+import java.util.ArrayList;
+import java.util.List;
+import mantech.mod.account.jpa.exceptions.IllegalOrphanException;
 import mantech.mod.account.jpa.exceptions.NonexistentEntityException;
 
 /**
@@ -32,11 +35,29 @@ public class JobJpaController {
     }
 
     public void create(Job job) {
+        if (job.getProfileList() == null) {
+            job.setProfileList(new ArrayList<Profile>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Profile> attachedProfileList = new ArrayList<Profile>();
+            for (Profile profileListProfileToAttach : job.getProfileList()) {
+                profileListProfileToAttach = em.getReference(profileListProfileToAttach.getClass(), profileListProfileToAttach.getId());
+                attachedProfileList.add(profileListProfileToAttach);
+            }
+            job.setProfileList(attachedProfileList);
             em.persist(job);
+            for (Profile profileListProfile : job.getProfileList()) {
+                Job oldJobOfProfileListProfile = profileListProfile.getJob();
+                profileListProfile.setJob(job);
+                profileListProfile = em.merge(profileListProfile);
+                if (oldJobOfProfileListProfile != null) {
+                    oldJobOfProfileListProfile.getProfileList().remove(profileListProfile);
+                    oldJobOfProfileListProfile = em.merge(oldJobOfProfileListProfile);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,12 +66,45 @@ public class JobJpaController {
         }
     }
 
-    public void edit(Job job) throws NonexistentEntityException, Exception {
+    public void edit(Job job) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Job persistentJob = em.find(Job.class, job.getId());
+            List<Profile> profileListOld = persistentJob.getProfileList();
+            List<Profile> profileListNew = job.getProfileList();
+            List<String> illegalOrphanMessages = null;
+            for (Profile profileListOldProfile : profileListOld) {
+                if (!profileListNew.contains(profileListOldProfile)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Profile " + profileListOldProfile + " since its job field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            List<Profile> attachedProfileListNew = new ArrayList<Profile>();
+            for (Profile profileListNewProfileToAttach : profileListNew) {
+                profileListNewProfileToAttach = em.getReference(profileListNewProfileToAttach.getClass(), profileListNewProfileToAttach.getId());
+                attachedProfileListNew.add(profileListNewProfileToAttach);
+            }
+            profileListNew = attachedProfileListNew;
+            job.setProfileList(profileListNew);
             job = em.merge(job);
+            for (Profile profileListNewProfile : profileListNew) {
+                if (!profileListOld.contains(profileListNewProfile)) {
+                    Job oldJobOfProfileListNewProfile = profileListNewProfile.getJob();
+                    profileListNewProfile.setJob(job);
+                    profileListNewProfile = em.merge(profileListNewProfile);
+                    if (oldJobOfProfileListNewProfile != null && !oldJobOfProfileListNewProfile.equals(job)) {
+                        oldJobOfProfileListNewProfile.getProfileList().remove(profileListNewProfile);
+                        oldJobOfProfileListNewProfile = em.merge(oldJobOfProfileListNewProfile);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -68,7 +122,7 @@ public class JobJpaController {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -79,6 +133,17 @@ public class JobJpaController {
                 job.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The job with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            List<Profile> profileListOrphanCheck = job.getProfileList();
+            for (Profile profileListOrphanCheckProfile : profileListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Job (" + job + ") cannot be destroyed since the Profile " + profileListOrphanCheckProfile + " in its profileList field has a non-nullable job field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(job);
             em.getTransaction().commit();

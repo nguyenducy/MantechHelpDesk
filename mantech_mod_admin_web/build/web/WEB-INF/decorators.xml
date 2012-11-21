@@ -16,6 +16,7 @@
         <pattern>/CheckArticleAvailableServlet</pattern>
         <pattern>/CheckUsernameAvailable</pattern>
         <pattern>/CheckUsernameAvaibleForGrantServlet</pattern>
+        <pattern>/CheckEmailAvaibleServlet</pattern>
     </excludes>
     <decorator name="admin-theme" page="admin-theme.jsp">
         <pattern>/*</pattern>
